@@ -159,6 +159,21 @@ web-polmind/
 5. **Router Script Built-in Server** ([router.php](router.php)):
    - Diperbarui agar dapat melayani file statis dari folder `public/` dengan MIME-Type yang presisi (termasuk `robots.txt`, `sitemap.xml`, css, js, webp, dan svg).
 
+### 5.4. Kesiapan Deployment Live Hosting (Hostinger Cloud Hosting)
+1. **Dump Database MySQL Siap Pakai** ([database/polmind_database_ready.sql](database/polmind_database_ready.sql)):
+   - Dump MySQL siap di-import langsung di phpMyAdmin Hostinger tanpa perlu menjalankan migrasi manual.
+   - Sudah terisi 1 akun admin (`admin@polmind.ac.id` / `admin123`), 9 berita, 13 slider, 45 pengaturan konten PMB/sambutan, 28 dosen, 2 tendik, 6 founder & expert, 8 fitur keunggulan.
+2. **Keamanan & Rewrite `.htaccess` Root** ([.htaccess](.htaccess)):
+   - Otomatis merutekan lalu lintas pengunjung ke `public/` secara aman.
+   - Memblokir langsung akses pengunjung ke file `.env`, file git, `storage/logs/`, serta direktori internal aplikasi (`app/`, `database/`, `bootstrap/`, dll).
+3. **Konfigurasi SSL/HTTPS & Proxy** ([bootstrap/app.php](bootstrap/app.php) & [app/Providers/AppServiceProvider.php](app/Providers/AppServiceProvider.php)):
+   - `trustProxies(at: '*')` diaktifkan agar deteksi reverse proxy/SSL Hostinger akurat.
+   - `URL::forceScheme('https')` otomatis aktif pada mode `production`.
+4. **Penyajian File Upload Tanpa Symlink** ([config/filesystems.php](config/filesystems.php)):
+   - Opsi `'serve' => true` diaktifkan pada disk `public` sehingga file upload (berita, slider, dosen) tetap tersaji mulus bahkan jika symlink hosting dibatasi.
+5. **Template Konfigurasi Hosting** ([.env.production.example](.env.production.example) & [PANDUAN_HOSTING_HOSTINGER.md](PANDUAN_HOSTING_HOSTINGER.md)):
+   - Panduan lengkap langkah demi langkah dari pembuatan database MySQL di hPanel hingga live testing.
+
 ---
 
 ## 6. Panduan Menjalankan Aplikasi di Lingkungan Lokal

@@ -2,18 +2,38 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    protected bool $seed = true;
+
+    /**
+     * Test public pages load successfully.
+     */
+    public function test_public_pages_return_successful_responses(): void
+    {
+        $routes = [
+            '/',
+            '/beranda',
+            '/profil',
+            '/prodi',
+            '/keunikan',
+            '/pmb',
+            '/dokumentasi',
+            '/daftar_dosen',
+            '/daftar_tendik',
+            '/beranda/berita',
+            '/admin/login',
+            '/sitemap.xml',
+        ];
+
+        foreach ($routes as $route) {
+            $response = $this->get($route);
+            $response->assertStatus(200);
+        }
     }
 }
