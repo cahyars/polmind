@@ -1,13 +1,14 @@
 @extends('layouts.frontend')
 
-@section('title', 'Berita - Politeknik Mitra Industri')
+@section('title', 'Berita & Informasi Terkini | Politeknik Mitra Industri')
+@section('meta_description', 'Kumpulan berita terbaru, siaran pers, kemitraan industri global, dan agenda kegiatan mahasiswa Politeknik Mitra Industri (Polmind) MM2100.')
 @section('canonical', 'https://polmind.ac.id/beranda/berita')
 
 @section('content')
 <div class="container" style="padding-top: 130px; min-height: 70vh;">
-  <h2 class="center-text">BERITA</h2>
+  <h1 class="center-text" style="color: #102C53; font-size: 32px; font-weight: 700; margin-bottom: 25px;">Berita & Informasi Terkini</h1>
   
-  <div style="margin: 30px 0px 20px 0px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+  <div style="margin: 20px 0px 25px 0px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
     <a href="javascript:history.back()" class="back-button mb15">← Kembali</a>
 
     <!-- Category filter tags -->
@@ -23,7 +24,7 @@
     <div class="card bg-light" style="margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); overflow: hidden; background: #fafafa; border: 1px solid #eef2f6;">
       <div class="card-header" style="padding: 15px 20px 5px;">
         <a href="/beranda/berita/{{ $article->slug }}" style="text-decoration:none;">
-          <h1 class="b-600 fs24" style="color: #102c53; text-align:left; font-size: 20px; line-height: 1.4; margin-bottom: 6px;">{{ $article->title }}</h1>
+          <h2 class="b-600 fs24" style="color: #102c53; text-align:left; font-size: 20px; line-height: 1.4; margin-bottom: 6px;">{{ $article->title }}</h2>
           <p class="breadcrumb ml5" style="color: #64748b; font-size: 13px;">
             <i class="far fa-user"></i> {{ $article->author }} &nbsp;|&nbsp; 
             <i class="far fa-calendar-alt"></i> {{ $article->formatted_date }} &nbsp;|&nbsp; 

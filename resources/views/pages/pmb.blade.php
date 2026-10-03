@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'PMB - Pendaftaran Mahasiswa Baru Politeknik Mitra Industri')
+@section('title', 'Pendaftaran Mahasiswa Baru (PMB) 2026/2027 | Politeknik Mitra Industri')
+@section('meta_description', 'Informasi resmi Penerimaan Mahasiswa Baru (PMB) Polmind: Jadwal gelombang, syarat pendaftaran, rincian biaya kuliah terjangkau, dan beasiswa industri MM2100.')
 @section('canonical', 'https://polmind.ac.id/pmb')
 
 @push('styles')

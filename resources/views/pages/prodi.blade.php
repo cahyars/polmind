@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Program Studi - Politeknik Mitra Industri')
+@section('title', 'Program Studi Sarjana Terapan (D4) | Politeknik Mitra Industri')
+@section('meta_description', 'Pilihan Program Studi D4 Politeknik Mitra Industri MM2100: Teknologi Rekayasa Perangkat Lunak (TRPL), Teknologi Rekayasa Manufaktur (TRM), dan Bisnis Digital.')
 @section('canonical', 'https://polmind.ac.id/prodi')
 
 @section('content')
@@ -47,16 +48,16 @@
           <!-- Gallery -->
           <div class="gallery row justify-content-center">
             <a class="col-6 pl-0 a-none" href="/assets/images/manufacture/manufacture01.jpg">
-              <img src="/assets/images/prodi/manufacture/manufacture01.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100">
+              <img src="/assets/images/prodi/manufacture/manufacture01.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/manufacture/manufacture02.jpg">
-              <img src="/assets/images/prodi/manufacture/manufacture02.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100">
+              <img src="/assets/images/prodi/manufacture/manufacture02.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pl-0 a-none" href="/assets/images/prodi/manufacture/manufacture03.jpg">
-              <img src="/assets/images/prodi/manufacture/manufacture03.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100">
+              <img src="/assets/images/prodi/manufacture/manufacture03.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/manufacture/manufacture04.jpg">
-              <img src="/assets/images/prodi/manufacture/manufacture04.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100">
+              <img src="/assets/images/prodi/manufacture/manufacture04.jpg" alt="Program Studi Teknologi Rekayasa Manufaktur (TRM)" class="w-100" loading="lazy" decoding="async">
             </a>
           </div>
         </center>
@@ -252,16 +253,16 @@
           <!-- Gallery -->
           <div class="gallery row justify-content-center">
             <a class="col-6 pl-0 a-none" href="/assets/images/prodi/business/business5.jpg">
-              <img src="/assets/images/prodi/business/business5.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100">
+              <img src="/assets/images/prodi/business/business5.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/business/business02.jpg">
-              <img src="/assets/images/prodi/business/business02.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100">
+              <img src="/assets/images/prodi/business/business02.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pl-0 a-none" href="/assets/images/prodi/business/business03.jpg">
-              <img src="/assets/images/prodi/business/business03.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100">
+              <img src="/assets/images/prodi/business/business03.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/business/business04.jpg">
-              <img src="/assets/images/prodi/business/business04.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100">
+              <img src="/assets/images/prodi/business/business04.jpg" alt="Program Studi Bisnis Digital (BD)" class="w-100" loading="lazy" decoding="async">
             </a>
           </div>
         </center>
@@ -449,16 +450,16 @@
           <!-- Gallery -->
           <div class="gallery row justify-content-center">
             <a class="col-6 pl-0 a-none" href="/assets/images/prodi/rpl/trpl06.jpg">
-              <img src="/assets/images/prodi/rpl/trpl06.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100">
+              <img src="/assets/images/prodi/rpl/trpl06.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/rpl/trpl07.jpg">
-              <img src="/assets/images/prodi/rpl/trpl07.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100">
+              <img src="/assets/images/prodi/rpl/trpl07.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pl-0 a-none" href="/assets/images/prodi/rpl/trpl03.jpg">
-              <img src="/assets/images/prodi/rpl/trpl03.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100">
+              <img src="/assets/images/prodi/rpl/trpl03.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100" loading="lazy" decoding="async">
             </a>
             <a class="col-6 pr-0 a-none" href="/assets/images/prodi/rpl/trpl04.jpg">
-              <img src="/assets/images/prodi/rpl/trpl04.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100">
+              <img src="/assets/images/prodi/rpl/trpl04.jpg" alt="Program Studi Teknologi Rekayasa Perangkat Lunak (TRPL)" class="w-100" loading="lazy" decoding="async">
             </a>
           </div>
         </center>

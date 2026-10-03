@@ -33,7 +33,7 @@ header {
       position: relative;
     }
 
-    h1.logo {
+    .logo, h1.logo {
       font-size: 13px;
       flex: 1;
       font-weight: 500;
@@ -934,7 +934,7 @@ ol {
         padding: 15px;
       }
 
-      h1.logo {
+      .logo, h1.logo {
         text-align: center;
         flex: 1;
         order: 2;

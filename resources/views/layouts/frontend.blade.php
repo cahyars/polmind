@@ -11,18 +11,39 @@
     gtag('js', new Date());
     gtag('config', 'G-E959YP027R');
   </script>
-  <meta name="description" content="Politeknik Mitra Industri Dikembangkan di kawasan industri MM2100, didukung oleh para praktisi industri dan pendidikan." />
-  <meta name="keywords" content="politeknik, mitra, industri, polmind, politeknik mitra industri, perguruan tinggi vokasi terbaik, politeknik terbaik" />
+  <meta name="description" content="@yield('meta_description', 'Politeknik Mitra Industri (Polmind) adalah perguruan tinggi vokasi unggulan di Kawasan Industri MM2100 Cikarang dengan kurikulum berbasis industri dan magang global.')" />
+  <meta name="keywords" content="@yield('meta_keywords', 'politeknik mitra industri, polmind, mm2100, kampus vokasi cikarang, beasiswa industri, trpl, teknologi manufaktur, bisnis digital')" />
+  <meta name="author" content="Politeknik Mitra Industri" />
+  <meta name="robots" content="index, follow" />
   <meta name="site_name" content="Politeknik Mitra Industri">
 
-  <title>@yield('title', 'Politeknik Mitra Industri')</title>
-  <link rel="canonical" href="@yield('canonical', 'https://polmind.ac.id')" />
+  <title>@yield('title', 'Politeknik Mitra Industri | Kampus Vokasi MM2100')</title>
+  <link rel="canonical" href="@yield('canonical', url()->current())" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="@yield('title', 'Politeknik Mitra Industri')">
-  <meta property="og:description" content="Politeknik Mitra Industri Dikembangkan di kawasan industri MM2100, didukung oleh para praktisi industri dan pendidikan.">
-  <meta property="og:url" content="@yield('canonical', 'https://polmind.ac.id/')">
-  <meta property="og:type" content="website">
+  <!-- Open Graph / Facebook / WhatsApp Preview -->
+  <meta property="og:site_name" content="Politeknik Mitra Industri">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:type" content="@yield('og_type', 'website')">
+  <meta property="og:title" content="@yield('title', 'Politeknik Mitra Industri | Kampus Vokasi MM2100')">
+  <meta property="og:description" content="@yield('meta_description', 'Politeknik Mitra Industri (Polmind) adalah perguruan tinggi vokasi unggulan di Kawasan Industri MM2100 Cikarang.')">
+  <meta property="og:url" content="@yield('canonical', url()->current())">
+  <meta property="og:image" content="@yield('og_image', asset('assets/images/slider/polmind_vasanta.png'))">
+  <meta property="og:image:alt" content="Politeknik Mitra Industri">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@yield('title', 'Politeknik Mitra Industri | Kampus Vokasi MM2100')">
+  <meta name="twitter:description" content="@yield('meta_description', 'Politeknik Mitra Industri (Polmind) adalah perguruan tinggi vokasi unggulan di Kawasan Industri MM2100 Cikarang.')">
+  <meta name="twitter:image" content="@yield('og_image', asset('assets/images/slider/polmind_vasanta.png'))">
+
+  <!-- Resource Hints for Faster Font & CDN Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://unpkg.com">
+
+  <!-- Combined Google Fonts Request with display=swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon-cerah.ico') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/main-style.css') }}">
@@ -34,8 +55,38 @@
 
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Structured Data: Organization (Schema.org JSON-LD) -->
+  <script type="application/ld+json">
+  {!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'CollegeOrUniversity',
+    'name' => 'Politeknik Mitra Industri',
+    'alternateName' => 'Polmind',
+    'url' => 'https://polmind.ac.id',
+    'logo' => asset('assets/images/logo.png'),
+    'description' => 'Politeknik Mitra Industri adalah perguruan tinggi vokasi unggulan yang berlokasi strategis di Kawasan Industri MM2100 Cikarang Barat, Bekasi.',
+    'address' => [
+      '@type' => 'PostalAddress',
+      'streetAddress' => 'Vasanta Innopark, Kawasan Industri MM2100, Gandasari',
+      'addressLocality' => 'Cikarang Barat',
+      'addressRegion' => 'Jawa Barat',
+      'postalCode' => '17530',
+      'addressCountry' => 'ID',
+    ],
+    'contactPoint' => [
+      '@type' => 'ContactPoint',
+      'telephone' => '+6282113296897',
+      'contactType' => 'admissions',
+      'areaServed' => 'ID',
+      'availableLanguage' => ['Indonesian', 'English'],
+    ],
+    'sameAs' => [
+      'https://www.instagram.com/politeknikmitraindustri',
+    ],
+  ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+  </script>
+  @yield('structured_data')
 
   <style>
     .news-card {
@@ -192,7 +243,7 @@
     <div class="header">
       <div class="header-inner">
         <a href="/beranda" style="text-decoration:none; color:white;">
-          <h1 class="logo" data-translate="site-title">{{ \App\Models\SiteSetting::get('site_title', 'POLITEKNIK MITRA INDUSTRI') }}</h1>
+          <div class="logo" data-translate="site-title">{{ \App\Models\SiteSetting::get('site_title', 'POLITEKNIK MITRA INDUSTRI') }}</div>
         </a>
 
         <div class="burger" id="burgerMenu">

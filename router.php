@@ -5,9 +5,32 @@
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $filePath = __DIR__ . '/public' . urldecode($uri);
 
-// Jika request adalah file fisik di folder public (CSS, JS, gambar, font, favicon, dll)
+// Jika request adalah file fisik di folder public (CSS, JS, gambar, font, favicon, robots.txt, sitemap.xml, dll)
 if ($uri !== '/' && file_exists($filePath) && !is_dir($filePath)) {
-    return false;
+    $ext = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+    $mimes = [
+        'css'   => 'text/css; charset=utf-8',
+        'js'    => 'application/javascript; charset=utf-8',
+        'png'   => 'image/png',
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'gif'   => 'image/gif',
+        'svg'   => 'image/svg+xml',
+        'ico'   => 'image/x-icon',
+        'webp'  => 'image/webp',
+        'txt'   => 'text/plain; charset=utf-8',
+        'xml'   => 'application/xml; charset=utf-8',
+        'html'  => 'text/html; charset=utf-8',
+        'woff2' => 'font/woff2',
+        'woff'  => 'font/woff',
+        'ttf'   => 'font/ttf',
+    ];
+
+    $mime = $mimes[$ext] ?? (mime_content_type($filePath) ?: 'application/octet-stream');
+    header("Content-Type: $mime");
+    header("Content-Length: " . filesize($filePath));
+    readfile($filePath);
+    exit;
 }
 
 // Jika request adalah folder yang memiliki index.html (contoh: /spmb/)
@@ -18,7 +41,10 @@ if (is_dir($filePath)) {
             header("Location: $uri/");
             exit;
         }
-        return false;
+        header("Content-Type: text/html; charset=utf-8");
+        header("Content-Length: " . filesize($indexHtml));
+        readfile($indexHtml);
+        exit;
     }
 }
 

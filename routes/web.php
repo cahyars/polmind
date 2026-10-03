@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::get('/daftar_tendik', [PageController::class, 'daftarTendik'])->name('daf
 // Berita routes
 Route::get('/beranda/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/beranda/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+
+// Dynamic Sitemap for SEO
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // SPMB redirect to static subsite if visited directly
 Route::get('/spmb', function () {

@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 
-@section('title', 'Keunikan - Politeknik Mitra Industri')
+@section('title', 'Keunikan & Keunggulan Kuliah | Politeknik Mitra Industri')
+@section('meta_description', '12 Keunikan dan Keunggulan Politeknik Mitra Industri (Polmind): Kurikulum 70% Praktek, Teaching Factory (TEFA), Real Project Industri MM2100, dan Magang Global.')
 @section('canonical', 'https://polmind.ac.id/keunikan')
 
 @section('content')
@@ -15,14 +16,14 @@
       <li data-translate="uniq-2">TEFA dan PjBL sejak semester awal.</li>
       <li data-translate="uniq-3"><em>Project-project</em>-nya berasal dari perusahaan/industri, dan <em>real project</em>.</li>
     </ol>
-    <img id="img-uniq1" src="/assets/images-new/images10.jpg" alt="Kerjasama Politeknik Mitra Industri dengan Astra Daihatsu Motor">
+    <img id="img-uniq1" src="/assets/images-new/images10.jpg" alt="Kerjasama Politeknik Mitra Industri dengan Astra Daihatsu Motor" loading="lazy" decoding="async">
   </div>
 
   <div class="sectionKeunikan">
     <ol start="4">
       <li data-translate="uniq-4">Bentuk TEFA, berupa Konsultan <em>Engineering</em> dan <i>Business</i>, atau berupa industri manufaktur.</li>
     </ol>
-    <img id="img-uniq2" src="/assets/images/keunikan/keunikan02.jpg" alt="Peresmian Teaching Factory (TEFA) Konsultan Engineering dan Bisnis">
+    <img id="img-uniq2" src="/assets/images/keunikan/keunikan02.jpg" alt="Peresmian Teaching Factory (TEFA) Konsultan Engineering dan Bisnis" loading="lazy" decoding="async">
   </div>
 
   <div class="sectionKeunikan">
@@ -32,7 +33,7 @@
       <li data-translate="uniq-7"><i>Team</i> mahasiswa digembleng menghasilkan produk riil yang memuaskan <i>customer</i>/industri.</li>
       <li data-translate="uniq-8">Mahasiswa rutin presentasi <i>progress project</i>, di depan <i>user</i>.</li>
     </ol>
-    <img id="img-uniq3" src="/assets/images/keunikan/keunikan03.jpg" alt="Foto Mahasiswa Presentasi jurusan Teknologi Rekayasa Perangkat Lunak">
+    <img id="img-uniq3" src="/assets/images/keunikan/keunikan03.jpg" alt="Foto Mahasiswa Presentasi jurusan Teknologi Rekayasa Perangkat Lunak" loading="lazy" decoding="async">
   </div>
 
   <div class="sectionKeunikan">
@@ -44,6 +45,4 @@
     </ol>
   </div>
 </div>
-
-<!-- Footer -->
 @endsection

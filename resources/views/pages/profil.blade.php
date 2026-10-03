@@ -1,12 +1,16 @@
 @extends('layouts.frontend')
 
-@section('title', 'Profil - Politeknik Mitra Industri')
+@section('title', 'Profil & Sejarah | Politeknik Mitra Industri MM2100')
+@section('meta_description', 'Profil lengkap Politeknik Mitra Industri (Polmind), visi misi, SK Mendikti Saintek, serta jajaran dewan pendiri dan praktisi industri MM2100.')
 @section('canonical', 'https://polmind.ac.id/profil')
 
 @section('content')
+<!-- Primary Heading for SEO -->
+<h1 style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">Profil Politeknik Mitra Industri</h1>
+
 <picture>
   <source id="src-profil-sp" media="(max-width: 991px)" srcset="{{ asset('assets/images/m_profil.png') }}">
-  <img id="img-profil" src="{{ asset($banner) }}" data-translate="profil-banner-alt" alt="Politeknik Mitra Industri menerapkan 5 nilai dan budaya industri 6S" style="display: block; margin-top: 95px; width: 100%; height: auto; position: relative; top: 3px;">
+  <img id="img-profil" src="{{ asset($banner) }}" data-translate="profil-banner-alt" alt="Politeknik Mitra Industri menerapkan 5 nilai dan budaya industri 6S" style="display: block; margin-top: 95px; width: 100%; height: auto; position: relative; top: 3px;" fetchpriority="high">
 </picture>
 
 <div class="container baseColor">
@@ -36,7 +40,7 @@
   <div class="team-container">
     @foreach($founders as $founder)
       <div class="team-card">
-        <img src="{{ $founder->photo_url }}" alt="{{ $founder->name }}">
+        <img src="{{ $founder->photo_url }}" alt="{{ $founder->name }}" loading="lazy" decoding="async">
         <h3>{{ $founder->name }}</h3>
         <p>{!! nl2br(e($founder->role)) !!}</p>
       </div>
