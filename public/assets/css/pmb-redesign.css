@@ -1,0 +1,1266 @@
+/* =========================================================
+   PMB REDESIGN - POLITEKNIK MITRA INDUSTRI (POLMIND)
+   Modern, responsive, high-converting admission page styling
+   ========================================================= */
+
+:root {
+  --pmb-navy: #0b2a50;
+  --pmb-navy-dark: #071c36;
+  --pmb-blue: #004aad;
+  --pmb-blue-light: #e0e7ff;
+  --pmb-red: #b91c1c;
+  --pmb-red-hover: #991b1b;
+  --pmb-red-light: #fef2f2;
+  --pmb-green: #059669;
+  --pmb-green-light: #ecfdf5;
+  --pmb-gold: #f59e0b;
+  --pmb-text: #1e293b;
+  --pmb-muted: #64748b;
+  --pmb-border: #e2e8f0;
+  --pmb-card-bg: #ffffff;
+  --pmb-radius-lg: 18px;
+  --pmb-radius-md: 12px;
+  --pmb-radius-sm: 8px;
+  --pmb-shadow: 0 6px 20px rgba(11, 42, 80, 0.06);
+  --pmb-shadow-hover: 0 12px 30px rgba(11, 42, 80, 0.12);
+}
+
+/* =========================================================
+   1. HERO SECTION
+   ========================================================= */
+.pmb-hero-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  background-color: #004aad;
+  background-image: url('/assets/images/pmb-1.png');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 145px 20px 75px;
+  overflow: hidden;
+}
+
+/* Overlay gradient subtle */
+.pmb-hero-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(11, 35, 68, 0.4) 0%, rgba(11, 35, 68, 0.15) 100%);
+  pointer-events: none;
+}
+
+.pmb-hero-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 620px;
+  margin-top: 35px; /* Jarak lega agar tidak mepet dengan navbar */
+  background: rgba(11, 35, 68, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--pmb-radius-lg);
+  padding: 38px 42px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  color: #ffffff;
+  animation: pmbFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pmbFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pmb-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #b91c1c;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.35);
+}
+
+.pmb-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  animation: pmbPulseDot 1.8s infinite;
+}
+
+@keyframes pmbPulseDot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.pmb-hero-title {
+  color: #ffffff;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.pmb-hero-subtitle {
+  color: #e2e8f0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.pmb-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pmb-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #b91c1c;
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 13px 30px;
+  border-radius: var(--pmb-radius-sm);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(185, 28, 28, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pmb-btn-primary:hover {
+  background: #991b1b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(185, 28, 28, 0.55);
+}
+
+.pmb-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: var(--pmb-radius-sm);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: all 0.25s ease;
+}
+
+.pmb-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   2. MAIN CONTENT LAYOUT
+   ========================================================= */
+.pmb-content-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 50px 24px 80px;
+}
+
+.pmb-header-section {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.pmb-main-title {
+  color: var(--pmb-navy);
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+
+/* Gelombang Tabs / Filter Pills */
+.pmb-batch-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.pmb-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid #cbd5e1;
+  color: var(--pmb-navy);
+  background: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pmb-tab-btn:hover {
+  border-color: var(--pmb-navy);
+  background: #f8fafc;
+}
+
+.pmb-tab-btn.active {
+  background: var(--pmb-navy);
+  color: #ffffff;
+  border-color: var(--pmb-navy);
+  box-shadow: 0 4px 12px rgba(11, 42, 80, 0.2);
+}
+
+.pmb-tab-badge {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #b91c1c;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* =========================================================
+   3. JADWAL GELOMBANG - STEPPER / TIMELINE CARDS
+   ========================================================= */
+.pmb-timeline-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 45px;
+}
+
+.pmb-batch-card {
+  background: var(--pmb-card-bg);
+  border: 1.5px solid var(--pmb-border);
+  border-radius: var(--pmb-radius-md);
+  padding: 28px 32px 32px;
+  box-shadow: var(--pmb-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.pmb-batch-card:hover {
+  box-shadow: var(--pmb-shadow-hover);
+}
+
+/* Highlighted Active Batch (Gelombang 1) */
+.pmb-batch-card.is-active {
+  border: 2px solid var(--pmb-navy);
+  box-shadow: 0 10px 30px rgba(11, 42, 80, 0.12);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+}
+
+.pmb-batch-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.pmb-batch-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pmb-batch-title {
+  color: var(--pmb-navy);
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.pmb-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pmb-status-open {
+  background: #b91c1c;
+  color: #ffffff;
+}
+
+.pmb-status-upcoming {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.pmb-batch-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pmb-btn-batch-apply {
+  background: #b91c1c;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(185, 28, 28, 0.3);
+}
+
+.pmb-btn-batch-apply:hover {
+  background: #991b1b;
+  transform: translateY(-1px);
+}
+
+/* Stepper Track */
+.pmb-stepper-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Connecting Horizontal Bar */
+.pmb-stepper-track::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 12%;
+  right: 12%;
+  height: 4px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+/* Highlighted progress on active card */
+.pmb-batch-card.is-active .pmb-stepper-track::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 12%;
+  width: 25%;
+  height: 4px;
+  background: #1e293b;
+  z-index: 1;
+}
+
+.pmb-step-item {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pmb-step-node {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+}
+
+.pmb-step-item.is-completed .pmb-step-node {
+  background: #1e293b;
+  border-color: #1e293b;
+  color: #ffffff;
+}
+
+.pmb-step-item.is-active-step .pmb-step-node {
+  background: #b91c1c;
+  border-color: #fecaca;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.2);
+  animation: pmbPulseNode 2s infinite;
+}
+
+@keyframes pmbPulseNode {
+  0% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(185, 28, 28, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+}
+
+.pmb-step-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.pmb-step-item.is-active-step .pmb-step-name {
+  color: #b91c1c;
+}
+
+.pmb-step-date {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.35;
+  max-width: 180px;
+}
+
+.pmb-step-item.is-active-step .pmb-step-date {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* =========================================================
+   4. QUICK INFO CARDS (2 COLUMNS)
+   ========================================================= */
+.pmb-quick-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.pmb-info-card {
+  background: #ffffff;
+  border: 1px solid var(--pmb-border);
+  border-radius: var(--pmb-radius-md);
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: var(--pmb-shadow);
+  transition: transform 0.2s ease;
+}
+
+.pmb-info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pmb-shadow-hover);
+}
+
+.pmb-info-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #e0e7ff;
+  color: var(--pmb-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.pmb-info-card.alt .pmb-info-icon-box {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.pmb-info-meta-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.pmb-info-meta-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--pmb-navy);
+}
+
+.pmb-info-meta-sub {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   5. PERSYARATAN ADMINISTRASI
+   ========================================================= */
+.pmb-req-card {
+  background: #ffffff;
+  border: 1px solid var(--pmb-border);
+  border-radius: var(--pmb-radius-md);
+  padding: 30px 34px;
+  box-shadow: var(--pmb-shadow);
+  margin-bottom: 50px;
+}
+
+.pmb-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid #f1f5f9;
+}
+
+.pmb-section-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--pmb-navy);
+  margin: 0;
+}
+
+.pmb-req-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 24px;
+}
+
+.pmb-req-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: var(--pmb-radius-sm);
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.pmb-req-item:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.pmb-req-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #b91c1c;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pmb-req-text {
+  font-size: 14.5px;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   6. BIAYA PERKULIAHAN SECTION
+   ========================================================= */
+.pmb-fee-section {
+  margin-bottom: 50px;
+}
+
+.pmb-fee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.pmb-fee-card {
+  background: #ffffff;
+  border: 1px solid var(--pmb-border);
+  border-radius: var(--pmb-radius-md);
+  overflow: hidden;
+  box-shadow: var(--pmb-shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pmb-fee-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--pmb-shadow-hover);
+}
+
+.pmb-fee-card.featured {
+  border: 2px solid #b91c1c;
+  box-shadow: 0 10px 25px rgba(185, 28, 28, 0.1);
+}
+
+/* Ribbon Rekomendasi Wrapper & Perfectly Centered Ribbon */
+.pmb-ribbon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 125px;
+  height: 125px;
+  overflow: hidden;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.pmb-ribbon {
+  position: absolute;
+  display: block;
+  width: 175px;
+  padding: 6px 0;
+  background-color: #b91c1c;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  left: -15px;
+  top: 28px;
+  transform: rotate(45deg);
+  letter-spacing: 1px;
+}
+
+.pmb-badge-saving {
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-left: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pmb-fee-notice {
+  background: #f0fdf4;
+  border-top: 1px solid #dcfce7;
+  padding: 10px 18px;
+  font-size: 12px;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.45;
+}
+
+.pmb-fee-notice i {
+  color: #15803d;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.pmb-fee-card-header {
+  background: var(--pmb-navy);
+  color: #ffffff;
+  padding: 14px 22px;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pmb-fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.pmb-fee-table th {
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+  padding: 11px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--pmb-border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.pmb-fee-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.pmb-fee-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pmb-fee-original {
+  text-decoration: line-through;
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.pmb-fee-discounted {
+  color: #b91c1c;
+  font-weight: 700;
+  font-size: 14.5px;
+}
+
+.pmb-fee-card-footer {
+  margin-top: auto;
+  background: #f8fafc;
+  padding: 14px 20px;
+  border-top: 1.5px dashed var(--pmb-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pmb-fee-total-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pmb-navy);
+  text-transform: uppercase;
+}
+
+.pmb-fee-total-val {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--pmb-navy);
+}
+
+/* =========================================================
+   7. GRAFIK PERBANDINGAN BIAYA SPI (BAR CHART CARD)
+   ========================================================= */
+.pmb-chart-box {
+  background: #ffffff;
+  border: 1px solid var(--pmb-border);
+  border-radius: var(--pmb-radius-md);
+  padding: 26px 30px;
+  box-shadow: var(--pmb-shadow);
+  margin-bottom: 28px;
+}
+
+.pmb-chart-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--pmb-navy);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pmb-chart-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 25px;
+}
+
+.pmb-bars-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 180px;
+  padding: 10px 10px 0;
+  border-bottom: 2px solid #cbd5e1;
+  gap: 16px;
+}
+
+.pmb-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.pmb-bar-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.pmb-bar-fill {
+  width: 100%;
+  max-width: 58px;
+  border-radius: 6px 6px 0 0;
+  background: #1e3a8a;
+  transition: height 0.6s ease;
+  position: relative;
+}
+
+.pmb-bar-col.best .pmb-bar-fill {
+  background: linear-gradient(180deg, #b91c1c 0%, #991b1b 100%);
+}
+
+.pmb-bar-label {
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #334155;
+  text-align: center;
+}
+
+.pmb-bar-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: #ecfdf5;
+  color: #059669;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
+  display: inline-block;
+}
+
+/* =========================================================
+   8. NB / ALERT BOX
+   ========================================================= */
+.pmb-alert-box {
+  background: #fff8f8;
+  border: 1.5px solid #fecaca;
+  border-radius: var(--pmb-radius-md);
+  padding: 22px 26px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.pmb-alert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.pmb-alert-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #991b1b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pmb-alert-list {
+  padding-left: 20px;
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.pmb-alert-list li {
+  margin-bottom: 6px;
+}
+
+/* =========================================================
+   9. CTA BOTTOM BANNER
+   ========================================================= */
+.pmb-bottom-cta {
+  background: linear-gradient(135deg, #0b2a50 0%, #061830 100%);
+  border-radius: var(--pmb-radius-lg);
+  padding: 45px 36px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 15px 35px rgba(11, 42, 80, 0.2);
+}
+
+.pmb-cta-title {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.pmb-cta-desc {
+  color: #cbd5e1;
+  font-size: 15px;
+  max-width: 680px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.pmb-cta-btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #b91c1c;
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 38px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(185, 28, 28, 0.4);
+  transition: all 0.25s ease;
+}
+
+.pmb-cta-btn-main:hover {
+  background: #991b1b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(185, 28, 28, 0.6);
+}
+
+.pmb-wa-help {
+  margin-top: 20px;
+  font-size: 13.5px;
+  color: #94a3b8;
+}
+
+.pmb-wa-help a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.pmb-wa-help a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   10. RESPONSIVE MEDIA QUERIES
+   ========================================================= */
+@media (max-width: 991px) {
+  .pmb-hero-wrapper {
+    min-height: 520px;
+    padding: 100px 20px 50px;
+  }
+
+  .pmb-hero-card {
+    padding: 30px 26px;
+  }
+
+  .pmb-hero-title {
+    font-size: 23px;
+  }
+
+  .pmb-main-title {
+    font-size: 28px;
+  }
+
+  .pmb-quick-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pmb-req-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pmb-fee-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Sembunyikan Hero Banner pada Tampilan Mobile */
+  .pmb-hero-wrapper {
+    display: none !important;
+  }
+
+  .pmb-content-container {
+    padding: 105px 16px 60px; /* Jarak pas di bawah fixed navbar saat hero di-hide di mobile */
+  }
+
+  .pmb-main-title {
+    font-size: 22px;
+  }
+
+  .pmb-batch-card {
+    padding: 20px 16px;
+  }
+
+  .pmb-batch-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .pmb-btn-batch-apply {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Stepper mobile conversion */
+  .pmb-stepper-track {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-left: 20px;
+  }
+
+  .pmb-stepper-track::before,
+  .pmb-batch-card.is-active .pmb-stepper-track::after {
+    left: 36px;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    height: auto;
+    right: auto;
+  }
+
+  .pmb-step-item {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    gap: 14px;
+  }
+
+  .pmb-step-node {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .pmb-bars-wrapper {
+    height: 150px;
+    gap: 8px;
+  }
+
+  .pmb-bar-val {
+    font-size: 10px;
+  }
+
+  .pmb-bar-label {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   6B. COMING SOON FEE SHOWCASE
+   ========================================================= */
+.pmb-cs-showcase {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 50%, #eff6ff 100%);
+  border: 1.5px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 42px 36px;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.pmb-cs-showcase::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.pmb-cs-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 18px;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+}
+
+.pmb-cs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.pmb-cs-title {
+  color: var(--pmb-navy);
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.pmb-cs-desc {
+  max-width: 740px;
+  margin: 0 auto 28px;
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.pmb-cs-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  text-align: left;
+}
+
+.pmb-cs-feature-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pmb-cs-feature-card:hover {
+  transform: translateY(-3px);
+  border-color: #93c5fd;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.pmb-cs-feature-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.pmb-cs-feature-icon.blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.pmb-cs-feature-icon.amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.pmb-cs-feature-icon.green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.pmb-cs-feature-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--pmb-navy);
+}
+
+.pmb-cs-feature-text {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pmb-cs-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pmb-cs-btn-schedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0b2a50;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(11, 42, 80, 0.25);
+}
+
+.pmb-cs-btn-schedule:hover {
+  background: #164070;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(11, 42, 80, 0.35);
+}
+
+.pmb-cs-btn-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+}
+
+.pmb-cs-btn-contact:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
+@media (max-width: 768px) {
+  .pmb-cs-showcase {
+    padding: 30px 20px;
+  }
+  .pmb-cs-features-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .pmb-cs-title {
+    font-size: 21px;
+  }
+}
