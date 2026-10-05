@@ -139,8 +139,9 @@
           <hr style="margin: 24px 0; border: 0; border-top: 1px solid var(--border);">
 
           <div class="form-group">
-            <label class="form-label" for="pmb_page_title">Judul Konten Halaman</label>
+            <label class="form-label" for="pmb_page_title">Judul Konten Halaman & Title Browser</label>
             <input type="text" id="pmb_page_title" name="pmb_page_title" class="form-control" value="{{ old('pmb_page_title', $pmb['pmb_page_title']) }}" required>
+            <div class="form-hint">Judul ini digunakan sebagai judul konten utama dan otomatis sinkron ke tag &lt;title&gt; browser (SEO).</div>
           </div>
 
           <div class="form-group">

@@ -1,7 +1,17 @@
 @extends('layouts.frontend')
 
-@section('title', 'Pendaftaran Mahasiswa Baru (PMB) 2026/2027 | Politeknik Mitra Industri')
-@section('meta_description', 'Informasi resmi Penerimaan Mahasiswa Baru (PMB) Polmind: Jadwal gelombang, syarat pendaftaran, rincian biaya kuliah terjangkau, dan beasiswa industri MM2100.')
+@php
+  $academicYear = $pmb['pmb_academic_year'] ?? '2027/2028';
+  $rawPageTitle = $pmb['pmb_page_title'] ?? ('Pendaftaran Mahasiswa Baru ' . $academicYear);
+  if (!str_contains($rawPageTitle, 'PMB')) {
+    $seoTitle = str_replace('Pendaftaran Mahasiswa Baru', 'Pendaftaran Mahasiswa Baru (PMB)', $rawPageTitle);
+  } else {
+    $seoTitle = $rawPageTitle;
+  }
+@endphp
+
+@section('title', $seoTitle . ' | Politeknik Mitra Industri')
+@section('meta_description', 'Informasi resmi ' . $seoTitle . ' Polmind: Jadwal gelombang pendaftaran, syarat, biaya perkuliahan, dan beasiswa industri MM2100.')
 @section('canonical', 'https://polmind.ac.id/pmb')
 
 @push('styles')
@@ -219,7 +229,7 @@
         </h3>
 
         <p class="pmb-cs-desc">
-          {{ $pmb['pmb_fee_coming_soon_desc'] ?? 'Rincian pembiayaan studi (SPI & UKT) untuk Tahun Akademik 2026/2027 saat ini sedang dalam proses penetapan oleh pimpinan institusi Politeknik Mitra Industri. Calon mahasiswa dipersilakan melakukan pendaftaran terlebih dahulu mengikuti jadwal gelombang yang telah dibuka.' }}
+          {{ $pmb['pmb_fee_coming_soon_desc'] ?? ('Rincian pembiayaan studi (SPI & UKT) untuk Tahun Akademik ' . $academicYear . ' saat ini sedang dalam proses penetapan oleh pimpinan institusi Politeknik Mitra Industri. Calon mahasiswa dipersilakan melakukan pendaftaran terlebih dahulu mengikuti jadwal gelombang yang telah dibuka.') }}
         </p>
 
         <!-- 3 Highlight Features -->

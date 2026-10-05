@@ -19,8 +19,8 @@ class PmbController extends Controller
             'pmb_hero_title' => "Lebih dari Sekadar Kuliah, \nKami adalah Inkubator Talenta Global!",
             'pmb_hero_subtitle' => 'Politeknik Mitra Industri hadir dengan konsep Teaching Factory yang revolusioner, mempersiapkanmu menjadi profesional handal dan membuka pintu karir impianmu di Jepang. Bergabunglah dengan kami dan ukir kisah suksesmu di panggung dunia!',
             'pmb_register_url' => 'https://siakad.polmind.ac.id/spmbfront',
-            'pmb_academic_year' => '2026/2027',
-            'pmb_page_title' => 'Pendaftaran Mahasiswa Baru Tahun 2026/2027',
+            'pmb_academic_year' => '2027/2028',
+            'pmb_page_title' => 'Pendaftaran Mahasiswa Baru Tahun 2027',
             'pmb_intro_text' => 'Selamat datang di laman resmi Pendaftaran Mahasiswa Baru (PMB) POLITEKNIK MITRA INDUSTRI (POLMIND). Kami membuka kesempatan bagi lulusan SMA/SMK/MA sederajat untuk bergabung menjadi bagian dari institusi kami. Silakan simak informasi penting berikut ini sebelum mengisi formulir pendaftaran.',
 
             // 2. Batches (Jadwal Gelombang)
@@ -155,7 +155,7 @@ class PmbController extends Controller
             'pmb_fee_coming_soon' => '1',
             'pmb_fee_coming_soon_badge' => 'Segera Diumumkan / Coming Soon',
             'pmb_fee_coming_soon_title' => 'Informasi Biaya Perkuliahan Akan Segera Diumumkan',
-            'pmb_fee_coming_soon_desc' => 'Rincian pembiayaan studi (SPI & UKT) untuk Tahun Akademik 2026/2027 saat ini sedang dalam proses penetapan oleh pimpinan institusi Politeknik Mitra Industri. Calon mahasiswa dipersilakan melakukan pendaftaran terlebih dahulu mengikuti jadwal gelombang yang telah dibuka.',
+            'pmb_fee_coming_soon_desc' => 'Rincian pembiayaan studi (SPI & UKT) untuk Tahun Akademik 2027/2028 saat ini sedang dalam proses penetapan oleh pimpinan institusi Politeknik Mitra Industri. Calon mahasiswa dipersilakan melakukan pendaftaran terlebih dahulu mengikuti jadwal gelombang yang telah dibuka.',
 
             // 6. Chart
             'pmb_chart_title' => 'Grafik Biaya SPI per Gelombang',
