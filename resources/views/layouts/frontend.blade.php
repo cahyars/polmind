@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/main-style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/news.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/detail_news.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/detail_news.css') }}?v={{ file_exists(public_path('assets/css/detail_news.css')) ? filemtime(public_path('assets/css/detail_news.css')) : '2.1' }}">
   <link rel="stylesheet" href="{{ asset('assets/css/dokumentasi.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/daftar-dosen.css') }}">
 
