@@ -35,11 +35,6 @@ Route::get('/beranda/berita/{slug}', [BeritaController::class, 'show'])->name('b
 // Dynamic Sitemap for SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
-// SPMB redirect to static subsite if visited directly
-Route::get('/spmb', function () {
-    return redirect('/spmb/');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Admin Authentication Routes

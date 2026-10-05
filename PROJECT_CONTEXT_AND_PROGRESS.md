@@ -43,7 +43,6 @@ web-polmind/
 │   └── seeders/                    # Seeder data awal (admin, berita, dosen)
 ├── public/
 │   ├── assets/                     # CSS, JS, Gambar, Font Institusi
-│   ├── spmb/                       # Sub-website statis SPMB
 │   ├── .htaccess                   # Konfigurasi Apache (Gzip & Cache)
 │   ├── robots.txt                  # Aturan Crawler & Sitemap Declaration
 │   ├── sitemap.xml                 # File fisik sitemap (auto-synchronized)
@@ -105,7 +104,6 @@ web-polmind/
 | `berita.index` | `/beranda/berita` | `BeritaController@index` | Arsip Berita dengan filter kategori |
 | `berita.show` | `/beranda/berita/{slug}` | `BeritaController@show` | Detail Baca Berita + Berita Terkait |
 | `sitemap` | `/sitemap.xml` | `SitemapController@index` | Dynamic XML Sitemap untuk Googlebot |
-| `spmb` | `/spmb/` | Static subsite | Modul statis informasi PMB lama |
 
 ---
 

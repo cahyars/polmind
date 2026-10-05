@@ -43,7 +43,6 @@ class SitemapController extends Controller
             ['url' => '/daftar_dosen', 'priority' => '0.8', 'changefreq' => 'weekly', 'lastmod' => date('Y-m-d')],
             ['url' => '/daftar_tendik', 'priority' => '0.7', 'changefreq' => 'monthly', 'lastmod' => date('Y-m-d')],
             ['url' => '/dokumentasi', 'priority' => '0.7', 'changefreq' => 'weekly', 'lastmod' => date('Y-m-d')],
-            ['url' => '/spmb/', 'priority' => '0.8', 'changefreq' => 'weekly', 'lastmod' => date('Y-m-d')],
         ];
 
         $articles = Berita::where('is_published', true)

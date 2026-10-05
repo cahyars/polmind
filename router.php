@@ -33,7 +33,7 @@ if ($uri !== '/' && file_exists($filePath) && !is_dir($filePath)) {
     exit;
 }
 
-// Jika request adalah folder yang memiliki index.html (contoh: /spmb/)
+// Jika request adalah folder yang memiliki index.html (static subsite)
 if (is_dir($filePath)) {
     $indexHtml = rtrim($filePath, '/') . '/index.html';
     if (file_exists($indexHtml)) {
