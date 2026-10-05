@@ -112,15 +112,23 @@
 
       <div class="form-group">
         <label class="form-label" for="content">Isi Berita Lengkap <span style="color:#ef4444;">*</span></label>
-        <div style="background: #f1f5f9; border: 1px solid var(--border); border-bottom: none; border-radius: 8px 8px 0 0; padding: 6px 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+        <div style="background: #f1f5f9; border: 1px solid var(--border); border-bottom: none; border-radius: 8px 8px 0 0; padding: 6px 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertTag('b')" title="Tebal (Bold)"><i class="fas fa-bold"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertTag('i')" title="Miring (Italic)"><i class="fas fa-italic"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertHeading()" title="Sub-Judul (H3)"><i class="fas fa-heading"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertParagraph()" title="Paragraf Baru (&lt;p&gt;)"><i class="fas fa-paragraph"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertList()" title="Daftar (List)"><i class="fas fa-list-ul"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertQuote()" title="Kutipan (Quote)"><i class="fas fa-quote-left"></i></button>
+          <div style="margin-left: auto;">
+            <button type="button" class="btn btn-sm" onclick="autoFormatEditor()" style="font-weight: 600; color: #1d4ed8; background: #eff6ff; border: 1px solid #bfdbfe; display: flex; align-items: center; gap: 6px;" title="Rapikan teks menjadi format paragraf dan daftar poin otomatis">
+              <i class="fas fa-wand-magic-sparkles"></i> Rapikan Format Paragraf & Bullets
+            </button>
+          </div>
         </div>
         <textarea id="content" name="content" class="form-control" rows="14" style="border-radius: 0 0 8px 8px; font-family: monospace; font-size: 14px; line-height: 1.6;" required>{{ old('content', $berita->content) }}</textarea>
+        <div class="form-hint" style="margin-top: 6px; font-size: 12px; color: #64748b;">
+          💡 <strong>Tips Penulisan:</strong> Tekan <em>Enter 2x</em> untuk memisahkan antar paragraf. Beri tanda hubung (<code>- </code>) di awal baris untuk daftar poin, atau klik tombol <strong style="color: #2563eb;">"Rapikan Format Paragraf & Bullets"</strong> di atas.
+        </div>
       </div>
 
       <div class="form-group" style="margin-top: 10px;">
@@ -330,6 +338,68 @@
     const replacement = `\n<blockquote>${text}</blockquote>\n`;
     textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
     textarea.dispatchEvent(new Event('input'));
+  }
+
+  function autoFormatEditor() {
+    const textarea = document.getElementById('content');
+    let text = textarea.value.trim();
+    if (!text) {
+      alert('Tulis atau paste isi berita terlebih dahulu.');
+      return;
+    }
+
+    const normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    const blocks = normalized.split(/\n\s*\n/);
+    const result = [];
+    let currentList = [];
+
+    for (let block of blocks) {
+      block = block.trim();
+      if (!block) continue;
+
+      if (/^<(p|ul|ol|table|blockquote|h[1-6]|div)\b/i.test(block)) {
+        if (currentList.length > 0) {
+          result.push('<ul class="news-bullet-list">\n' + currentList.join('\n') + '\n</ul>');
+          currentList = [];
+        }
+        result.push(block);
+        continue;
+      }
+
+      const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+      const isBulletBlock = lines.length > 0 && lines.every(l => /^([-*•]|\d+[\.)])\s+/.test(l));
+
+      if (isBulletBlock) {
+        for (let line of lines) {
+          let cleaned = line.replace(/^([-*•]|\d+[\.)])\s+/, '');
+          let colonMatch = cleaned.match(/^([^:]{2,80}):\s*(.*)$/);
+          if (colonMatch) {
+            cleaned = `<strong>${colonMatch[1]}:</strong> ${colonMatch[2]}`;
+          }
+          currentList.push(`  <li>${cleaned}</li>`);
+        }
+      } else {
+        if (currentList.length > 0) {
+          result.push('<ul class="news-bullet-list">\n' + currentList.join('\n') + '\n</ul>');
+          currentList = [];
+        }
+
+        let colonMatch = block.match(/^([^:\n]{3,65}):\s*([\s\S]+)$/);
+        if (colonMatch) {
+          result.push(`<p><strong>${colonMatch[1]}:</strong> ${colonMatch[2].replace(/\n/g, '<br>')}</p>`);
+        } else {
+          result.push(`<p>${block.replace(/\n/g, '<br>')}</p>`);
+        }
+      }
+    }
+
+    if (currentList.length > 0) {
+      result.push('<ul class="news-bullet-list">\n' + currentList.join('\n') + '\n</ul>');
+    }
+
+    textarea.value = result.join('\n\n');
+    textarea.dispatchEvent(new Event('input'));
+    autoExtractSummary(true);
   }
 </script>
 @endsection

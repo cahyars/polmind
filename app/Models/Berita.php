@@ -122,4 +122,73 @@ class Berita extends Model
 
         return static::extractSummaryFromContent($this->content, 200);
     }
+
+    /**
+     * Get content formatted as HTML with paragraphs and bullet lists
+     */
+    public function getFormattedContentAttribute(): string
+    {
+        $content = $this->content ?? '';
+        if (empty(trim($content))) {
+            return '';
+        }
+
+        // If content already contains HTML block tags (<p>, <ul>, <ol>, <div>, <h3>, <table>), return as is
+        if (preg_match('/<(p|ul|ol|table|blockquote|h[1-6]|div)\b[^>]*>/i', $content)) {
+            return $content;
+        }
+
+        // Otherwise, intelligently convert plain text into rich HTML paragraphs and lists
+        $normalized = str_replace(["\r\n", "\r"], "\n", $content);
+        $blocks = preg_split('/\n\s*\n/', $normalized);
+        $result = [];
+        $currentList = [];
+
+        foreach ($blocks as $block) {
+            $block = trim($block);
+            if (empty($block)) {
+                continue;
+            }
+
+            $lines = array_values(array_filter(array_map('trim', explode("\n", $block))));
+            $allBullets = count($lines) > 0;
+            foreach ($lines as $line) {
+                if (!preg_match('/^([-*•]|\d+[\.)])\s+/', $line)) {
+                    $allBullets = false;
+                    break;
+                }
+            }
+
+            if ($allBullets) {
+                foreach ($lines as $line) {
+                    $cleaned = preg_replace('/^([-*•]|\d+[\.)])\s+/', '', $line);
+                    if (preg_match('/^([^:]{2,80}):\s*(.*)$/', $cleaned, $m)) {
+                        $cleaned = '<strong>' . htmlspecialchars($m[1]) . ':</strong> ' . htmlspecialchars($m[2]);
+                    } else {
+                        $cleaned = htmlspecialchars($cleaned);
+                    }
+                    $currentList[] = '<li>' . $cleaned . '</li>';
+                }
+            } else {
+                if (!empty($currentList)) {
+                    $result[] = '<ul class="news-bullet-list">' . implode('', $currentList) . '</ul>';
+                    $currentList = [];
+                }
+
+                // Check if paragraph starts with a label followed by a colon (e.g. "Label: description")
+                if (preg_match('/^([^:\n]{3,65}):\s*(.+)$/s', $block, $m)) {
+                    $pContent = '<strong>' . htmlspecialchars($m[1]) . ':</strong> ' . nl2br(htmlspecialchars($m[2]));
+                } else {
+                    $pContent = nl2br(htmlspecialchars($block));
+                }
+                $result[] = '<p>' . $pContent . '</p>';
+            }
+        }
+
+        if (!empty($currentList)) {
+            $result[] = '<ul class="news-bullet-list">' . implode('', $currentList) . '</ul>';
+        }
+
+        return implode("\n\n", $result);
+    }
 }

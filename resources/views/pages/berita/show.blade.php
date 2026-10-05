@@ -271,11 +271,116 @@
   opacity: 1 !important;
 }
 
+/* ========================================================
+   NEWS HERO IMAGE & CONTENT FORMATTING
+   ======================================================== */
+.news-image-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 260px !important;
+  max-height: 640px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  margin: 20px auto 28px !important;
+  background: #0b1329 !important;
+  box-shadow: 0 10px 30px -10px rgba(16, 44, 83, 0.16) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.news-image-backdrop {
+  position: absolute !important;
+  inset: -25px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  filter: blur(28px) brightness(0.55) saturate(1.2) !important;
+  opacity: 0.75 !important;
+  transform: scale(1.08) !important;
+  pointer-events: none !important;
+}
+
+.news-image-wrapper img.news-image {
+  position: relative !important;
+  z-index: 2 !important;
+  max-width: 100% !important;
+  max-height: 640px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 8px !important;
+}
+
+.news-content {
+  font-size: 16.5px !important;
+  color: #1e293b !important;
+  line-height: 1.85 !important;
+  margin-top: 25px !important;
+}
+
+.news-content p {
+  margin-bottom: 22px !important;
+  line-height: 1.85 !important;
+  font-size: 16.5px !important;
+  color: #1e293b !important;
+}
+
+.news-content ul,
+.news-content .news-bullet-list {
+  margin: 16px 0 24px 28px !important;
+  padding-left: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  list-style-type: disc !important;
+}
+
+.news-content ul li,
+.news-content .news-bullet-list li {
+  font-size: 16px !important;
+  line-height: 1.75 !important;
+  color: #1e293b !important;
+  padding-left: 4px !important;
+}
+
+.news-content ol {
+  margin: 16px 0 24px 28px !important;
+  padding-left: 8px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  list-style-type: decimal !important;
+}
+
+.news-content ol li {
+  font-size: 16px !important;
+  line-height: 1.75 !important;
+  color: #1e293b !important;
+}
+
+.news-content strong,
+.news-content b {
+  color: #102C53 !important;
+  font-weight: 700 !important;
+}
+
 @media (max-width: 640px) {
   .news-meta-bar {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 12px !important;
+  }
+
+  .news-image-wrapper {
+    min-height: 220px !important;
+    max-height: 480px !important;
+  }
+
+  .news-image-wrapper img.news-image {
+    max-height: 480px !important;
   }
 
   .news-share-box {
@@ -366,16 +471,18 @@
   </div>
 
   @if($article->image)
-    <img src="{{ $article->image_url }}"
-         alt="{{ $article->title }}"
-         class="news-image"
-         fetchpriority="high"
-         decoding="async"
-         style="max-height: 480px; width: 100%; object-fit: cover; border-radius: 8px; margin: 15px auto; display: block;" />
+    <div class="news-image-wrapper">
+      <div class="news-image-backdrop" style="background-image: url('{{ $article->image_url }}');"></div>
+      <img src="{{ $article->image_url }}"
+           alt="{{ $article->title }}"
+           class="news-image"
+           fetchpriority="high"
+           decoding="async" />
+    </div>
   @endif
 
-  <div class="news-content lh2" style="font-size: 16px; color: #1e293b; line-height: 1.8; margin-top: 25px;">
-    {!! $article->content !!}
+  <div class="news-content" style="font-size: 16.5px; color: #1e293b; line-height: 1.85; margin-top: 25px;">
+    {!! $article->formatted_content !!}
   </div>
 
   <div class="news-source" style="margin-top: 30px; font-style: italic; color: #64748b; font-size: 14px;">
