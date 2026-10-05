@@ -14,7 +14,8 @@ class UserSeeder extends Seeder
             ['email' => 'admin@polmind.ac.id'],
             [
                 'name' => 'Administrator Polmind',
-                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'password' => Hash::make('PolmindMM2100!!'),
                 'email_verified_at' => now(),
             ]
         );

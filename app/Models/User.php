@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -45,5 +46,24 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return ($this->role ?? 'admin') === 'admin';
+    }
+
+    public function isHumas(): bool
+    {
+        return in_array($this->role ?? '', ['humas', 'operator']);
+    }
+
+    public function getRoleLabelAttribute(): string
+    {
+        return match($this->role ?? 'admin') {
+            'admin' => 'Administrator',
+            'humas', 'operator' => 'Humas / Operator Berita',
+            default => ucfirst($this->role ?? 'Pengguna'),
+        };
     }
 }

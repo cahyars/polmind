@@ -430,7 +430,7 @@
       <img src="{{ asset('assets/images/logoFooter.png') }}" alt="Polmind Logo">
       <div>
         <div class="brand-text">POLMIND</div>
-        <span class="badge-admin">ADMINISTRATOR</span>
+        <span class="badge-admin" style="background: {{ Auth::user()->isAdmin() ? '#3b82f6' : '#059669' }};">{{ Auth::user()->isAdmin() ? 'ADMINISTRATOR' : 'HUMAS / OPERATOR' }}</span>
       </div>
     </div>
 
@@ -458,6 +458,7 @@
         </a>
       </li>
 
+      @if(Auth::user()->isAdmin())
       <li class="menu-item {{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
         <a href="{{ route('admin.sliders.index') }}">
           <i class="fas fa-images"></i>
@@ -494,6 +495,15 @@
         </a>
       </li>
 
+      <li class="menu-header">Pengaturan Sistem</li>
+      <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.users.index') }}">
+          <i class="fas fa-users-gear"></i>
+          <span>Kelola Pengguna</span>
+        </a>
+      </li>
+      @endif
+
       <li class="menu-header">Situs</li>
       <li class="menu-item">
         <a href="{{ url('/') }}" target="_blank">
@@ -505,10 +515,13 @@
 
     <div class="sidebar-footer">
       <div class="user-info-brief">
-        <div class="user-avatar-small">
-          <i class="fas fa-user-shield"></i>
+        <div class="user-avatar-small" style="background: {{ Auth::user()->isAdmin() ? '#2563eb' : '#059669' }};">
+          <i class="fas {{ Auth::user()->isAdmin() ? 'fa-user-shield' : 'fa-bullhorn' }}"></i>
         </div>
-        <div class="user-name-small">{{ Auth::user()->name ?? 'Admin' }}</div>
+        <div>
+          <div class="user-name-small">{{ Auth::user()->name ?? 'Admin' }}</div>
+          <div style="font-size:11px; color:#94a3b8;">{{ Auth::user()->role_label }}</div>
+        </div>
       </div>
     </div>
   </aside>

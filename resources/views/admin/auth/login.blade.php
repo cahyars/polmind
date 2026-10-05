@@ -144,15 +144,6 @@
       font-size: 12px;
       color: #94a3b8;
     }
-    .demo-credentials {
-      margin-top: 18px;
-      padding: 12px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #475569;
-    }
   </style>
 </head>
 
@@ -180,18 +171,18 @@
       @csrf
 
       <div class="form-group">
-        <label class="form-label" for="email">Email Administrator</label>
+        <label class="form-label" for="email">Alamat Email</label>
         <div class="input-wrapper">
           <i class="fas fa-envelope"></i>
-          <input type="email" id="email" name="email" class="form-control" value="{{ old('email', 'admin@polmind.ac.id') }}" required autofocus placeholder="admin@polmind.ac.id">
+          <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus placeholder="Masukkan email Anda">
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="password">Password</label>
+        <label class="form-label" for="password">Kata Sandi</label>
         <div class="input-wrapper">
           <i class="fas fa-lock"></i>
-          <input type="password" id="password" name="password" class="form-control" value="admin123" required placeholder="••••••••">
+          <input type="password" id="password" name="password" class="form-control" required placeholder="Masukkan kata sandi">
         </div>
       </div>
 
@@ -206,12 +197,6 @@
         <span>Masuk ke Panel Admin</span>
         <i class="fas fa-arrow-right"></i>
       </button>
-
-      <div class="demo-credentials">
-        <strong><i class="fas fa-key"></i> Akun Login Default:</strong><br>
-        Email: <code>admin@polmind.ac.id</code><br>
-        Password: <code>admin123</code>
-      </div>
     </form>
 
     <div class="login-footer">

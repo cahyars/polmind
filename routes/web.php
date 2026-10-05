@@ -61,27 +61,35 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // Kategori Berita Management
     Route::resource('kategori', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
 
-    // Slider Management
-    Route::resource('sliders', SliderController::class)->only(['index', 'store', 'update', 'destroy']);
-    Route::post('sliders/{slider}/toggle', [SliderController::class, 'toggle'])->name('sliders.toggle');
+    // ========================================================
+    // Fitur Khusus Administrator (Akses Penuh)
+    // ========================================================
+    Route::middleware('admin.only')->group(function () {
+        // Slider Management
+        Route::resource('sliders', SliderController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::post('sliders/{slider}/toggle', [SliderController::class, 'toggle'])->name('sliders.toggle');
 
-    // Konten Website Management
-    Route::get('konten', [ContentController::class, 'index'])->name('konten.index');
-    Route::post('konten/sambutan', [ContentController::class, 'updateSambutan'])->name('konten.sambutan');
-    Route::post('konten/pmb', [ContentController::class, 'updatePmb'])->name('konten.pmb');
-    Route::post('konten/profil', [ContentController::class, 'updateProfil'])->name('konten.profil');
-    Route::post('konten/general', [ContentController::class, 'updateGeneral'])->name('konten.general');
+        // Konten Website Management
+        Route::get('konten', [ContentController::class, 'index'])->name('konten.index');
+        Route::post('konten/sambutan', [ContentController::class, 'updateSambutan'])->name('konten.sambutan');
+        Route::post('konten/pmb', [ContentController::class, 'updatePmb'])->name('konten.pmb');
+        Route::post('konten/profil', [ContentController::class, 'updateProfil'])->name('konten.profil');
+        Route::post('konten/general', [ContentController::class, 'updateGeneral'])->name('konten.general');
 
-    // Kelola Informasi PMB Lengkap
-    Route::get('pmb', [PmbController::class, 'index'])->name('pmb.index');
-    Route::post('pmb/hero', [PmbController::class, 'updateHero'])->name('pmb.hero');
-    Route::post('pmb/jadwal', [PmbController::class, 'updateJadwal'])->name('pmb.jadwal');
-    Route::post('pmb/biaya', [PmbController::class, 'updateBiaya'])->name('pmb.biaya');
-    Route::post('pmb/persyaratan', [PmbController::class, 'updatePersyaratan'])->name('pmb.persyaratan');
-    Route::post('pmb/info', [PmbController::class, 'updateInfo'])->name('pmb.info');
-    Route::post('pmb/reset', [PmbController::class, 'resetDefaults'])->name('pmb.reset');
+        // Kelola Informasi PMB Lengkap
+        Route::get('pmb', [PmbController::class, 'index'])->name('pmb.index');
+        Route::post('pmb/hero', [PmbController::class, 'updateHero'])->name('pmb.hero');
+        Route::post('pmb/jadwal', [PmbController::class, 'updateJadwal'])->name('pmb.jadwal');
+        Route::post('pmb/biaya', [PmbController::class, 'updateBiaya'])->name('pmb.biaya');
+        Route::post('pmb/persyaratan', [PmbController::class, 'updatePersyaratan'])->name('pmb.persyaratan');
+        Route::post('pmb/info', [PmbController::class, 'updateInfo'])->name('pmb.info');
+        Route::post('pmb/reset', [PmbController::class, 'resetDefaults'])->name('pmb.reset');
 
-    // Civitas Akademika
-    Route::resource('dosen', LecturerController::class)->only(['index', 'store', 'update', 'destroy']);
-    Route::resource('tendik', StaffController::class)->only(['index', 'store', 'update', 'destroy']);
+        // Civitas Akademika
+        Route::resource('dosen', LecturerController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('tendik', StaffController::class)->only(['index', 'store', 'update', 'destroy']);
+
+        // Manajemen Pengguna & Operator
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
+    });
 });
