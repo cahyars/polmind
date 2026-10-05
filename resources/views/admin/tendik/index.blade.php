@@ -76,6 +76,10 @@
                 <td style="color: #64748b; font-size: 13px;">{{ $item->position }}</td>
                 <td>{{ $item->order }}</td>
                 <td style="text-align: right; white-space: nowrap;">
+                  <button type="button" class="btn btn-sm btn-primary" onclick="openEditModal({{ $item->id }}, '{{ addslashes($item->name) }}', '{{ addslashes($item->position ?? '') }}', {{ $item->order }}, '{{ $item->photo_url }}')" title="Edit Data Tendik">
+                    <i class="fas fa-pen-to-square"></i>
+                  </button>
+
                   <form action="{{ route('admin.tendik.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data tendik ini?')">
                     @csrf
                     @method('DELETE')
@@ -96,4 +100,75 @@
     </div>
   </div>
 </div>
+
+<!-- Edit Tendik Modal -->
+<div id="editTendikModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+  <div style="background: #fff; width: 100%; max-width: 520px; border-radius: 12px; padding: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); max-height: 90vh; overflow-y: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="font-size: 17px; font-weight: 700; color: var(--primary);">Edit Data Tenaga Kependidikan</h3>
+      <button type="button" onclick="closeEditModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #94a3b8;">✕</button>
+    </div>
+
+    <form id="editTendikForm" method="POST" action="" enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+
+      <div class="form-group">
+        <label class="form-label" for="edit_name">Nama Lengkap &amp; Gelar <span style="color:#ef4444;">*</span></label>
+        <input type="text" id="edit_name" name="name" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_position">Jabatan / Bagian</label>
+        <input type="text" id="edit_position" name="position" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_photo">Ganti Foto Tendik</label>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+          <img id="edit_photo_preview" src="" alt="Foto Tendik" style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 1px solid var(--border);">
+          <span style="font-size: 12px; color: #64748b;">Foto saat ini</span>
+        </div>
+        <input type="file" id="edit_photo" name="photo" class="form-control" accept="image/*">
+        <div class="form-hint">Biarkan kosong jika tidak ingin mengubah foto.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_order">Urutan Tampil <span style="color:#ef4444;">*</span></label>
+        <input type="number" id="edit_order" name="order" class="form-control" required min="1">
+      </div>
+
+      <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Batal</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Perbarui Data</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openEditModal(id, name, position, order, photoUrl) {
+    const modal = document.getElementById('editTendikModal');
+    const form = document.getElementById('editTendikForm');
+    form.action = `/admin/tendik/${id}`;
+
+    document.getElementById('edit_name').value = name;
+    document.getElementById('edit_position').value = position;
+    document.getElementById('edit_order').value = order;
+    document.getElementById('edit_photo_preview').src = photoUrl;
+
+    modal.style.display = 'flex';
+  }
+
+  function closeEditModal() {
+    document.getElementById('editTendikModal').style.display = 'none';
+  }
+
+  window.addEventListener('click', function(e) {
+    const modal = document.getElementById('editTendikModal');
+    if (e.target === modal) {
+      closeEditModal();
+    }
+  });
+</script>
 @endsection

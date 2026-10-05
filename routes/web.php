@@ -59,7 +59,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::post('berita/{berita}/toggle', [AdminBeritaController::class, 'togglePublish'])->name('berita.toggle');
 
     // Kategori Berita Management
-    Route::resource('kategori', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
+    Route::resource('kategori', \App\Http\Controllers\Admin\CategoryController::class)->parameters(['kategori' => 'kategori'])->except(['create', 'show', 'edit']);
 
     // ========================================================
     // Fitur Khusus Administrator (Akses Penuh)
@@ -86,8 +86,8 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::post('pmb/reset', [PmbController::class, 'resetDefaults'])->name('pmb.reset');
 
         // Civitas Akademika
-        Route::resource('dosen', LecturerController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('tendik', StaffController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('dosen', LecturerController::class)->parameters(['dosen' => 'dosen'])->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('tendik', StaffController::class)->parameters(['tendik' => 'tendik'])->only(['index', 'store', 'update', 'destroy']);
 
         // Manajemen Pengguna & Operator
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);

@@ -40,8 +40,10 @@ class StaffController extends Controller
         return back()->with('success', 'Tenaga kependidikan berhasil ditambahkan.');
     }
 
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, $tendik)
     {
+        $staff = $tendik instanceof Staff ? $tendik : Staff::findOrFail($tendik);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'nullable|string|max:255',
@@ -67,8 +69,10 @@ class StaffController extends Controller
         return back()->with('success', 'Data tendik berhasil diperbarui.');
     }
 
-    public function destroy(Staff $staff)
+    public function destroy($tendik)
     {
+        $staff = $tendik instanceof Staff ? $tendik : Staff::findOrFail($tendik);
+
         if ($staff->photo && !Str::startsWith($staff->photo, 'assets/')) {
             Storage::disk('public')->delete($staff->photo);
         }

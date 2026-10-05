@@ -47,8 +47,10 @@ class CategoryController extends Controller
         return back()->with('success', 'Kategori baru berhasil ditambahkan.');
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $kategori)
     {
+        $category = $kategori instanceof Category ? $kategori : Category::findOrFail($kategori);
+
         $validated = $request->validate([
             'name' => 'required|string|max:100|unique:categories,name,' . $category->id,
             'slug' => 'required|string|max:100|unique:categories,slug,' . $category->id,
@@ -72,8 +74,10 @@ class CategoryController extends Controller
         return back()->with('success', 'Kategori berhasil diperbarui.');
     }
 
-    public function destroy(Category $category)
+    public function destroy($kategori)
     {
+        $category = $kategori instanceof Category ? $kategori : Category::findOrFail($kategori);
+
         // Find default or fallback category
         $fallback = Category::where('id', '!=', $category->id)->where('slug', 'umum')->first() 
                  ?: Category::where('id', '!=', $category->id)->first();

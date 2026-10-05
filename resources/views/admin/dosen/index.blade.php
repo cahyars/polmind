@@ -95,6 +95,10 @@
                 </td>
                 <td>{{ $dosen->order }}</td>
                 <td style="text-align: right; white-space: nowrap;">
+                  <button type="button" class="btn btn-sm btn-primary" onclick="openEditModal({{ $dosen->id }}, '{{ addslashes($dosen->name) }}', '{{ addslashes($dosen->position ?? '') }}', '{{ $dosen->category }}', {{ $dosen->order }}, '{{ $dosen->photo_url }}')" title="Edit Data Dosen">
+                    <i class="fas fa-pen-to-square"></i>
+                  </button>
+
                   <form action="{{ route('admin.dosen.destroy', $dosen->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data dosen ini?')">
                     @csrf
                     @method('DELETE')
@@ -115,4 +119,85 @@
     </div>
   </div>
 </div>
+
+<!-- Edit Dosen Modal -->
+<div id="editDosenModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+  <div style="background: #fff; width: 100%; max-width: 520px; border-radius: 12px; padding: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); max-height: 90vh; overflow-y: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="font-size: 17px; font-weight: 700; color: var(--primary);">Edit Data Dosen / Expert</h3>
+      <button type="button" onclick="closeEditModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #94a3b8;">✕</button>
+    </div>
+
+    <form id="editDosenForm" method="POST" action="" enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+
+      <div class="form-group">
+        <label class="form-label" for="edit_name">Nama Lengkap &amp; Gelar <span style="color:#ef4444;">*</span></label>
+        <input type="text" id="edit_name" name="name" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_category">Kategori Dosen <span style="color:#ef4444;">*</span></label>
+        <select id="edit_category" name="category" class="form-control" required>
+          <option value="internal">Dosen Internal Kampus</option>
+          <option value="industri">Expert Industri</option>
+          <option value="instruktur">Instruktur</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_position">Jabatan / Prodi / Perusahaan</label>
+        <input type="text" id="edit_position" name="position" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_photo">Ganti Foto Dosen</label>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+          <img id="edit_photo_preview" src="" alt="Foto Dosen" style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 1px solid var(--border);">
+          <span style="font-size: 12px; color: #64748b;">Foto saat ini</span>
+        </div>
+        <input type="file" id="edit_photo" name="photo" class="form-control" accept="image/*">
+        <div class="form-hint">Biarkan kosong jika tidak ingin mengubah foto.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="edit_order">Urutan Tampil <span style="color:#ef4444;">*</span></label>
+        <input type="number" id="edit_order" name="order" class="form-control" required min="1">
+      </div>
+
+      <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Batal</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Perbarui Data</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openEditModal(id, name, position, category, order, photoUrl) {
+    const modal = document.getElementById('editDosenModal');
+    const form = document.getElementById('editDosenForm');
+    form.action = `/admin/dosen/${id}`;
+
+    document.getElementById('edit_name').value = name;
+    document.getElementById('edit_position').value = position;
+    document.getElementById('edit_category').value = category;
+    document.getElementById('edit_order').value = order;
+    document.getElementById('edit_photo_preview').src = photoUrl;
+
+    modal.style.display = 'flex';
+  }
+
+  function closeEditModal() {
+    document.getElementById('editDosenModal').style.display = 'none';
+  }
+
+  window.addEventListener('click', function(e) {
+    const modal = document.getElementById('editDosenModal');
+    if (e.target === modal) {
+      closeEditModal();
+    }
+  });
+</script>
 @endsection

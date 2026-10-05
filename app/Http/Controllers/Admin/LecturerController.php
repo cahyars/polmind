@@ -42,8 +42,10 @@ class LecturerController extends Controller
         return back()->with('success', 'Dosen berhasil ditambahkan.');
     }
 
-    public function update(Request $request, Lecturer $lecturer)
+    public function update(Request $request, $dosen)
     {
+        $lecturer = $dosen instanceof Lecturer ? $dosen : Lecturer::findOrFail($dosen);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'nullable|string|max:255',
@@ -71,8 +73,10 @@ class LecturerController extends Controller
         return back()->with('success', 'Data dosen berhasil diperbarui.');
     }
 
-    public function destroy(Lecturer $lecturer)
+    public function destroy($dosen)
     {
+        $lecturer = $dosen instanceof Lecturer ? $dosen : Lecturer::findOrFail($dosen);
+
         if ($lecturer->photo && !Str::startsWith($lecturer->photo, 'assets/')) {
             Storage::disk('public')->delete($lecturer->photo);
         }
