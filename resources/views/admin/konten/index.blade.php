@@ -145,6 +145,12 @@
               </div>
             @endif
             <input type="file" id="pmb_popup_image" name="pmb_popup_image" class="form-control" accept="image/*">
+            <div class="form-hint" style="margin-top: 6px; font-size: 12px; color: #64748b;">
+              💡 <strong>Tips:</strong> Popup ini muncul otomatis saat pengunjung membuka website. Untuk langsung menguji atau melihat tampilannya, buka:
+              <a href="{{ url('/beranda?popup=1') }}" target="_blank" style="color: #2563eb; font-weight: 600; text-decoration: underline;">
+                Uji Tampilan Popup di Website ↗
+              </a>
+            </div>
           </div>
 
           <button type="submit" class="btn btn-primary">

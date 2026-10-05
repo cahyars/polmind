@@ -369,15 +369,237 @@
     </a>
   </div>
 
-  @if(\App\Models\SiteSetting::get('pmb_popup_enabled', '0') == '1')
-  <!-- POPUP PMB -->
-  <div id="popupPMB" class="pmb-popup-overlay" style="display:none;" onclick="closePopupPMB()">
-    <div class="pmb-popup-box" onclick="event.stopPropagation();">
-      <a href="/pmb">
-        <img src="{{ asset(\App\Models\SiteSetting::get('pmb_popup_image', 'assets/images/perpanjangan_gel4.jpeg')) }}" alt="Informasi PMB Polmind">
+  @if(\App\Models\SiteSetting::get('pmb_popup_enabled', '0') == '1' && !request()->is('pmb*') && !request()->is('admin*'))
+  @php
+    $popupImg = \App\Models\SiteSetting::get('pmb_popup_image', 'assets/images/perpanjangan_gel4.jpeg');
+    $popupImgUrl = str_starts_with($popupImg, 'http') ? $popupImg : asset($popupImg);
+    $popupCtaLink = url(\App\Models\SiteSetting::get('pmb_cta_link', '/pmb'));
+  @endphp
+  <!-- POPUP PROMO PMB -->
+  <div id="popupPMB" class="pmb-popup-overlay" role="dialog" aria-modal="true" aria-label="Pengumuman PMB Politeknik Mitra Industri">
+    <div class="pmb-popup-backdrop" onclick="closePopupPMB()"></div>
+    <div class="pmb-popup-card">
+      <!-- Tombol Close (X) -->
+      <button type="button" class="pmb-popup-close-btn" onclick="closePopupPMB()" aria-label="Tutup Popup" title="Tutup">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Gambar Flyer / Banner PMB -->
+      <a href="{{ $popupCtaLink }}" class="pmb-popup-link" title="Klik untuk Informasi PMB Lengkap">
+        <img src="{{ $popupImgUrl }}" alt="Informasi PMB Politeknik Mitra Industri" class="pmb-popup-image" loading="eager">
       </a>
+
+      <!-- Quick Action Footer -->
+      <div class="pmb-popup-footer">
+        <a href="{{ $popupCtaLink }}" class="pmb-popup-action-btn">
+          <span>Lihat Info &amp; Syarat Pendaftaran</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
+
+  <style>
+    /* ========================================================
+       POPUP PROMO PMB STYLES
+       ======================================================== */
+    .pmb-popup-overlay {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 16px !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease, visibility 0.35s ease !important;
+    }
+
+    .pmb-popup-overlay.show {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+
+    .pmb-popup-backdrop {
+      position: absolute !important;
+      inset: 0 !important;
+      background: rgba(10, 20, 40, 0.72) !important;
+      backdrop-filter: blur(6px) !important;
+      -webkit-backdrop-filter: blur(6px) !important;
+      cursor: pointer !important;
+    }
+
+    .pmb-popup-card {
+      position: relative !important;
+      z-index: 10 !important;
+      max-width: 440px !important;
+      width: 100% !important;
+      background: #ffffff !important;
+      border-radius: 16px !important;
+      box-shadow: 0 25px 50px -12px rgba(10, 25, 55, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+      overflow: hidden !important;
+      transform: scale(0.9) translateY(15px) !important;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .pmb-popup-overlay.show .pmb-popup-card {
+      transform: scale(1) translateY(0) !important;
+    }
+
+    .pmb-popup-close-btn {
+      position: absolute !important;
+      top: 12px !important;
+      right: 12px !important;
+      z-index: 25 !important;
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 50% !important;
+      background: rgba(15, 23, 42, 0.8) !important;
+      color: #ffffff !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+      padding: 0 !important;
+    }
+
+    .pmb-popup-close-btn:hover {
+      background: #dc2626 !important;
+      border-color: #ef4444 !important;
+      transform: rotate(90deg) scale(1.1) !important;
+    }
+
+    .pmb-popup-link {
+      display: block !important;
+      width: 100% !important;
+      line-height: 0 !important;
+      background: #f8fafc !important;
+      overflow: hidden !important;
+    }
+
+    .pmb-popup-image {
+      width: 100% !important;
+      max-height: 72vh !important;
+      height: auto !important;
+      object-fit: contain !important;
+      display: block !important;
+      margin: 0 auto !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    .pmb-popup-link:hover .pmb-popup-image {
+      transform: scale(1.015) !important;
+    }
+
+    .pmb-popup-footer {
+      padding: 12px 16px 14px !important;
+      background: #ffffff !important;
+      border-top: 1px solid #f1f5f9 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .pmb-popup-action-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      width: 100% !important;
+      padding: 11px 20px !important;
+      background: linear-gradient(135deg, #102C53 0%, #1e4a86 100%) !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+      font-size: 14.5px !important;
+      border-radius: 10px !important;
+      text-decoration: none !important;
+      box-shadow: 0 4px 14px rgba(16, 44, 83, 0.25) !important;
+      transition: all 0.25s ease !important;
+    }
+
+    .pmb-popup-action-btn:hover {
+      background: linear-gradient(135deg, #0d2342 0%, #163866 100%) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 18px rgba(16, 44, 83, 0.35) !important;
+      color: #ffffff !important;
+    }
+
+    @media (max-width: 480px) {
+      .pmb-popup-card {
+        max-width: 92vw !important;
+        border-radius: 14px !important;
+      }
+      .pmb-popup-image {
+        max-height: 65vh !important;
+      }
+      .pmb-popup-action-btn {
+        font-size: 13.5px !important;
+        padding: 10px 14px !important;
+      }
+      .pmb-popup-close-btn {
+        width: 32px !important;
+        height: 32px !important;
+        top: 10px !important;
+        right: 10px !important;
+      }
+    }
+  </style>
+
+  <script>
+    (function() {
+      const POPUP_STORAGE_KEY = 'polmind_pmb_popup_dismissed';
+      const hasDismissed = sessionStorage.getItem(POPUP_STORAGE_KEY);
+      const isTestMode = window.location.search.includes('popup=1');
+
+      function openPopup() {
+        const popup = document.getElementById('popupPMB');
+        if (popup) {
+          popup.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      window.closePopupPMB = function() {
+        const popup = document.getElementById('popupPMB');
+        if (popup) {
+          popup.classList.remove('show');
+          document.body.style.overflow = '';
+          sessionStorage.setItem(POPUP_STORAGE_KEY, 'true');
+        }
+      };
+
+      if (!hasDismissed || isTestMode) {
+        if (document.readyState === 'complete') {
+          setTimeout(openPopup, 500);
+        } else {
+          window.addEventListener('load', function() {
+            setTimeout(openPopup, 500);
+          });
+        }
+      }
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+          window.closePopupPMB();
+        }
+      });
+    })();
+  </script>
   @endif
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
