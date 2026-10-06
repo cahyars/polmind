@@ -404,14 +404,19 @@ h2.header-pmb {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
-    font-size: 0.82rem;
+    padding: 7px 16px;
+    font-size: 0.84rem;
+    font-family: inherit;
     font-weight: 600;
+    line-height: 1.4;
     color: #104b78;
     background: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
     transition: all 0.2s ease;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
@@ -428,17 +433,53 @@ h2.header-pmb {
     transform: translateY(0);
 }
 
+.btn-kurikulum-expand {
+    background: #104b78;
+    color: #ffffff;
+    border: 1px solid #104b78;
+}
+
+.btn-kurikulum-expand:hover {
+    background: #0b2a50;
+    border-color: #0b2a50;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 75, 120, 0.25);
+}
+
+.btn-kurikulum-expand i {
+    color: #ffffff;
+}
+
+.btn-kurikulum-collapse {
+    background: #ffffff;
+    color: #104b78;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-kurikulum-collapse:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn-kurikulum-collapse i {
+    color: #104b78;
+}
+
 .card-prodi-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 kolom */
-    gap: 18px;
-    max-width: 90%;
-    margin: 15px auto 30px;
-    align-items: start; /* SANGAT PENTING: Mencegah card tertutup tertarik tinggi oleh card sebelahnya */
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+    max-width: 90% !important;
+    margin: 15px auto 35px !important;
+    align-items: start !important; /* Mencegah card tertutup tertarik tinggi oleh card sebelahnya */
 }
 
 .card-prodi {
+    align-self: start !important; /* Mencegah card tertutup tertarik tinggi oleh card sebelahnya */
+    height: auto !important;
+    min-height: 0 !important;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
@@ -515,7 +556,12 @@ h2.header-pmb {
     font-weight: 900;
     font-size: 0.85rem;
     color: #64748b;
+    margin-left: auto;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s ease;
+}
+
+.card-prodi-header:has(.card-prodi-badge)::after {
+    margin-left: 0;
 }
 
 .card-prodi.expanded .card-prodi-header::after {

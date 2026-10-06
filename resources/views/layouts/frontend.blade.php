@@ -46,12 +46,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon-cerah.ico') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/main-style.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/news.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/main-style.css') }}?v={{ file_exists(public_path('assets/css/main-style.css')) ? filemtime(public_path('assets/css/main-style.css')) : '1.0' }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : '2.0' }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/news.css') }}?v={{ file_exists(public_path('assets/css/news.css')) ? filemtime(public_path('assets/css/news.css')) : '1.0' }}">
   <link rel="stylesheet" href="{{ asset('assets/css/detail_news.css') }}?v={{ file_exists(public_path('assets/css/detail_news.css')) ? filemtime(public_path('assets/css/detail_news.css')) : '2.1' }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/dokumentasi.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/daftar-dosen.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/dokumentasi.css') }}?v={{ file_exists(public_path('assets/css/dokumentasi.css')) ? filemtime(public_path('assets/css/dokumentasi.css')) : '1.0' }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/daftar-dosen.css') }}?v={{ file_exists(public_path('assets/css/daftar-dosen.css')) ? filemtime(public_path('assets/css/daftar-dosen.css')) : '1.0' }}">
 
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -603,7 +603,7 @@
   @endif
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="{{ asset('assets/js/script1.js') }}"></script>
+  <script src="{{ asset('assets/js/script1.js') }}?v={{ file_exists(public_path('assets/js/script1.js')) ? filemtime(public_path('assets/js/script1.js')) : '2.0' }}"></script>
   <script src="{{ asset('assets/js/en/lang.js') }}?v={{ file_exists(public_path('assets/js/en/lang.js')) ? filemtime(public_path('assets/js/en/lang.js')) : '1.0' }}"></script>
   @stack('scripts')
 </body>

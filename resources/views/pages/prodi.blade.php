@@ -17,7 +17,7 @@
 </div>
 
 <!-- TRM -->
-<section id="about" class="section-1 highlights team image-right" id="trm">
+<section class="section-1 highlights team image-right">
   <div id="trm" style="position: relative; top: -100px; visibility: hidden;"></div>
   <div class="container">
     <div class="row">
@@ -68,17 +68,17 @@
       Berikut ini adalah <i>outline</i> kurikulum untuk Program Studi D4 Teknologi Rekayasa Manufaktur:
     </p>
 
-    <div class="kurikulum-toolbar">
-      <div class="kurikulum-toolbar-info">
-        <i class="fa-solid fa-circle-info mr5"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
+    <div class="kurikulum-toolbar" style="display: flex; justify-content: space-between; align-items: center; max-width: 90%; margin: 18px auto 20px; padding: 12px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #104b78; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div class="kurikulum-toolbar-info" style="font-size: 0.9rem; color: #334155; display: inline-flex; align-items: center; font-weight: 500;">
+        <i class="fa-solid fa-circle-info mr5" style="color: #104b78; margin-right: 8px;"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
       </div>
-      <div class="kurikulum-toolbar-actions">
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, true)"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, false)"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
+      <div class="kurikulum-toolbar-actions" style="display: inline-flex; align-items: center; gap: 10px;">
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-expand" onclick="toggleAllCurriculum(this, true)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #ffffff; background: #104b78; border: 1px solid #104b78; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-collapse" onclick="toggleAllCurriculum(this, false)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #104b78; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
       </div>
     </div>
 
-    <div class="card-prodi-container">
+    <div class="card-prodi-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 90%; margin: 15px auto 35px; align-items: start;">
     <div class="card-prodi">
         <div class="card-prodi-header" onclick="toggleCard(this)"><i class="fa-solid fa-book mr10"></i> <span data-translate="semester-1">Semester 1</span></div>
         <div class="card-prodi-body">
@@ -222,7 +222,7 @@
 </section>
 
 <!-- BD -->
-<section id="features" class="section-3 features offers" id="bd">
+<section class="section-3 features offers">
   <div id="bd" style="position: relative; top: -100px; visibility: hidden;"></div>
   <div class="container">
     <div class="row">
@@ -273,17 +273,17 @@
       Berikut ini adalah <i>outline</i> kurikulum untuk Program Studi D4 Bisnis Digital:
     </p>
 
-    <div class="kurikulum-toolbar">
-      <div class="kurikulum-toolbar-info">
-        <i class="fa-solid fa-circle-info mr5"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
+    <div class="kurikulum-toolbar" style="display: flex; justify-content: space-between; align-items: center; max-width: 90%; margin: 18px auto 20px; padding: 12px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #104b78; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div class="kurikulum-toolbar-info" style="font-size: 0.9rem; color: #334155; display: inline-flex; align-items: center; font-weight: 500;">
+        <i class="fa-solid fa-circle-info mr5" style="color: #104b78; margin-right: 8px;"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
       </div>
-      <div class="kurikulum-toolbar-actions">
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, true)"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, false)"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
+      <div class="kurikulum-toolbar-actions" style="display: inline-flex; align-items: center; gap: 10px;">
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-expand" onclick="toggleAllCurriculum(this, true)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #ffffff; background: #104b78; border: 1px solid #104b78; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-collapse" onclick="toggleAllCurriculum(this, false)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #104b78; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
       </div>
     </div>
 
-    <div class="card-prodi-container">
+    <div class="card-prodi-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 90%; margin: 15px auto 35px; align-items: start;">
         <div class="card-prodi">
             <div class="card-prodi-header" onclick="toggleCard(this)"><i class="fa-solid fa-book mr10"></i> <span data-translate="semester-1">Semester 1</span></div>
             <div class="card-prodi-body">
@@ -419,7 +419,7 @@
 </section>
 
 <!-- TRPL -->
-<section id="about" class="section-1 highlights team image-right" id="trpl">
+<section class="section-1 highlights team image-right">
   <div id="trpl" style="position: relative; top: -100px; visibility: hidden;"></div>
   <div class="container">
     <div class="row">
@@ -470,17 +470,17 @@
       Berikut ini adalah <i>outline</i> kurikulum untuk Program Studi D4 Teknologi Rekayasa Perangkat Lunak:
     </p>
 
-    <div class="kurikulum-toolbar">
-      <div class="kurikulum-toolbar-info">
-        <i class="fa-solid fa-circle-info mr5"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
+    <div class="kurikulum-toolbar" style="display: flex; justify-content: space-between; align-items: center; max-width: 90%; margin: 18px auto 20px; padding: 12px 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #104b78; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+      <div class="kurikulum-toolbar-info" style="font-size: 0.9rem; color: #334155; display: inline-flex; align-items: center; font-weight: 500;">
+        <i class="fa-solid fa-circle-info mr5" style="color: #104b78; margin-right: 8px;"></i> <span data-translate="kurikulum-hint">Klik semester untuk membuka atau menutup daftar mata kuliah</span>
       </div>
-      <div class="kurikulum-toolbar-actions">
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, true)"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
-        <button type="button" class="btn-kurikulum-toggle" onclick="toggleAllCurriculum(this, false)"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
+      <div class="kurikulum-toolbar-actions" style="display: inline-flex; align-items: center; gap: 10px;">
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-expand" onclick="toggleAllCurriculum(this, true)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #ffffff; background: #104b78; border: 1px solid #104b78; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-down mr5"></i> <span data-translate="kurikulum-expand-all">Buka Semua</span></button>
+        <button type="button" class="btn-kurikulum-toggle btn-kurikulum-collapse" onclick="toggleAllCurriculum(this, false)" style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; font-size: 0.84rem; font-weight: 600; color: #104b78; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-angles-up mr5"></i> <span data-translate="kurikulum-collapse-all">Tutup Semua</span></button>
       </div>
     </div>
 
-    <div class="card-prodi-container">
+    <div class="card-prodi-container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 90%; margin: 15px auto 35px; align-items: start;">
       <div class="card-prodi">
         <div class="card-prodi-header" onclick="toggleCard(this)"><i class="fa-solid fa-book mr10"></i> <span data-translate="semester-1">Semester 1</span></div>
         <div class="card-prodi-body">
@@ -618,3 +618,368 @@
 
 <!-- Footer -->
 @endsection
+
+@push('styles')
+<style>
+  /* =========================================================
+     Kurikulum Toolbar & Accordion Card Styling (Prodi Page)
+     ========================================================= */
+  .kurikulum-toolbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    max-width: 90% !important;
+    margin: 18px auto 20px !important;
+    padding: 12px 20px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid #104b78 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .kurikulum-toolbar-info {
+    font-size: 0.9rem !important;
+    color: #334155 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+  }
+
+  .kurikulum-toolbar-info i {
+    color: #104b78 !important;
+    margin-right: 8px !important;
+    font-size: 1.05rem !important;
+  }
+
+  .kurikulum-toolbar-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .btn-kurikulum-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    padding: 8px 18px !important;
+    font-size: 0.84rem !important;
+    font-family: inherit !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    user-select: none !important;
+  }
+
+  .btn-kurikulum-expand {
+    background: #104b78 !important;
+    color: #ffffff !important;
+    border: 1px solid #104b78 !important;
+  }
+
+  .btn-kurikulum-expand:hover {
+    background: #0b2a50 !important;
+    border-color: #0b2a50 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(16, 75, 120, 0.25) !important;
+  }
+
+  .btn-kurikulum-expand i {
+    color: #ffffff !important;
+  }
+
+  .btn-kurikulum-collapse {
+    background: #ffffff !important;
+    color: #104b78 !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .btn-kurikulum-collapse:hover {
+    background: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .btn-kurikulum-collapse i {
+    color: #104b78 !important;
+  }
+
+  .card-prodi-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px !important;
+    max-width: 90% !important;
+    margin: 15px auto 35px !important;
+    align-items: start !important; /* MENCEGAH KARTU SEBELAHNYA TERTARIK TINGGI */
+  }
+
+  .card-prodi {
+    align-self: start !important; /* MENCEGAH KARTU TERTARIK TINGGI OLEH GRID ROW */
+    height: auto !important;
+    min-height: 0 !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-prodi:hover {
+    box-shadow: 0 6px 16px rgba(11, 42, 80, 0.09);
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+  }
+
+  .card-prodi.expanded {
+    border-color: #0b2a50;
+    box-shadow: 0 6px 18px rgba(11, 42, 80, 0.12);
+  }
+
+  .card-prodi-header {
+    padding: 13px 18px;
+    color: #102c53;
+    font-weight: 700;
+    font-size: 1.02rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: #ffffff;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .card-prodi-header:hover {
+    background-color: #f8fafc;
+  }
+
+  .card-prodi.expanded .card-prodi-header {
+    background-color: #0b2a50;
+    color: #ffffff;
+  }
+
+  .card-prodi-header i.fa-book {
+    color: #104b78;
+    font-size: 1rem;
+    margin-right: 10px;
+    transition: color 0.25s ease;
+  }
+
+  .card-prodi.expanded .card-prodi-header i.fa-book {
+    color: #93c5fd;
+  }
+
+  .card-prodi-badge {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: #e2e8f0;
+    color: #475569;
+    margin-left: auto;
+    margin-right: 12px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .card-prodi.expanded .card-prodi-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .card-prodi-header::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-left: auto;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s ease;
+  }
+
+  .card-prodi-header:has(.card-prodi-badge)::after {
+    margin-left: 0;
+  }
+
+  .card-prodi.expanded .card-prodi-header::after {
+    transform: rotate(180deg);
+    color: #ffffff;
+  }
+
+  .card-prodi-body {
+    padding: 10px 18px 16px;
+    background: #ffffff;
+    display: none;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .card-prodi.expanded .card-prodi-body {
+    display: block;
+    animation: fadeInCurriculum 0.25s ease-out;
+  }
+
+  .card-prodi-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0 !important;
+    margin-bottom: 0;
+  }
+
+  .card-prodi-body ul > li {
+    position: relative;
+    padding: 8px 10px 8px 22px;
+    font-size: 0.92rem;
+    color: #334155;
+    border-bottom: 1px dashed #e2e8f0;
+    transition: background 0.15s ease;
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+
+  .card-prodi-body ul > li:last-child {
+    border-bottom: none;
+  }
+
+  .card-prodi-body ul > li:hover {
+    background: #f8fafc;
+    color: #0f172a;
+  }
+
+  .card-prodi-body ul > li::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 15px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #104b78;
+  }
+
+  .card-prodi-body ol {
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    background: #f8fafc;
+    border-radius: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-left: 3px solid #cbd5e1;
+  }
+
+  .card-prodi-body ol > li {
+    padding: 3px 6px;
+    font-size: 0.87rem;
+    color: #475569;
+    border-bottom: none;
+    list-style: decimal;
+  }
+
+  .card-prodi-body ol > li::before {
+    display: none;
+  }
+
+  @keyframes fadeInCurriculum {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .kurikulum-toolbar {
+      max-width: 100% !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 10px !important;
+      padding: 12px !important;
+      margin: 12px 0 16px !important;
+    }
+
+    .kurikulum-toolbar-actions {
+      width: 100% !important;
+      display: flex !important;
+      gap: 8px !important;
+    }
+
+    .btn-kurikulum-toggle {
+      flex: 1 !important;
+      justify-content: center !important;
+      padding: 9px 10px !important;
+      font-size: 0.82rem !important;
+    }
+
+    .card-prodi-container {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+      max-width: 100% !important;
+    }
+
+    .card-prodi-header {
+      padding: 12px 14px;
+    }
+
+    .card-prodi-body {
+      padding: 8px 14px 14px;
+    }
+  }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+  // Expose toggleCard directly
+  window.toggleCard = function (headerElement) {
+    const card = headerElement.closest(".card-prodi");
+    if (card) {
+      card.classList.toggle("expanded");
+    }
+  };
+
+  // Expose toggleAllCurriculum for Buka Semua / Tutup Semua
+  window.toggleAllCurriculum = function (btnElement, expand) {
+    const parentContainer = btnElement.closest("section") || btnElement.closest(".container") || document;
+    const cards = parentContainer.querySelectorAll(".card-prodi");
+    cards.forEach(card => {
+      if (expand) {
+        card.classList.add("expanded");
+      } else {
+        card.classList.remove("expanded");
+      }
+    });
+  };
+
+  // Generate badges automatically with MK count
+  function initCurriculumBadges() {
+    document.querySelectorAll(".card-prodi").forEach(card => {
+      const items = card.querySelectorAll(".card-prodi-body > ul > li");
+      const header = card.querySelector(".card-prodi-header");
+      if (items.length > 0 && header && !header.querySelector(".card-prodi-badge")) {
+        const badge = document.createElement("span");
+        badge.className = "card-prodi-badge";
+        badge.textContent = `${items.length} MK`;
+        header.appendChild(badge);
+      }
+    });
+  }
+
+  if (document.readyState !== "loading") {
+    initCurriculumBadges();
+  } else {
+    document.addEventListener("DOMContentLoaded", initCurriculumBadges);
+  }
+</script>
+@endpush

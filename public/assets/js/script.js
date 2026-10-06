@@ -155,3 +155,42 @@ document.addEventListener("DOMContentLoaded", function () {
   // Inisialisasi badge mata kuliah
   initCurriculumBadges();
 });
+
+// ===== GLOBAL TOGGLE FUNCTIONS (Available immediately for inline onclick) ===== //
+window.toggleCard = function (headerElement) {
+  const card = headerElement.closest(".card-prodi");
+  if (card) {
+    card.classList.toggle("expanded");
+  }
+};
+
+window.toggleAllCurriculum = function (btnElement, expand) {
+  const parentContainer = btnElement.closest("section") || btnElement.closest(".container") || document;
+  const cards = parentContainer.querySelectorAll(".card-prodi");
+  cards.forEach(card => {
+    if (expand) {
+      card.classList.add("expanded");
+    } else {
+      card.classList.remove("expanded");
+    }
+  });
+};
+
+function initCurriculumBadges() {
+  document.querySelectorAll(".card-prodi").forEach(card => {
+    const items = card.querySelectorAll(".card-prodi-body > ul > li");
+    const header = card.querySelector(".card-prodi-header");
+    if (items.length > 0 && header && !header.querySelector(".card-prodi-badge")) {
+      const badge = document.createElement("span");
+      badge.className = "card-prodi-badge";
+      badge.textContent = `${items.length} MK`;
+      header.appendChild(badge);
+    }
+  });
+}
+
+if (document.readyState !== "loading") {
+  initCurriculumBadges();
+} else {
+  document.addEventListener("DOMContentLoaded", initCurriculumBadges);
+}
