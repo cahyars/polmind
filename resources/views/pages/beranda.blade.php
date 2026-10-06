@@ -118,6 +118,75 @@
     .news-filter-btn { border: 1px solid #102C53; background: #fff; color: #102C53; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: all .2s ease; font-weight: 500; }
     .news-filter-btn.active, .news-filter-btn:hover { background: #102C53; color: #fff; }
     .news-empty-message { color: #102C53; margin-bottom: 20px; text-align: center; }
+
+    /* Desktop News Pagination (8 Berita / Halaman) */
+    .desktop-news-pagination { display: none; }
+    @media (min-width: 768px) {
+        .desktop-news-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 36px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .desktop-news-pagination .page-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            height: 42px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            color: #102C53;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            user-select: none;
+        }
+        .desktop-news-pagination .page-btn:hover:not(:disabled):not(.active) {
+            background-color: #f1f5f9;
+            border-color: #102C53;
+            color: #102C53;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(16, 44, 83, 0.12);
+        }
+        .desktop-news-pagination .page-btn.active {
+            background-color: #102C53;
+            border-color: #102C53;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(16, 44, 83, 0.25);
+            cursor: default;
+        }
+        .desktop-news-pagination .page-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+            color: #94a3b8;
+            box-shadow: none;
+            transform: none;
+        }
+        .desktop-news-pagination .page-ellipsis {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 42px;
+            color: #64748b;
+            font-weight: 700;
+            font-size: 1rem;
+            user-select: none;
+        }
+    }
+    @media (max-width: 767px) {
+        .desktop-news-pagination { display: none !important; }
+    }
 </style>
 
 <!-- News -->
@@ -141,7 +210,7 @@
       <div class="swiper-wrapper">
         @foreach($latestNews as $item)
           <div class="swiper-slide">
-            <div class="news-card" data-category="{{ strtolower($item->category) }}">
+            <div class="news-card" data-category="{{ strtolower($item->category ?? ($item->categoryRel->slug ?? 'umum')) }}">
               <a href="/beranda/berita/{{ $item->slug }}" style="text-decoration: none;">
                 <img src="{{ $item->image_url }}" alt="{{ $item->title }}" loading="lazy" decoding="async">
                 <div class="news-content" style="color: #102C53;">
@@ -155,9 +224,12 @@
         @endforeach
       </div>
 
-      <!-- Pagination Bulatan -->
+      <!-- Pagination Bulatan (Mobile Only) -->
       <div class="swiper-pagination"></div>
     </div>
+
+    <!-- Pagination Desktop (8 Berita per Halaman) -->
+    <div class="desktop-news-pagination" id="desktop-news-pagination"></div>
 </div>
 
 <!-- Partner Kami -->

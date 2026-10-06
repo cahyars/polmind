@@ -97,8 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // ============ MOBILE ONLY: NEWS SLIDER ============ //
   const isMobile = window.innerWidth < 768;
 
+  let mobileNewsSwiper = null;
   if (isMobile && typeof Swiper !== "undefined") {
-    new Swiper(".news-slider", {
+    mobileNewsSwiper = new Swiper(".news-slider", {
       slidesPerView: 1,
       spaceBetween: 10,
       loop: true,
@@ -116,30 +117,187 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-  
-  // Filter Kategori Berita //
-  const newsFilterButtons = document.querySelectorAll(".news-filter-btn");
-  const newsSlides = document.querySelectorAll(".news-slider .swiper-slide");
-  const emptyMessage = document.getElementById("news-empty-message");
 
-  function updateNewsFilter(category) {
-    let matchCount = 0;
+  // ============ FILTER KATEGORI & PAGINATION 8 BERITA (DESKTOP) ============ //
+  const newsFilterButtons = document.querySelectorAll(".news-filter-btn");
+  const newsSlides = Array.from(document.querySelectorAll(".news-slider .swiper-slide"));
+  const emptyMessage = document.getElementById("news-empty-message");
+  const desktopPagination = document.getElementById("desktop-news-pagination");
+
+  const ITEMS_PER_PAGE = 8;
+  let currentNewsPage = 1;
+  let currentCategory = "all";
+
+  function scrollToNewsSection() {
+    const section = document.querySelector(".news-section");
+    if (section) {
+      const yOffset = -90;
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  function renderDesktopPagination(totalPages) {
+    if (!desktopPagination) return;
+
+    if (totalPages <= 1) {
+      desktopPagination.innerHTML = "";
+      desktopPagination.style.display = "none";
+      return;
+    }
+
+    desktopPagination.style.display = "flex";
+    desktopPagination.innerHTML = "";
+
+    // Tombol Sebelumnya
+    const prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.className = "page-btn prev-btn";
+    prevBtn.setAttribute("aria-label", "Sebelumnya");
+    prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left" style="font-size: 0.8rem; margin-right: 6px;"></i> Sebelumnya';
+    if (currentNewsPage <= 1) {
+      prevBtn.disabled = true;
+    } else {
+      prevBtn.addEventListener("click", () => {
+        if (currentNewsPage > 1) {
+          currentNewsPage--;
+          renderNews();
+          scrollToNewsSection();
+        }
+      });
+    }
+    desktopPagination.appendChild(prevBtn);
+
+    // Helper Nomor Halaman
+    function addPageNumberBtn(num) {
+      const pageBtn = document.createElement("button");
+      pageBtn.type = "button";
+      pageBtn.className = "page-btn" + (num === currentNewsPage ? " active" : "");
+      pageBtn.setAttribute("aria-label", "Halaman " + num);
+      pageBtn.textContent = num;
+      if (num !== currentNewsPage) {
+        pageBtn.addEventListener("click", () => {
+          currentNewsPage = num;
+          renderNews();
+          scrollToNewsSection();
+        });
+      }
+      desktopPagination.appendChild(pageBtn);
+    }
+
+    // Helper Ellipsis
+    function addEllipsis() {
+      const span = document.createElement("span");
+      span.className = "page-ellipsis";
+      span.textContent = "…";
+      desktopPagination.appendChild(span);
+    }
+
+    // Tampilkan Nomor Halaman
+    if (totalPages <= 7) {
+      for (let p = 1; p <= totalPages; p++) {
+        addPageNumberBtn(p);
+      }
+    } else {
+      addPageNumberBtn(1);
+      if (currentNewsPage > 3) addEllipsis();
+      const startP = Math.max(2, currentNewsPage - 1);
+      const endP = Math.min(totalPages - 1, currentNewsPage + 1);
+      for (let p = startP; p <= endP; p++) {
+        addPageNumberBtn(p);
+      }
+      if (currentNewsPage < totalPages - 2) addEllipsis();
+      addPageNumberBtn(totalPages);
+    }
+
+    // Tombol Selanjutnya
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "page-btn next-btn";
+    nextBtn.setAttribute("aria-label", "Selanjutnya");
+    nextBtn.innerHTML = 'Selanjutnya <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; margin-left: 6px;"></i>';
+    if (currentNewsPage >= totalPages) {
+      nextBtn.disabled = true;
+    } else {
+      nextBtn.addEventListener("click", () => {
+        if (currentNewsPage < totalPages) {
+          currentNewsPage++;
+          renderNews();
+          scrollToNewsSection();
+        }
+      });
+    }
+    desktopPagination.appendChild(nextBtn);
+  }
+
+  function renderNews() {
+    if (!newsSlides.length) return;
+
+    const isMobileView = window.innerWidth < 768;
+
+    // Filter slide berdasarkan kategori aktif
+    const matchingSlides = [];
     newsSlides.forEach((slide) => {
       const card = slide.querySelector(".news-card");
       if (!card) return;
-
-      const cardCategory = card.dataset.category;
-      const visible =
-        !category || category === "all" || cardCategory === category;
-      slide.style.display = visible ? "" : "none";
-      if (visible) {
-        matchCount += 1;
+      const cardCategory = (card.dataset.category || "").toLowerCase().trim();
+      const matches = !currentCategory || currentCategory === "all" || cardCategory === currentCategory.toLowerCase().trim();
+      if (matches) {
+        matchingSlides.push(slide);
+      } else {
+        slide.style.display = "none";
       }
     });
 
     if (emptyMessage) {
-      emptyMessage.style.display = matchCount === 0 ? "block" : "none";
+      emptyMessage.style.display = matchingSlides.length === 0 ? "block" : "none";
     }
+
+    // ============================================
+    // JIKA MOBILE: TETAP SEPERTI SAAT INI
+    // Tampilkan semua slide yang cocok untuk Swiper slider
+    // ============================================
+    if (isMobileView) {
+      matchingSlides.forEach((slide) => {
+        slide.style.display = "";
+      });
+      if (desktopPagination) {
+        desktopPagination.innerHTML = "";
+        desktopPagination.style.display = "none";
+      }
+      if (mobileNewsSwiper && typeof mobileNewsSwiper.update === "function") {
+        try {
+          mobileNewsSwiper.update();
+        } catch (e) {}
+      }
+      return;
+    }
+
+    // ============================================
+    // JIKA DESKTOP: PAGINATION PER 8 BERITA
+    // ============================================
+    const totalMatching = matchingSlides.length;
+    const totalPages = Math.ceil(totalMatching / ITEMS_PER_PAGE) || 1;
+
+    if (currentNewsPage > totalPages) {
+      currentNewsPage = 1;
+    }
+    if (currentNewsPage < 1) {
+      currentNewsPage = 1;
+    }
+
+    const startIndex = (currentNewsPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+
+    matchingSlides.forEach((slide, index) => {
+      if (index >= startIndex && index < endIndex) {
+        slide.style.display = "";
+      } else {
+        slide.style.display = "none";
+      }
+    });
+
+    renderDesktopPagination(totalPages);
   }
 
   newsFilterButtons.forEach((button) => {
@@ -147,12 +305,22 @@ document.addEventListener("DOMContentLoaded", function () {
       const selectedCategory = button.dataset.category;
       newsFilterButtons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
-      updateNewsFilter(selectedCategory);
+      currentCategory = selectedCategory;
+      currentNewsPage = 1;
+      renderNews();
     });
   });
 
-  if (newsFilterButtons.length) {
-    updateNewsFilter("all");
+  let newsResizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(newsResizeTimer);
+    newsResizeTimer = setTimeout(() => {
+      renderNews();
+    }, 150);
+  });
+
+  if (newsSlides.length) {
+    renderNews();
   }
 
   // ===== TOGGLE KARTU PRODI (Bisa di-toggle di Desktop & Mobile) ===== //
