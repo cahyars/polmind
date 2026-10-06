@@ -1,3 +1,28 @@
+#news-page-detail {
+    margin-top: 170px !important;
+    margin-bottom: 60px !important;
+}
+
+@media (max-width: 991px) {
+    #news-page-detail {
+        margin-top: 155px !important;
+        margin-bottom: 50px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    #news-page-detail {
+        margin-top: 135px !important;
+        margin-bottom: 40px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #news-page-detail {
+        margin-top: 125px !important;
+    }
+}
+
 .news {
     width: 100%;
     max-width: 900px;

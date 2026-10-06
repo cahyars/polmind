@@ -37,6 +37,44 @@
 @push('styles')
 <style>
 /* ========================================================
+   PAGE TOP SPACING (Mencegah tertutup / mepet oleh navbar fixed)
+   ======================================================== */
+#news-page-detail {
+  margin-top: 170px !important;
+  margin-bottom: 60px !important;
+}
+
+@media (max-width: 991px) {
+  #news-page-detail {
+    margin-top: 155px !important;
+    margin-bottom: 50px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #news-page-detail {
+    margin-top: 135px !important;
+    margin-bottom: 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #news-page-detail {
+    margin-top: 125px !important;
+  }
+}
+
+.top-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-bottom: 1.5rem !important;
+  margin-top: 0 !important;
+}
+
+/* ========================================================
    EMBEDDED NEWS SHARE STYLES (IMMUNE TO CACHE ISSUES)
    ======================================================== */
 .news-meta-bar {

@@ -5,7 +5,7 @@
 @section('canonical', 'https://polmind.ac.id/beranda/berita')
 
 @section('content')
-<div class="container" style="padding-top: 130px; min-height: 70vh;">
+<div class="container" style="padding-top: 165px; min-height: 70vh;">
   <h1 class="center-text" style="color: #102C53; font-size: 32px; font-weight: 700; margin-bottom: 25px;">Berita & Informasi Terkini</h1>
   
   <div style="margin: 20px 0px 25px 0px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
