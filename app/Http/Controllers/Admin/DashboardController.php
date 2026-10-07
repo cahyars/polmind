@@ -17,6 +17,7 @@ class DashboardController extends Controller
             'total_berita' => Berita::count(),
             'published_berita' => Berita::where('is_published', true)->count(),
             'total_sliders' => Slider::where('is_active', true)->count(),
+            'total_partners' => \App\Models\Partner::where('is_active', true)->count(),
             'total_dosen' => Lecturer::count(),
             'total_tendik' => Staff::count(),
             'total_views' => Berita::sum('views_count'),

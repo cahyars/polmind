@@ -322,7 +322,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,8 +331,38 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_10_03_003046_create_beritas_table',2),(5,'2026_10_03_003046_create_grid_features_table',2),(6,'2026_10_03_003046_create_lecturers_table',2),(7,'2026_10_03_003046_create_sliders_table',2),(8,'2026_10_03_003047_create_founder_experts_table',2),(9,'2026_10_03_003047_create_site_settings_table',2),(10,'2026_10_03_003047_create_staff_table',2),(11,'2026_10_03_005159_create_categories_table',3),(12,'2026_10_03_005200_add_category_id_to_beritas_table',4);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_10_03_003046_create_beritas_table',2),(5,'2026_10_03_003046_create_grid_features_table',2),(6,'2026_10_03_003046_create_lecturers_table',2),(7,'2026_10_03_003046_create_sliders_table',2),(8,'2026_10_03_003047_create_founder_experts_table',2),(9,'2026_10_03_003047_create_site_settings_table',2),(10,'2026_10_03_003047_create_staff_table',2),(11,'2026_10_03_005159_create_categories_table',3),(12,'2026_10_03_005200_add_category_id_to_beritas_table',4),(13,'2026_10_05_094500_add_role_to_users_table',5),(14,'2026_10_07_140000_create_partners_table',6);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `partners`
+--
+
+DROP TABLE IF EXISTS `partners`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `partners` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `website_url` varchar(255) DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `partners`
+--
+
+LOCK TABLES `partners` WRITE;
+/*!40000 ALTER TABLE `partners` DISABLE KEYS */;
+INSERT INTO `partners` VALUES (1,'PT Denso Indonesia','partners/pt-denso-indonesia.png','https://www.denso.com/id/id/',1,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(2,'PT Jotun Indonesia','partners/jotun.png','https://www.jotun.com/id-id/',2,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(3,'PT United Tractors Tbk','partners/united-tractors.png','https://www.unitedtractors.com/',3,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(4,'PT Sugity Creatives','partners/pt-sugity-creatives.png','https://sugity.co.id/',4,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(5,'PT Diamond Electric Mfg. Indonesia','partners/pt-diamond-electric-mfg.png',NULL,5,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(6,'PT ROKI Indonesia','partners/pt-roki-indonesia.png',NULL,6,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(7,'PT JFE Steel Galvanizing Indonesia','partners/pt-jfe-steel.png',NULL,7,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(8,'PT Bekasi Fajar Industrial Estate Tbk (BeFa)','partners/pt-befa.png','https://www.befa.id/',8,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(9,'PT MMID (Kawasan Industri MM2100)','partners/pt-mmid.png','https://mm2100.co.id/',9,1,'2026-10-06 23:55:29','2026-10-06 23:55:29'),(10,'Akademi Komunitas Toyota Indonesia','partners/akademi-komunitas-toyota-indonesia.png',NULL,10,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(11,'Universitas Gadjah Mada (UGM)','partners/universitas-gadjah-mada.jpeg','https://ugm.ac.id/',11,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(12,'Ehime University Japan','partners/ehime-university.jpeg','https://www.ehime-u.ac.jp/en/',12,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(13,'Shunan University Japan','partners/shunan-university.png','https://www.shunan-u.ac.jp/',13,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(14,'Wuhan Vocational College of Software & Engineering','partners/wuhan-vocational-college-of-software-and-engineering.jpeg',NULL,14,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(15,'IROOTECH Technology Co., Ltd','partners/irootech-technologi-co-ltd.png',NULL,15,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(16,'PT Bank Tabungan Negara (Persero) Tbk','partners/pt-bank-tabungan-negara.png','https://www.btn.co.id/',16,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(17,'Kanwil Kemenkumham Jawa Barat','partners/kanwil-kemenkumham-ri-provinsi-jawa-barat.png',NULL,17,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(18,'PT DTECH Engineering','partners/pt-dtech-engineering.png','https://dtechengineering.com/',18,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(19,'PT DRA Component Persada','partners/pt-dra-component-persada.png',NULL,19,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(20,'PT Dora Bisnis Konsultindo','partners/pt-dora-bisnis-konsultindo.png',NULL,20,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(21,'PT Gisma Cipta Sukses','partners/pt-gisma.png',NULL,21,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(22,'PT Mili Talenta Inspirasi','partners/pt-mili-talenta-inspirasi.png',NULL,22,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(23,'Pusat Studi Apindo','partners/pt-pusat-studi-apindo.jpeg',NULL,23,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(24,'DC Robotic School','partners/dc-robotic-school.png',NULL,24,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(25,'SMK Mitra Industri MM2100','partners/smk-mitra-industri-mm2100.png','https://smkmitraindustrimm2100.sch.id/',25,1,'2026-10-06 23:55:30','2026-10-06 23:55:30'),(26,'SMK Dewantara 2','partners/smk-dewantara-2.jpeg',NULL,26,1,'2026-10-06 23:55:30','2026-10-06 23:55:30');
+/*!40000 ALTER TABLE `partners` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -487,6 +517,7 @@ CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `role` varchar(30) NOT NULL DEFAULT 'admin',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -503,7 +534,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrator Polmind','admin@polmind.ac.id','2026-10-02 17:33:55','$2y$12$A1RHtT/VDlNT0HGf2MmyL.req8ZxQbhGprHIQ.OgGUXMiO9M3ri76','zjWVb7AdZdonaJedlrrZpfU621ySODW2cvczj6LRhFO7dtuH7vBQHucMgMoB','2026-10-02 17:33:56','2026-10-02 17:33:56');
+INSERT INTO `users` VALUES (1,'Administrator Polmind','admin@polmind.ac.id','admin','2026-10-02 17:33:55','$2y$12$YoIL0SIQcPrOIJZDtFSNN.Y8ws2RXWL21tes3w5sZoWBbfkKdjDAO','zjWVb7AdZdonaJedlrrZpfU621ySODW2cvczj6LRhFO7dtuH7vBQHucMgMoB','2026-10-02 17:33:56','2026-10-04 19:51:30');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -516,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-03 11:37:21
+-- Dump completed on 2026-10-07 14:07:08

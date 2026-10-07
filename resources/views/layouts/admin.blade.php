@@ -466,6 +466,13 @@
         </a>
       </li>
 
+      <li class="menu-item {{ request()->routeIs('admin.partners.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.partners.index') }}">
+          <i class="fas fa-handshake"></i>
+          <span>Logo Mitra</span>
+        </a>
+      </li>
+
       <li class="menu-item {{ request()->routeIs('admin.pmb.*') ? 'active' : '' }}">
         <a href="{{ route('admin.pmb.index') }}">
           <i class="fas fa-user-graduate"></i>

@@ -232,16 +232,219 @@
     <div class="desktop-news-pagination" id="desktop-news-pagination"></div>
 </div>
 
-<!-- Partner Kami -->
-<div class="container">
-    <h2 class="prodi">
+<!-- Partner Kami (Slider Otomatis Dinamis) -->
+<div class="container partner-section-wrap">
+    <h2 class="prodi" style="margin-bottom: 6px;">
         <span class="highlight-box"><span class="highlight-text" data-translate="partner">Mitra</span></span>
         <span class="partner-text" data-translate="our">Kami</span>
     </h2>
-    <div class="banner">
-        <img src="{{ asset('assets/images/images11.png') }}" alt="Mitra Industri Politeknik Mitra Industri" class="partnerImg" loading="lazy" decoding="async">
-    </div>
+    <p class="partner-section-subtitle" data-translate="partner-sub">
+        Kolaborasi strategis bersama industri manufaktur terkemuka, teknologi global, BUMN, dan perguruan tinggi bergengsi.
+    </p>
+
+    @if(isset($partners) && $partners->isNotEmpty())
+        <div class="partner-marquee-wrapper" aria-label="Slider Logo Mitra Industri dan Kampus">
+            <div class="partner-marquee-track">
+                <!-- Track 1: Original List -->
+                <div class="partner-track-group">
+                    @foreach($partners as $partner)
+                        @if($partner->website_url)
+                            <a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer" class="partner-card" title="{{ $partner->name }}">
+                        @else
+                            <div class="partner-card" title="{{ $partner->name }}">
+                        @endif
+                            <div class="partner-card-logo">
+                                <img src="{{ $partner->logo_url }}" alt="Logo {{ $partner->name }}" class="partner-logo-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="partner-card-name">{{ $partner->name }}</div>
+                        @if($partner->website_url)
+                            </a>
+                        @else
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                <!-- Track 2: Duplicate List for Seamless Infinite Loop -->
+                <div class="partner-track-group" aria-hidden="true">
+                    @foreach($partners as $partner)
+                        @if($partner->website_url)
+                            <a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer" class="partner-card" tabindex="-1">
+                        @else
+                            <div class="partner-card">
+                        @endif
+                            <div class="partner-card-logo">
+                                <img src="{{ $partner->logo_url }}" alt="Logo {{ $partner->name }}" class="partner-logo-img" loading="lazy" decoding="async">
+                            </div>
+                            <div class="partner-card-name">{{ $partner->name }}</div>
+                        @if($partner->website_url)
+                            </a>
+                        @else
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @else
+        <div class="banner">
+            <p style="text-align: center; color: #64748b; padding: 24px;">Data mitra industri sedang disinkronkan.</p>
+        </div>
+    @endif
 </div>
+
+<style>
+    /* Styling Slider Otomatis Mitra Kami */
+    .partner-section-wrap {
+        margin-top: 50px;
+        margin-bottom: 24px;
+        position: relative;
+    }
+    .partner-section-subtitle {
+        text-align: center;
+        color: #64748b;
+        font-size: 14.5px;
+        margin-top: 4px;
+        margin-bottom: 20px;
+        font-weight: 400;
+        max-width: 780px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+    }
+    .partner-marquee-wrapper {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding: 16px 0 28px;
+        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+    .partner-marquee-track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+        animation: scrollPartnerMarquee 50s linear infinite;
+    }
+    .partner-marquee-wrapper:hover .partner-marquee-track {
+        animation-play-state: paused;
+    }
+    .partner-track-group {
+        display: flex;
+        align-items: stretch;
+        gap: 16px;
+        padding-right: 16px;
+    }
+    .partner-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 185px;
+        min-width: 185px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px 14px 14px;
+        text-decoration: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.25s ease;
+        cursor: pointer;
+        user-select: none;
+    }
+    .partner-card:hover {
+        transform: translateY(-5px);
+        border-color: #3b82f6;
+        box-shadow: 0 12px 28px -6px rgba(16, 44, 83, 0.14), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+    }
+    .partner-card-logo {
+        height: 64px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .partner-logo-img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.72;
+        transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .partner-card:hover .partner-logo-img {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.08);
+    }
+    .partner-card-name {
+        font-size: 11.5px;
+        font-weight: 500;
+        color: #475569;
+        text-align: center;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 31px;
+        transition: color 0.25s ease, font-weight 0.2s ease;
+    }
+    .partner-card:hover .partner-card-name {
+        color: #102C53;
+        font-weight: 700;
+    }
+
+    @keyframes scrollPartnerMarquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .partner-section-subtitle {
+            font-size: 13px;
+            padding: 0 12px;
+            margin-bottom: 16px;
+        }
+        .partner-card {
+            width: 155px;
+            min-width: 155px;
+            padding: 12px 10px 10px;
+        }
+        .partner-card-logo {
+            height: 50px;
+            margin-bottom: 8px;
+        }
+        .partner-card-name {
+            font-size: 10.5px;
+            min-height: 28px;
+        }
+        .partner-marquee-track {
+            animation-duration: 42s;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .partner-marquee-track {
+            animation: none;
+            overflow-x: auto;
+            width: 100%;
+            padding-bottom: 12px;
+        }
+        .partner-marquee-wrapper {
+            mask-image: none;
+            -webkit-mask-image: none;
+        }
+    }
+</style>
 
 <!-- Sambutan -->
 <div class="container-wrapper pb0">

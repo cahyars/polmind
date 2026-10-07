@@ -806,6 +806,7 @@ const translations = {
     // Partner
     "partner": "Our",
     "our": "Partner",
+    "partner-sub": "Strategic collaboration with manufacturing industries, global technology leaders, state-owned enterprises, and top universities.",
 
     // Sambutan Direktur
     "welcome-title": "Director",

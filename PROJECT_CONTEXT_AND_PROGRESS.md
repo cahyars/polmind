@@ -80,6 +80,7 @@ web-polmind/
 7. `grid_features`: Kotak fitur keunggulan di beranda.
 8. `lecturers`: Daftar dosen internal, praktisi industri, instruktur.
 9. `staff`: Daftar tenaga kependidikan.
+10. `partners`: Daftar logo mitra industri & kerjasama kampus (`name`, `logo`, `website_url`, `order`, `is_active`).
 
 ### 3.3. Kredensial Default Login Admin
 - **URL Login**: `http://127.0.0.1:8000/admin/login` (atau `/login`)

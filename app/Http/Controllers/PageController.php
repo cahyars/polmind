@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\FounderExpert;
 use App\Models\GridFeature;
 use App\Models\Lecturer;
+use App\Models\Partner;
 use App\Models\SiteSetting;
 use App\Models\Slider;
 use App\Models\Staff;
@@ -21,6 +22,7 @@ class PageController extends Controller
         $gridFeatures = GridFeature::where('is_active', true)->orderBy('order')->get();
         $latestNews = Berita::where('is_published', true)->orderByDesc('published_date')->get();
         $categories = Category::orderBy('name')->get();
+        $partners = Partner::where('is_active', true)->orderBy('order')->orderBy('name')->get();
 
         $settings = [
             'director_name' => SiteSetting::get('director_name', 'Wikan Sakarinto, S.T., M.Sc., Ph.D.'),
@@ -34,7 +36,7 @@ class PageController extends Controller
             'pmb_popup_enabled' => SiteSetting::get('pmb_popup_enabled', '0'),
         ];
 
-        return view('pages.beranda', compact('sliders', 'gridFeatures', 'latestNews', 'settings', 'categories'));
+        return view('pages.beranda', compact('sliders', 'gridFeatures', 'latestNews', 'settings', 'categories', 'partners'));
     }
 
     public function profil()

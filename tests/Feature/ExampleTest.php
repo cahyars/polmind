@@ -36,4 +36,21 @@ class ExampleTest extends TestCase
             $response->assertStatus(200);
         }
     }
+
+    public function test_beranda_displays_partner_slider(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('partner-marquee-track');
+        $response->assertSee('PT Denso Indonesia');
+    }
+
+    public function test_admin_can_access_partners_management(): void
+    {
+        $admin = \App\Models\User::first();
+        $response = $this->actingAs($admin)->get('/admin/partners');
+        $response->assertStatus(200);
+        $response->assertSee('Kelola Logo Mitra');
+        $response->assertSee('PT Denso Indonesia');
+    }
 }

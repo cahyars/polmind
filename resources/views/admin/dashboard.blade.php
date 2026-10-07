@@ -40,6 +40,17 @@
   </div>
 
   <div class="card" style="margin-bottom:0; padding: 20px; display: flex; align-items: center; gap: 18px;">
+    <div style="width: 52px; height: 52px; border-radius: 12px; background: #e0f2fe; color: #0369a1; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+      <i class="fas fa-handshake"></i>
+    </div>
+    <div>
+      <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase;">Logo Mitra</div>
+      <div style="font-size: 26px; font-weight: 800; color: #102C53;">{{ $stats['total_partners'] ?? 0 }}</div>
+      <div style="font-size: 12px; color: #0284c7; font-weight: 500;">Mitra industri aktif</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:0; padding: 20px; display: flex; align-items: center; gap: 18px;">
     <div style="width: 52px; height: 52px; border-radius: 12px; background: #fee2e2; color: #991b1b; display: flex; align-items: center; justify-content: center; font-size: 22px;">
       <i class="fas fa-eye"></i>
     </div>
@@ -63,6 +74,9 @@
       </a>
       <a href="{{ route('admin.sliders.index') }}" class="btn btn-secondary" style="justify-content: center; padding: 12px; background: #102C53;">
         <i class="fas fa-images"></i> Kelola Slider Beranda
+      </a>
+      <a href="{{ route('admin.partners.index') }}" class="btn btn-secondary" style="justify-content: center; padding: 12px; background: #4338ca;">
+        <i class="fas fa-handshake"></i> Kelola Logo Mitra
       </a>
       <a href="{{ route('admin.konten.index') }}#sambutan" class="btn btn-secondary" style="justify-content: center; padding: 12px; background: #0284c7;">
         <i class="fas fa-user-tie"></i> Edit Sambutan Direktur

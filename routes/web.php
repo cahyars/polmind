@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LecturerController;
 use App\Http\Controllers\Admin\PmbController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\BeritaController;
@@ -68,6 +69,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         // Slider Management
         Route::resource('sliders', SliderController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::post('sliders/{slider}/toggle', [SliderController::class, 'toggle'])->name('sliders.toggle');
+
+        // Logo Mitra Management
+        Route::resource('partners', PartnerController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::post('partners/{partner}/toggle', [PartnerController::class, 'toggle'])->name('partners.toggle');
 
         // Konten Website Management
         Route::get('konten', [ContentController::class, 'index'])->name('konten.index');
