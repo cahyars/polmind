@@ -473,6 +473,13 @@
         </a>
       </li>
 
+      <li class="menu-item {{ request()->routeIs('admin.keunikan.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.keunikan.index') }}">
+          <i class="fas fa-award"></i>
+          <span>Keunikan & Keunggulan</span>
+        </a>
+      </li>
+
       <li class="menu-item {{ request()->routeIs('admin.pmb.*') ? 'active' : '' }}">
         <a href="{{ route('admin.pmb.index') }}">
           <i class="fas fa-user-graduate"></i>

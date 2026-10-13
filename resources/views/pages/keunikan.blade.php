@@ -1,48 +1,146 @@
 @extends('layouts.frontend')
 
 @section('title', 'Keunikan & Keunggulan Kuliah | Politeknik Mitra Industri')
-@section('meta_description', '12 Keunikan dan Keunggulan Politeknik Mitra Industri (Polmind): Kurikulum 70% Praktek, Teaching Factory (TEFA), Real Project Industri MM2100, dan Magang Global.')
+@section('meta_description', 'Keunikan dan Keunggulan Politeknik Mitra Industri: Kurikulum 70% Praktek, Teaching Factory (TEFA), Real Project Industri MM2100, Magang Global, dan Peluang Kerja.')
 @section('canonical', 'https://polmind.ac.id/keunikan')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/keunikan.css') }}?v={{ file_exists(public_path('assets/css/keunikan.css')) ? filemtime(public_path('assets/css/keunikan.css')) : '1.0' }}">
+<style>
+  /* Sorot navigasi aktif di navbar */
+  .desktop-nav ul li a[href="/keunikan"] {
+    border-bottom: 2px solid #ffffff !important;
+  }
+</style>
+@endpush
+
 @section('content')
-<div class="container">
-  <h1 class="mb-0 title effect-static-text mb15" data-translate="uniq-title" style="color: #102C53;margin-top: 125px;">
-    KEUNIKAN DAN KEUNGGULAN
-  </h1>
+<div class="keunikan-page-wrapper">
+  <div class="keunikan-container">
+    
+    <!-- Header Halaman -->
+    <div class="keunikan-header">
+      <h1 class="keunikan-main-title" data-translate="uniq-title">
+        {{ $pageTitle ?? 'KEUNIKAN DAN KEUNGGULAN' }}
+      </h1>
+      <p class="keunikan-subtitle">
+        {{ $pageSubtitle ?? 'Mengapa Memilih Politeknik Mitra Industri?' }}
+      </p>
+    </div>
 
-  <div class="sectionKeunikan">
-    <ol>
-      <li data-translate="uniq-1">Kuliah lebih fokus Project-Based Learning (Teaching Factory), tidak banyak di dalam ruang kelas.</li>
-      <li data-translate="uniq-2">TEFA dan PjBL sejak semester awal.</li>
-      <li data-translate="uniq-3"><em>Project-project</em>-nya berasal dari perusahaan/industri, dan <em>real project</em>.</li>
-    </ol>
-    <img id="img-uniq1" src="/assets/images-new/images10.jpg" alt="Kerjasama Politeknik Mitra Industri dengan Astra Daihatsu Motor" loading="lazy" decoding="async">
-  </div>
+    <!-- Daftar Blok Keunggulan (01, 02, 03...) -->
+    <div class="keunikan-blocks-list">
+      @forelse($blocks as $block)
+        <section class="keunikan-block {{ $loop->even ? 'block-reverse' : '' }}" id="keunikan-block-{{ $block->order }}">
+          
+          <!-- Konten Teks & Checklist -->
+          <div class="keunikan-block-content">
+            <div class="keunikan-badge-number">
+              {{ $block->badge_number ?: sprintf('%02d', $loop->iteration) }}
+            </div>
+            
+            <h2 class="keunikan-block-title">
+              {{ $block->title }}
+            </h2>
 
-  <div class="sectionKeunikan">
-    <ol start="4">
-      <li data-translate="uniq-4">Bentuk TEFA, berupa Konsultan <em>Engineering</em> dan <i>Business</i>, atau berupa industri manufaktur.</li>
-    </ol>
-    <img id="img-uniq2" src="/assets/images/keunikan/keunikan02.jpg" alt="Peresmian Teaching Factory (TEFA) Konsultan Engineering dan Bisnis" loading="lazy" decoding="async">
-  </div>
+            @if(count($block->points) > 0)
+              <ul class="keunikan-points-list">
+                @foreach($block->points as $point)
+                  <li class="keunikan-point-item">
+                    <span class="keunikan-point-icon" aria-hidden="true">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <p class="keunikan-point-text">{!! $point !!}</p>
+                  </li>
+                @endforeach
+              </ul>
+            @else
+              <p class="keunikan-point-text">{{ $block->description }}</p>
+            @endif
+          </div>
 
-  <div class="sectionKeunikan">
-    <ol start="5">
-      <li data-translate="uniq-5">Mata Kuliah semua mendukung PjBL dan TEFA. Dosen tidak jalan sendiri-sendiri, tidak bikin PR/Tugas yang tidak ada hubungan dengan <i>project</i> TEFA.</li>
-      <li data-translate="uniq-6">Para dosen dari internal dan banyak dari <i>expert</i> serta pimpinan industri.</li>
-      <li data-translate="uniq-7"><i>Team</i> mahasiswa digembleng menghasilkan produk riil yang memuaskan <i>customer</i>/industri.</li>
-      <li data-translate="uniq-8">Mahasiswa rutin presentasi <i>progress project</i>, di depan <i>user</i>.</li>
-    </ol>
-    <img id="img-uniq3" src="/assets/images/keunikan/keunikan03.jpg" alt="Foto Mahasiswa Presentasi jurusan Teknologi Rekayasa Perangkat Lunak" loading="lazy" decoding="async">
-  </div>
+          <!-- Foto Kegiatan / Industri -->
+          <div class="keunikan-block-image-wrap">
+            <div class="keunikan-image-card">
+              <img 
+                src="{{ $block->image_url }}" 
+                alt="{{ $block->title }} — Politeknik Mitra Industri" 
+                loading="{{ $loop->first ? 'eager' : 'lazy' }}" 
+                decoding="async"
+                @if($loop->first) fetchpriority="high" @endif
+              >
+            </div>
+          </div>
 
-  <div class="sectionKeunikan">
-    <ol start="9">
-      <li data-translate="uniq-9">Mahasiswa akan bisa magang di industri yang selama ini menjadi <i>customers</i> mereka.</li>
-      <li data-translate="uniq-10">Tugas Akhir/Skripsi berasal dari <i>project</i> yang dikerjakan.</li>
-      <li data-translate="uniq-11">Kesempatan untuk bisa lanjut bekerja di industri tempat tersebut setelah lulus/wisuda.</li>
-      <li data-translate="uniq-12">Selama proses kuliah tersebut, dibiasakan presentasi dengan Bahasa Asing agar peluang ke luar negeri semakin besar.</li>
-    </ol>
+        </section>
+      @empty
+        <!-- Fallback Statis jika data belum tersedia -->
+        <section class="keunikan-block">
+          <div class="keunikan-block-content">
+            <div class="keunikan-badge-number">01</div>
+            <h2 class="keunikan-block-title">Project-Based Learning & TEFA</h2>
+            <ul class="keunikan-points-list">
+              <li class="keunikan-point-item">
+                <span class="keunikan-point-icon"><i class="fas fa-check"></i></span>
+                <p class="keunikan-point-text">Kuliah lebih fokus Project-Based Learning (Teaching Factory), tidak banyak di dalam ruang kelas.</p>
+              </li>
+              <li class="keunikan-point-item">
+                <span class="keunikan-point-icon"><i class="fas fa-check"></i></span>
+                <p class="keunikan-point-text">TEFA dan PjBL sejak semester awal.</p>
+              </li>
+              <li class="keunikan-point-item">
+                <span class="keunikan-point-icon"><i class="fas fa-check"></i></span>
+                <p class="keunikan-point-text"><em>Project-project</em>-nya berasal dari perusahaan/industri, dan <em>real project</em>.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="keunikan-block-image-wrap">
+            <div class="keunikan-image-card">
+              <img src="/assets/images-new/images10.jpg" alt="PBL dan TEFA Polmind" loading="eager" fetchpriority="high">
+            </div>
+          </div>
+        </section>
+      @endforelse
+    </div>
+
+    <!-- Bagian Karir & Internasionalisasi (4 Kartu Grid) -->
+    <section class="keunikan-career-section">
+      <h2 class="keunikan-career-heading">
+        {{ $careerTitle ?? 'Bagian Karir & Internasionalisasi' }}
+      </h2>
+
+      <div class="keunikan-career-grid">
+        @forelse($careers as $career)
+          <div class="keunikan-career-card">
+            <div class="keunikan-career-icon-box">
+              <i class="{{ $career->icon ?: 'fas fa-briefcase' }}"></i>
+            </div>
+            <h3 class="keunikan-career-title">{{ $career->title }}</h3>
+            @if($career->subtitle)
+              <div class="keunikan-career-note">{{ $career->subtitle }}</div>
+            @endif
+          </div>
+        @empty
+          <div class="keunikan-career-card">
+            <div class="keunikan-career-icon-box"><i class="fas fa-briefcase"></i></div>
+            <h3 class="keunikan-career-title">Magang di Industri</h3>
+          </div>
+          <div class="keunikan-career-card">
+            <div class="keunikan-career-icon-box"><i class="fas fa-file-lines"></i></div>
+            <h3 class="keunikan-career-title">Tugas Akhir/Skripsi dari project</h3>
+          </div>
+          <div class="keunikan-career-card">
+            <div class="keunikan-career-icon-box"><i class="fas fa-handshake"></i></div>
+            <h3 class="keunikan-career-title">Kesempatan Kerja</h3>
+          </div>
+          <div class="keunikan-career-card">
+            <div class="keunikan-career-icon-box"><i class="fas fa-globe"></i></div>
+            <h3 class="keunikan-career-title">Presentasi Bahasa Asing</h3>
+          </div>
+        @endforelse
+      </div>
+    </section>
+
   </div>
 </div>
 @endsection

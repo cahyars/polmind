@@ -81,6 +81,7 @@ web-polmind/
 8. `lecturers`: Daftar dosen internal, praktisi industri, instruktur.
 9. `staff`: Daftar tenaga kependidikan.
 10. `partners`: Daftar logo mitra industri & kerjasama kampus (`name`, `logo`, `website_url`, `order`, `is_active`).
+11. `keunikan_items`: Data dinamis keunikan & keunggulan kampus (blok 01-03 berurutan & 4 kartu karir/internasionalisasi).
 
 ### 3.3. Kredensial Default Login Admin
 - **URL Login**: `http://127.0.0.1:8000/admin/login` (atau `/login`)
@@ -172,6 +173,24 @@ web-polmind/
    - Opsi `'serve' => true` diaktifkan pada disk `public` sehingga file upload (berita, slider, dosen) tetap tersaji mulus bahkan jika symlink hosting dibatasi.
 5. **Template Konfigurasi Hosting** ([.env.production.example](.env.production.example) & [PANDUAN_HOSTING_HOSTINGER.md](PANDUAN_HOSTING_HOSTINGER.md)):
    - Panduan lengkap langkah demi langkah dari pembuatan database MySQL di hPanel hingga live testing.
+
+### 5.5. Redesign Halaman Keunikan & Fitur Kelola Keunikan di Panel Admin
+1. **Redesign Visual Halaman Publik** ([resources/views/pages/keunikan.blade.php](resources/views/pages/keunikan.blade.php) & [public/assets/css/keunikan.css](public/assets/css/keunikan.css)):
+   - Mengadopsi tata letak modern sesuai ilustrasi desain resmi:
+     - Header halaman dengan judul H1 dan sub-judul pengantar yang lega di bawah navbar fixed.
+     - Layout selang-seling (*alternating layout*) untuk blok keunggulan bernomor 01, 02, 03.
+     - Angka aksen besar (*watermark* bernomor 01, 02, 03) dengan tipografi Montserrat.
+     - Poin-poin pembelajaran dengan ikon centang lingkaran terstruktur.
+     - Gambar kegiatan & industri MM2100 dengan sudut membulat (*border-radius: 28px*) dan bayangan lembut.
+     - Bagian Karir & Internasionalisasi dengan 4 kartu interaktif (Magang di Industri, Tugas Akhir/Skripsi dari project, Kesempatan Kerja, Presentasi Bahasa Asing) lengkap dengan ikon, elevasi bayangan, dan animasi hover.
+2. **Sistem Dinamis & Panel Admin** ([app/Http/Controllers/Admin/KeunikanController.php](app/Http/Controllers/Admin/KeunikanController.php) & [resources/views/admin/keunikan/index.blade.php](resources/views/admin/keunikan/index.blade.php)):
+   - Tabel `keunikan_items` beserta Model Eloquent [app/Models/KeunikanItem.php](app/Models/KeunikanItem.php) dan Seeder [database/seeders/KeunikanSeeder.php](database/seeders/KeunikanSeeder.php).
+   - CRUD lengkap untuk blok keunggulan (unggah/ganti foto, nomor badge, judul, textarea poin per baris, pengurutan, aktif/nonaktif).
+   - CRUD untuk kartu karir & internasionalisasi (judul, subjudul, ikon FontAwesome, pengurutan, aktif/nonaktif).
+   - Pengaturan teks dinamis judul utama, sub-judul, dan judul bagian karir terhubung ke `SiteSetting`.
+   - Sidebar admin terintegrasi dengan menu "Keunikan & Keunggulan".
+3. **Pengujian Otomatis (Automated Testing)** ([tests/Feature/KeunikanTest.php](tests/Feature/KeunikanTest.php)):
+   - 8 unit/feature test memastikan halaman publik dan seluruh aksi CRUD admin (create, update, toggle status, delete, update settings) berjalan 100% lulus.
 
 ---
 

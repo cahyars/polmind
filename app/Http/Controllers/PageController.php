@@ -7,6 +7,7 @@ use App\Models\Berita;
 use App\Models\Category;
 use App\Models\FounderExpert;
 use App\Models\GridFeature;
+use App\Models\KeunikanItem;
 use App\Models\Lecturer;
 use App\Models\Partner;
 use App\Models\SiteSetting;
@@ -58,7 +59,14 @@ class PageController extends Controller
 
     public function keunikan()
     {
-        return view('pages.keunikan');
+        $blocks = KeunikanItem::blocks()->where('is_active', true)->orderBy('order')->get();
+        $careers = KeunikanItem::careers()->where('is_active', true)->orderBy('order')->get();
+
+        $pageTitle = SiteSetting::get('keunikan_page_title', 'KEUNIKAN DAN KEUNGGULAN');
+        $pageSubtitle = SiteSetting::get('keunikan_page_subtitle', 'Mengapa Memilih Politeknik Mitra Industri?');
+        $careerTitle = SiteSetting::get('keunikan_career_title', 'Bagian Karir & Internasionalisasi');
+
+        return view('pages.keunikan', compact('blocks', 'careers', 'pageTitle', 'pageSubtitle', 'careerTitle'));
     }
 
     public function pmb()

@@ -1,0 +1,350 @@
+/* ==========================================================================
+   KEUNIKAN & KEUNGGULAN - POLITEKNIK MITRA INDUSTRI
+   Desain Modern & Responsif Sesuai Ilustrasi Institusi
+   ========================================================================== */
+
+.keunikan-page-wrapper {
+  background-color: #f6f9fc;
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(16, 44, 83, 0.03) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(37, 99, 235, 0.04) 0px, transparent 50%);
+  min-height: 100vh;
+  padding-top: 170px; /* Jarak aman di bawah fixed navbar institusi */
+  padding-bottom: 90px;
+  position: relative;
+  z-index: 1;
+}
+
+.keunikan-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header Section (Gunakan div agar tidak bentrok dengan global selector header) */
+.keunikan-header {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  text-align: center;
+  margin: 0 0 60px 0;
+  display: block;
+  z-index: 2;
+  clear: both;
+}
+
+.keunikan-main-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 2.75rem) !important;
+  font-weight: 800;
+  color: #102C53 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.keunikan-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #334155;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Feature Block Rows (Alternating Layout) */
+.keunikan-blocks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  margin-bottom: 70px;
+  position: relative;
+  z-index: 1;
+}
+
+.keunikan-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+/* Alternating: Even blocks have image on left, content on right */
+.keunikan-block.block-reverse {
+  flex-direction: row-reverse;
+}
+
+.keunikan-block-content {
+  flex: 1 1 50%;
+  max-width: 530px;
+  position: relative;
+}
+
+.keunikan-badge-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(3.8rem, 6.5vw, 5rem);
+  font-weight: 800;
+  color: #b0c6de;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.keunikan-block-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem) !important;
+  font-weight: 700;
+  color: #102C53 !important;
+  line-height: 1.3;
+  margin: 0 0 24px 0;
+}
+
+/* Checklist Points */
+.keunikan-points-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.keunikan-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.keunikan-point-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  border: 2px solid #102C53;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #102C53;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.keunikan-point-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1e293b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.keunikan-point-text em,
+.keunikan-point-text i {
+  font-style: italic;
+}
+
+/* Block Image Card */
+.keunikan-block-image-wrap {
+  flex: 1 1 50%;
+  max-width: 520px;
+}
+
+.keunikan-image-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -8px rgba(16, 44, 83, 0.16);
+  background: #e2e8f0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.keunikan-image-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px -6px rgba(16, 44, 83, 0.22);
+}
+
+.keunikan-image-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.keunikan-image-card:hover img {
+  transform: scale(1.025);
+}
+
+/* Career & Internationalization Section */
+.keunikan-career-section {
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.keunikan-career-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem) !important;
+  font-weight: 700;
+  color: #102C53 !important;
+  margin: 0 0 28px 0;
+  text-align: left;
+}
+
+.keunikan-career-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.keunikan-career-card {
+  background: #ffffff;
+  border: 1px solid #e2eaf4;
+  border-radius: 20px;
+  padding: 34px 18px 28px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(16, 44, 83, 0.05);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.keunikan-career-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(16, 44, 83, 0.12);
+  border-color: #cbd5e1;
+}
+
+.keunikan-career-icon-box {
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
+  background: #102C53;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(16, 44, 83, 0.22);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.keunikan-career-card:hover .keunikan-career-icon-box {
+  transform: scale(1.08) rotate(4deg);
+  background: #1e3a63;
+}
+
+.keunikan-career-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #102C53;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.keunikan-career-note {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Responsive Rules */
+@media (max-width: 992px) {
+  .keunikan-page-wrapper {
+    padding-top: 145px;
+  }
+
+  .keunikan-header {
+    margin-bottom: 40px;
+  }
+
+  .keunikan-blocks-list {
+    gap: 50px;
+  }
+
+  .keunikan-block,
+  .keunikan-block.block-reverse {
+    flex-direction: column !important;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .keunikan-block-content,
+  .keunikan-block-image-wrap {
+    max-width: 100%;
+    width: 100%;
+    flex: none;
+  }
+
+  .keunikan-badge-number {
+    font-size: 3.5rem;
+  }
+
+  .keunikan-career-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .keunikan-page-wrapper {
+    padding-top: 130px;
+  }
+
+  .keunikan-header {
+    margin-bottom: 30px;
+  }
+
+  .keunikan-main-title {
+    font-size: 1.75rem !important;
+  }
+
+  .keunikan-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .keunikan-block-title {
+    font-size: 1.35rem !important;
+    margin-bottom: 18px;
+  }
+
+  .keunikan-point-text {
+    font-size: 14px;
+  }
+
+  .keunikan-image-card {
+    border-radius: 20px;
+  }
+
+  .keunikan-image-card img {
+    aspect-ratio: 16 / 11;
+  }
+
+  .keunikan-career-heading {
+    text-align: center;
+    font-size: 1.35rem !important;
+  }
+
+  .keunikan-career-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .keunikan-career-card {
+    padding: 24px 16px;
+  }
+}

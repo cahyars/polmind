@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             FounderExpertSeeder::class,
             SiteSettingSeeder::class,
             PartnerSeeder::class,
+            KeunikanSeeder::class,
         ]);
     }
 }

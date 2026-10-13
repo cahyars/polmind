@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KeunikanController;
 use App\Http\Controllers\Admin\LecturerController;
 use App\Http\Controllers\Admin\PmbController;
 use App\Http\Controllers\Admin\PartnerController;
@@ -73,6 +74,11 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         // Logo Mitra Management
         Route::resource('partners', PartnerController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::post('partners/{partner}/toggle', [PartnerController::class, 'toggle'])->name('partners.toggle');
+
+        // Kelola Keunikan & Keunggulan
+        Route::resource('keunikan', KeunikanController::class)->parameters(['keunikan' => 'keunikan'])->except(['show']);
+        Route::post('keunikan/{keunikan}/toggle', [KeunikanController::class, 'toggle'])->name('keunikan.toggle');
+        Route::post('keunikan-settings', [KeunikanController::class, 'updateSettings'])->name('keunikan.settings');
 
         // Konten Website Management
         Route::get('konten', [ContentController::class, 'index'])->name('konten.index');
