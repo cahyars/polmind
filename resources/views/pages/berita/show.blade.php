@@ -455,7 +455,7 @@
   <div class="top-bar">
     <a href="javascript:history.back()" class="back-button" data-translate="news-back">← Kembali</a>
     <div class="breadcrumb">
-      <a href="/beranda" style="text-decoration: none;color: #102C53;" data-translate="home">Beranda</a> /
+      <a href="/beranda" style="text-decoration: none;color: #102C53;" data-translate="news-home">Beranda</a> /
       <a href="/beranda/berita" style="text-decoration: none;color: #102C53;" data-translate="news">Berita</a>
     </div>
   </div>

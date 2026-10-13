@@ -582,7 +582,7 @@ const translations = {
         "kemnaker-source": "Sumber: Media Polmind",
 
         "news-back": "← Kembali",
-        "home": "Beranda",
+        "news-home": "Beranda",
         "news": "Berita",
 
         "pressconf-title": "Polmind Gelar Press Conference, Perkenalkan Program Terkini dengan Dukungan Para Tokoh Kunci",
@@ -1302,6 +1302,7 @@ const translations = {
       "Source: <a href=\"https://www.jabaronline.com/perkuat-pendidikan-vokasi-berstandar-global-politeknik-mitra-industri-gandeng-ehime-university-jepang\" target=\"_blank\">www.jabaronline.com</a>",
 
       "news-back": "← Back",
+      "news-home": "Home",
       "news": "News",
 
       "kemnaker-title": "Mitra Industry Polytechnic Establishes Strategic Synergy with the Ministry of Manpower of the Republic of Indonesia",
