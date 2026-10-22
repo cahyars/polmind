@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Admin Panel') — Politeknik Mitra Industri</title>
-  <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon-cerah.ico') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
+  <link rel="apple-touch-icon" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -455,6 +456,13 @@
         <a href="{{ route('admin.kategori.index') }}">
           <i class="fas fa-tags"></i>
           <span>Kategori Berita</span>
+        </a>
+      </li>
+
+      <li class="menu-item {{ request()->routeIs('admin.dokumentasi.*') ? 'active' : '' }}">
+        <a href="{{ route('admin.dokumentasi.index') }}">
+          <i class="fas fa-camera-retro"></i>
+          <span>Kelola Dokumentasi</span>
         </a>
       </li>
 

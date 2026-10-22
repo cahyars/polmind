@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Administrator — Politeknik Mitra Industri</title>
-  <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon-cerah.ico') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
+  <link rel="apple-touch-icon" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

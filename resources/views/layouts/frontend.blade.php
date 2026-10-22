@@ -45,7 +45,9 @@
   <!-- Combined Google Fonts Request with display=swap -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon-cerah.ico') }}">
+  <link rel="icon" type="image/png" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
+  <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
+  <link rel="apple-touch-icon" href="{{ asset('assets/images/logo_polmind.png') }}?v={{ file_exists(public_path('assets/images/logo_polmind.png')) ? filemtime(public_path('assets/images/logo_polmind.png')) : '1.0' }}">
   <link rel="stylesheet" href="{{ asset('assets/css/main-style.css') }}?v={{ file_exists(public_path('assets/css/main-style.css')) ? filemtime(public_path('assets/css/main-style.css')) : '1.0' }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : '2.0' }}">
   <link rel="stylesheet" href="{{ asset('assets/css/news.css') }}?v={{ file_exists(public_path('assets/css/news.css')) ? filemtime(public_path('assets/css/news.css')) : '1.0' }}">
