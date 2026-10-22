@@ -28,7 +28,7 @@
 
   /* Filter category pills */
   .category-pill {
-    padding: 7px 16px;
+    padding: 6px 14px;
     border-radius: 20px;
     text-decoration: none;
     font-size: 13px;
@@ -57,14 +57,14 @@
   .berita-card {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
     justify-content: space-between;
     gap: 24px;
     background: #ffffff;
     border: 1px solid #eef2f6;
     border-radius: 12px;
-    padding: 22px 24px;
-    margin-bottom: 22px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(16, 44, 83, 0.05);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     overflow: hidden;
@@ -90,19 +90,24 @@
     display: block;
   }
 
+  /* Crucial: Override .container h2 { font-size: 3rem } from global CSS */
+  .container .berita-card h2.berita-card-title,
+  .container .berita-card .berita-card-title,
+  .berita-card h2.berita-card-title,
+  h2.berita-card-title,
   .berita-card-title {
-    color: #102C53;
-    text-align: left;
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 700;
-    margin: 0 0 8px 0;
+    color: #102C53 !important;
+    text-align: left !important;
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+    font-weight: 700 !important;
+    margin: 0 0 8px 0 !important;
     transition: color 0.2s ease;
   }
 
   .berita-card:hover .berita-card-title,
   .berita-title-link:hover .berita-card-title {
-    color: #1d4ed8;
+    color: #1d4ed8 !important;
   }
 
   .berita-card-meta {
@@ -110,9 +115,9 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 6px 10px;
-    color: #64748b;
-    font-size: 13px;
-    margin-bottom: 12px;
+    color: #64748b !important;
+    font-size: 12.5px !important;
+    margin-bottom: 10px !important;
   }
 
   .berita-card-meta i {
@@ -129,7 +134,7 @@
     text-transform: capitalize;
     background: #e0e7ff;
     color: #3730a3;
-    padding: 2px 10px;
+    padding: 2px 9px;
     border-radius: 4px;
     font-size: 11px;
     font-weight: 600;
@@ -137,12 +142,12 @@
   }
 
   .berita-card-summary {
-    color: #475569;
-    font-size: 14.5px;
-    line-height: 1.6;
-    margin: 0 0 16px 0;
+    color: #475569 !important;
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 12px 0 !important;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -157,7 +162,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 600;
     color: #102C53;
     text-decoration: none;
@@ -165,7 +170,7 @@
   }
 
   .berita-read-more i {
-    font-size: 12px;
+    font-size: 11px;
     transition: transform 0.2s ease;
   }
 
@@ -179,9 +184,9 @@
 
   /* Right: Thumbnail Area */
   .berita-card-thumb {
-    width: 260px;
-    min-width: 260px;
-    max-width: 260px;
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -190,8 +195,8 @@
   .berita-thumb-link {
     display: block;
     width: 100%;
-    height: 170px;
-    border-radius: 10px;
+    height: 148px;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
     background: #f1f5f9;
@@ -214,15 +219,18 @@
   /* Responsive Breakpoints */
   @media (max-width: 991px) {
     .berita-card-thumb {
-      width: 220px;
-      min-width: 220px;
-      max-width: 220px;
+      width: 200px;
+      min-width: 200px;
+      max-width: 200px;
     }
     .berita-thumb-link {
-      height: 155px;
+      height: 135px;
     }
+    .container .berita-card h2.berita-card-title,
+    .container .berita-card .berita-card-title,
+    h2.berita-card-title,
     .berita-card-title {
-      font-size: 19px;
+      font-size: 17px !important;
     }
   }
 
@@ -230,7 +238,14 @@
     .berita-card {
       flex-direction: column-reverse;
       padding: 16px;
-      gap: 16px;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .container .berita-card h2.berita-card-title,
+    .container .berita-card .berita-card-title,
+    h2.berita-card-title,
+    .berita-card-title {
+      font-size: 16px !important;
     }
     .berita-card-thumb {
       width: 100%;
@@ -238,14 +253,11 @@
       max-width: 100%;
     }
     .berita-thumb-link {
-      height: 190px;
+      height: 180px;
       border-radius: 8px;
     }
-    .berita-card-title {
-      font-size: 18px;
-    }
     .berita-card-summary {
-      font-size: 14px;
+      font-size: 13px !important;
       -webkit-line-clamp: 2;
     }
   }
@@ -274,7 +286,7 @@
       <div class="berita-card-body">
         <div>
           <a href="/beranda/berita/{{ $article->slug }}" class="berita-title-link">
-            <h2 class="berita-card-title">{{ $article->title }}</h2>
+            <h2 class="berita-card-title" style="font-size: 18px !important; line-height: 1.45 !important; font-weight: 700 !important; color: #102C53 !important; margin: 0 0 8px 0 !important;">{{ $article->title }}</h2>
           </a>
           <div class="berita-card-meta">
             <span><i class="far fa-user"></i> {{ $article->author ?: 'Humas Polmind' }}</span>
