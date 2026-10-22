@@ -126,7 +126,7 @@
             Film Pendek Hasil Latihan AI Mahasiswa
         </h2>
         <p class="video-subtitle">
-            Karya Inovasi & Pelatihan Artificial Intelligence Mahasiswa Baru Politeknik Mitra Industri
+            Terima Kasih Pihak Sponsor Acara PERKASA 2026
         </p>
         <div class="video-wrapper">
             <iframe 
