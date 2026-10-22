@@ -133,12 +133,13 @@ class Berita extends Model
             return '';
         }
 
-        // If content already contains HTML block tags (<p>, <ul>, <ol>, <div>, <h3>, <table>), return as is
-        if (preg_match('/<(p|ul|ol|table|blockquote|h[1-6]|div)\b[^>]*>/i', $content)) {
+        // If content already contains HTML block tags (<p>, <div>, <section>, <article>), return as is
+        if (preg_match('/<(p|div|section|article)\b[^>]*>/i', $content)) {
             return $content;
         }
 
-        // Otherwise, intelligently convert plain text into rich HTML paragraphs and lists
+        // Otherwise, intelligently convert plain text into rich HTML paragraphs and lists,
+        // while preserving raw HTML blocks such as <figure>, <img>, <h3>, <blockquote>, etc.
         $normalized = str_replace(["\r\n", "\r"], "\n", $content);
         $blocks = preg_split('/\n\s*\n/', $normalized);
         $result = [];
@@ -147,6 +148,16 @@ class Berita extends Model
         foreach ($blocks as $block) {
             $block = trim($block);
             if (empty($block)) {
+                continue;
+            }
+
+            // If the block is an HTML tag like <figure>, <img>, <blockquote>, <h1-6>, <table>, etc.
+            if (preg_match('/^<(figure|img|blockquote|h[1-6]|table|div|iframe)\b/i', $block)) {
+                if (!empty($currentList)) {
+                    $result[] = '<ul class="news-bullet-list">' . implode('', $currentList) . '</ul>';
+                    $currentList = [];
+                }
+                $result[] = $block;
                 continue;
             }
 
@@ -175,13 +186,16 @@ class Berita extends Model
                     $currentList = [];
                 }
 
-                // Check if paragraph starts with a label followed by a colon (e.g. "Label: description")
-                if (preg_match('/^([^:\n]{3,65}):\s*(.+)$/s', $block, $m)) {
+                // If block contains an embedded figure or image tag
+                if (preg_match('/<(figure|img)\b/i', $block)) {
+                    $result[] = $block;
+                } elseif (preg_match('/^([^:\n]{3,65}):\s*(.+)$/s', $block, $m)) {
                     $pContent = '<strong>' . htmlspecialchars($m[1]) . ':</strong> ' . nl2br(htmlspecialchars($m[2]));
+                    $result[] = '<p>' . $pContent . '</p>';
                 } else {
                     $pContent = nl2br(htmlspecialchars($block));
+                    $result[] = '<p>' . $pContent . '</p>';
                 }
-                $result[] = '<p>' . $pContent . '</p>';
             }
         }
 

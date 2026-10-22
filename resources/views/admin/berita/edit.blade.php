@@ -119,6 +119,9 @@
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertParagraph()" title="Paragraf Baru (&lt;p&gt;)"><i class="fas fa-paragraph"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertList()" title="Daftar (List)"><i class="fas fa-list-ul"></i></button>
           <button type="button" class="btn btn-sm btn-secondary" onclick="insertQuote()" title="Kutipan (Quote)"><i class="fas fa-quote-left"></i></button>
+          <button type="button" class="btn btn-sm" onclick="openInsertImageModal()" style="font-weight: 600; color: #1e40af; background: #e0e7ff; border: 1px solid #c7d2fe; display: flex; align-items: center; gap: 5px;" title="Sisipkan Gambar di Sela Paragraf">
+            <i class="fas fa-image"></i> Sisipkan Gambar
+          </button>
           <div style="margin-left: auto;">
             <button type="button" class="btn btn-sm" onclick="autoFormatEditor()" style="font-weight: 600; color: #1d4ed8; background: #eff6ff; border: 1px solid #bfdbfe; display: flex; align-items: center; gap: 6px;" title="Rapikan teks menjadi format paragraf dan daftar poin otomatis">
               <i class="fas fa-wand-magic-sparkles"></i> Rapikan Format Paragraf & Bullets
@@ -357,7 +360,7 @@
       block = block.trim();
       if (!block) continue;
 
-      if (/^<(p|ul|ol|table|blockquote|h[1-6]|div)\b/i.test(block)) {
+      if (/^<(p|ul|ol|table|blockquote|h[1-6]|div|figure|img)\b/i.test(block)) {
         if (currentList.length > 0) {
           result.push('<ul class="news-bullet-list">\n' + currentList.join('\n') + '\n</ul>');
           currentList = [];
@@ -401,5 +404,227 @@
     textarea.dispatchEvent(new Event('input'));
     autoExtractSummary(true);
   }
+
+  // ==========================================
+  // Inline Image Upload & Insertion Logic
+  // ==========================================
+  let savedCursorPos = null;
+
+  function openInsertImageModal() {
+    const textarea = document.getElementById('content');
+    savedCursorPos = {
+      start: textarea.selectionStart,
+      end: textarea.selectionEnd
+    };
+    document.getElementById('inlineImageModal').style.display = 'flex';
+    document.getElementById('inlineImageFile').value = '';
+    document.getElementById('inlineImageUrl').value = '';
+    document.getElementById('inlineImageCaption').value = '';
+    document.getElementById('inlinePreviewWrap').style.display = 'none';
+    document.getElementById('inlineUploadAlert').style.display = 'none';
+    switchImageTab('upload');
+  }
+
+  function closeInsertImageModal() {
+    document.getElementById('inlineImageModal').style.display = 'none';
+  }
+
+  let activeImageTab = 'upload';
+  function switchImageTab(tab) {
+    activeImageTab = tab;
+    const uploadBtn = document.getElementById('tabUploadBtn');
+    const urlBtn = document.getElementById('tabUrlBtn');
+    const uploadSec = document.getElementById('sectionUpload');
+    const urlSec = document.getElementById('sectionUrl');
+
+    if (tab === 'upload') {
+      uploadBtn.style.background = '#ffffff';
+      uploadBtn.style.color = '#102C53';
+      uploadBtn.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      urlBtn.style.background = 'transparent';
+      urlBtn.style.color = '#64748b';
+      urlBtn.style.boxShadow = 'none';
+      uploadSec.style.display = 'block';
+      urlSec.style.display = 'none';
+    } else {
+      urlBtn.style.background = '#ffffff';
+      urlBtn.style.color = '#102C53';
+      urlBtn.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      uploadBtn.style.background = 'transparent';
+      uploadBtn.style.color = '#64748b';
+      uploadBtn.style.boxShadow = 'none';
+      urlSec.style.display = 'block';
+      uploadSec.style.display = 'none';
+    }
+  }
+
+  function previewInlineImage(input) {
+    const wrap = document.getElementById('inlinePreviewWrap');
+    const img = document.getElementById('inlinePreviewImg');
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        img.src = e.target.result;
+        wrap.style.display = 'block';
+      };
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+
+  function processInsertInlineImage() {
+    const alertBox = document.getElementById('inlineUploadAlert');
+    const submitBtn = document.getElementById('btnSubmitInlineImage');
+    const caption = document.getElementById('inlineImageCaption').value.trim();
+    alertBox.style.display = 'none';
+
+    if (activeImageTab === 'url') {
+      const url = document.getElementById('inlineImageUrl').value.trim();
+      if (!url) {
+        showInlineAlert('Harap masukkan URL gambar.', 'error');
+        return;
+      }
+      insertImageSnippet(url, caption);
+      closeInsertImageModal();
+    } else {
+      const fileInput = document.getElementById('inlineImageFile');
+      if (!fileInput.files || !fileInput.files[0]) {
+        showInlineAlert('Harap pilih file gambar terlebih dahulu.', 'error');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image', fileInput.files[0]);
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengunggah...';
+
+      fetch('{{ route("admin.berita.upload_image") }}', {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}',
+          'Accept': 'application/json'
+        },
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Sisipkan ke Berita';
+        if (data.success && data.url) {
+          insertImageSnippet(data.url, caption);
+          closeInsertImageModal();
+        } else {
+          showInlineAlert(data.message || 'Gagal mengunggah gambar. Pastikan format file sesuai.', 'error');
+        }
+      })
+      .catch(err => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Sisipkan ke Berita';
+        showInlineAlert('Terjadi kesalahan koneksi saat mengunggah gambar.', 'error');
+      });
+    }
+  }
+
+  function showInlineAlert(msg, type) {
+    const alertBox = document.getElementById('inlineUploadAlert');
+    alertBox.style.display = 'block';
+    if (type === 'error') {
+      alertBox.style.background = '#fef2f2';
+      alertBox.style.color = '#b91c1c';
+      alertBox.style.border = '1px solid #fecaca';
+    } else {
+      alertBox.style.background = '#eff6ff';
+      alertBox.style.color = '#1d4ed8';
+      alertBox.style.border = '1px solid #bfdbfe';
+    }
+    alertBox.textContent = msg;
+  }
+
+  function insertImageSnippet(url, caption) {
+    const textarea = document.getElementById('content');
+    const escapedCaption = caption.replace(/"/g, '&quot;');
+    
+    let snippet = `\n\n<figure class="news-inline-image">\n  <img src="${url}" alt="${escapedCaption}">`;
+    if (caption) {
+      snippet += `\n  <figcaption>${caption}</figcaption>`;
+    }
+    snippet += `\n</figure>\n\n`;
+
+    let start = (savedCursorPos && typeof savedCursorPos.start === 'number') ? savedCursorPos.start : textarea.selectionStart;
+    let end = (savedCursorPos && typeof savedCursorPos.end === 'number') ? savedCursorPos.end : textarea.selectionEnd;
+
+    const originalVal = textarea.value;
+    textarea.value = originalVal.substring(0, start) + snippet + originalVal.substring(end);
+    
+    const newPos = start + snippet.length;
+    textarea.setSelectionRange(newPos, newPos);
+    textarea.focus();
+    textarea.dispatchEvent(new Event('input'));
+  }
 </script>
+
+<!-- Modal Sisipkan Gambar ke Konten Berita -->
+<div id="inlineImageModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div style="background: #ffffff; border-radius: 14px; width: 92%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); overflow: hidden; border: 1px solid #e2e8f0;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
+      <h4 style="margin: 0; font-size: 16px; font-weight: 700; color: #102C53; display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-image" style="color: #2563eb;"></i> Sisipkan Gambar di Sela Paragraf
+      </h4>
+      <button type="button" onclick="closeInsertImageModal()" style="background: none; border: none; font-size: 20px; color: #64748b; cursor: pointer; padding: 2px 8px; line-height: 1;">&times;</button>
+    </div>
+
+    <div style="padding: 20px;">
+      <!-- Pilihan Sumber Gambar -->
+      <div style="display: flex; gap: 8px; margin-bottom: 16px; background: #f1f5f9; padding: 4px; border-radius: 8px;">
+        <button type="button" id="tabUploadBtn" onclick="switchImageTab('upload')" style="flex: 1; padding: 8px 12px; font-size: 13px; font-weight: 600; border-radius: 6px; border: none; background: #ffffff; color: #102C53; box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;">
+          <i class="fas fa-upload"></i> Upload dari Perangkat
+        </button>
+        <button type="button" id="tabUrlBtn" onclick="switchImageTab('url')" style="flex: 1; padding: 8px 12px; font-size: 13px; font-weight: 600; border-radius: 6px; border: none; background: transparent; color: #64748b; cursor: pointer;">
+          <i class="fas fa-link"></i> Masukkan URL
+        </button>
+      </div>
+
+      <!-- Bagian Upload File -->
+      <div id="sectionUpload">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" style="font-size: 13px; font-weight: 600;">Pilih File Gambar (JPG, PNG, WEBP)</label>
+          <input type="file" id="inlineImageFile" accept="image/*" class="form-control" style="font-size: 13px; padding: 7px 10px;" onchange="previewInlineImage(this)">
+          <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Maksimal 5MB. Gambar akan otomatis tersimpan di server.</div>
+        </div>
+
+        <div id="inlinePreviewWrap" style="display: none; text-align: center; margin-bottom: 14px; background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+          <img id="inlinePreviewImg" src="" style="max-height: 150px; max-width: 100%; border-radius: 6px; object-fit: contain;">
+        </div>
+      </div>
+
+      <!-- Bagian URL Gambar -->
+      <div id="sectionUrl" style="display: none;">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" style="font-size: 13px; font-weight: 600;">Link / URL Gambar</label>
+          <input type="url" id="inlineImageUrl" class="form-control" placeholder="https://example.com/foto.jpg" style="font-size: 13px;">
+          <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Bisa gunakan URL web atau path lokal seperti <code>/assets/images/...</code></div>
+        </div>
+      </div>
+
+      <!-- Keterangan / Caption Gambar -->
+      <div class="form-group" style="margin-bottom: 14px;">
+        <label class="form-label" style="font-size: 13px; font-weight: 600;">Keterangan Foto (Caption) <span style="font-weight: 400; color: #64748b;">(Opsional)</span></label>
+        <input type="text" id="inlineImageCaption" class="form-control" placeholder="Contoh: Suasana penandatanganan kerjasama..." style="font-size: 13px;">
+        <div class="form-hint" style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Teks ini akan tampil rapi di bawah foto sebagai keterangan.</div>
+      </div>
+
+      <!-- Status & Error Alert -->
+      <div id="inlineUploadAlert" style="display: none; padding: 8px 12px; border-radius: 6px; font-size: 12.5px; margin-bottom: 14px;"></div>
+    </div>
+
+    <div style="padding: 12px 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px;">
+      <button type="button" class="btn btn-sm btn-secondary" onclick="closeInsertImageModal()">Batal</button>
+      <button type="button" id="btnSubmitInlineImage" class="btn btn-sm btn-primary" onclick="processInsertInlineImage()" style="display: flex; align-items: center; gap: 6px;">
+        <i class="fas fa-plus-circle"></i> Sisipkan ke Berita
+      </button>
+    </div>
+  </div>
+</div>
 @endsection

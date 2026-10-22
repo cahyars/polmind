@@ -208,4 +208,28 @@ class BeritaController extends Controller
         $status = $berita->is_published ? 'dipublikasikan' : 'dijadikan draft';
         return back()->with('success', "Status berita berhasil diubah menjadi {$status}.");
     }
+
+    /**
+     * Upload an inline image to be inserted inside the article content
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
+        ], [
+            'image.required' => 'Pilih file gambar yang ingin di-upload.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.mimes' => 'Format gambar yang didukung: JPG, PNG, WEBP, GIF.',
+            'image.max' => 'Ukuran gambar maksimal 5MB.',
+        ]);
+
+        $path = $request->file('image')->store('news/inline', 'public');
+        $url = asset('storage/' . $path);
+
+        return response()->json([
+            'success' => true,
+            'url' => $url,
+            'filename' => basename($path),
+        ]);
+    }
 }

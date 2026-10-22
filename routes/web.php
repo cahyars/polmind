@@ -59,6 +59,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Berita Management
+    Route::post('berita/upload-image', [AdminBeritaController::class, 'uploadImage'])->name('berita.upload_image');
     Route::resource('berita', AdminBeritaController::class)->parameters(['berita' => 'berita'])->except(['show']);
     Route::post('berita/{berita}/toggle', [AdminBeritaController::class, 'togglePublish'])->name('berita.toggle');
 
