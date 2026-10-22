@@ -82,6 +82,7 @@ web-polmind/
 9. `staff`: Daftar tenaga kependidikan.
 10. `partners`: Daftar logo mitra industri & kerjasama kampus (`name`, `logo`, `website_url`, `order`, `is_active`).
 11. `keunikan_items`: Data dinamis keunikan & keunggulan kampus (blok 01-03 berurutan & 4 kartu karir/internasionalisasi).
+12. `documentations`: Galeri foto kegiatan & dokumentasi kampus (`category`, `category_subtitle`, `title`, `description`, `image`, `order`, `is_active`).
 
 ### 3.3. Kredensial Default Login Admin
 - **URL Login**: `http://127.0.0.1:8000/admin/login` (atau `/login`)

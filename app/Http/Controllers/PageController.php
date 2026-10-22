@@ -94,4 +94,55 @@ class PageController extends Controller
         $tendik = Staff::orderBy('order')->get();
         return view('pages.daftar_tendik', compact('tendik'));
     }
+
+    public function videoAi()
+    {
+        // Daftar video AI karya mahasiswa Politeknik Mitra Industri
+        $videos = [
+            [
+                'id' => '3AdW-_NuwIU',
+                'type' => 'landscape',
+                'title' => 'Hasil Latihan AI - Maba Polmind (Ospek) - Thanks Sponsor JOTUN - Perkasa 2026',
+                'short_title' => 'Film Pendek AI: PERKASA 2026',
+                'description' => 'Karya eksplorasi visual artificial intelligence oleh mahasiswa baru Politeknik Mitra Industri pada rangkaian kegiatan pengenalan kampus PERKASA 2026 yang didukung oleh PT Jotun Indonesia.',
+                'creator' => 'Mahasiswa Baru Polmind 2026',
+                'category' => 'Film Pendek AI',
+                'sponsor' => 'PT Jotun Indonesia',
+                'youtube_url' => 'https://youtu.be/3AdW-_NuwIU',
+                'embed_url' => 'https://www.youtube.com/embed/3AdW-_NuwIU',
+                'date' => 'Oktober 2026',
+                'featured' => true,
+            ],
+            [
+                'id' => 'cv0bJYMaziw',
+                'type' => 'shorts',
+                'title' => 'Karya Video AI Mahasiswa Polmind - Shorts 1',
+                'short_title' => 'Eksplorasi Video AI #1',
+                'description' => 'Karya eksplorasi visual format vertikal berbasis teknologi Artificial Intelligence oleh mahasiswa Politeknik Mitra Industri.',
+                'creator' => 'Mahasiswa Polmind',
+                'category' => 'YouTube Shorts AI',
+                'sponsor' => null,
+                'youtube_url' => 'https://youtube.com/shorts/cv0bJYMaziw',
+                'embed_url' => 'https://www.youtube.com/embed/cv0bJYMaziw',
+                'date' => 'Oktober 2026',
+                'featured' => false,
+            ],
+            [
+                'id' => 'OO0y1nbDAoU',
+                'type' => 'shorts',
+                'title' => 'Karya Video AI Mahasiswa Polmind - Shorts 2',
+                'short_title' => 'Eksplorasi Video AI #2',
+                'description' => 'Inovasi visualisasi kreatif format vertikal berbasis Artificial Intelligence yang dihasilkan mahasiswa Politeknik Mitra Industri.',
+                'creator' => 'Mahasiswa Polmind',
+                'category' => 'YouTube Shorts AI',
+                'sponsor' => null,
+                'youtube_url' => 'https://youtube.com/shorts/OO0y1nbDAoU',
+                'embed_url' => 'https://www.youtube.com/embed/OO0y1nbDAoU',
+                'date' => 'Oktober 2026',
+                'featured' => false,
+            ],
+        ];
+
+        return view('pages.video_ai', compact('videos'));
+    }
 }

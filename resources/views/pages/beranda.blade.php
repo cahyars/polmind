@@ -101,6 +101,58 @@
   border: 0;
 }
 
+.video-section-pmb .video-action-wrap {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.video-section-pmb a.btn-video-more,
+.video-section-pmb .btn-video-more {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background: #102C53 !important;
+  background-color: #102C53 !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  padding: 12px 30px !important;
+  border-radius: 30px !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(16, 44, 83, 0.2) !important;
+  transition: all 0.25s ease !important;
+  border: 1px solid #102C53 !important;
+}
+
+.video-section-pmb a.btn-video-more span,
+.video-section-pmb a.btn-video-more i,
+.video-section-pmb .btn-video-more span,
+.video-section-pmb .btn-video-more i {
+  color: #ffffff !important;
+}
+
+.video-section-pmb a.btn-video-more:hover,
+.video-section-pmb .btn-video-more:hover {
+  background: #1e4b85 !important;
+  background-color: #1e4b85 !important;
+  color: #ffffff !important;
+  border-color: #1e4b85 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(16, 44, 83, 0.28) !important;
+}
+
+.video-section-pmb a.btn-video-more i,
+.video-section-pmb .btn-video-more i {
+  transition: transform 0.25s ease;
+  font-size: 13px;
+}
+
+.video-section-pmb a.btn-video-more:hover i,
+.video-section-pmb .btn-video-more:hover i {
+  transform: translateX(4px);
+}
+
 @media (max-width: 767px) {
   .video-section-pmb {
     padding: 30px 15px 35px !important;
@@ -116,11 +168,16 @@
   .video-section-pmb .video-wrapper {
     border-radius: 10px;
   }
+  .video-section-pmb a.btn-video-more,
+  .video-section-pmb .btn-video-more {
+    font-size: 14px !important;
+    padding: 11px 24px !important;
+  }
 }
 </style>
 @endpush
 
-<div class="textPmb video-section-pmb">
+<div class="video-section-pmb">
     <div class="video-inner">
         <h2 class="video-title">
             Film Pendek Hasil Latihan AI Mahasiswa
@@ -136,6 +193,14 @@
                 referrerpolicy="strict-origin-when-cross-origin" 
                 allowfullscreen>
             </iframe>
+        </div>
+
+        <!-- Tombol Lihat Video Lainnya -->
+        <div class="video-action-wrap">
+            <a href="/video-ai" class="btn-video-more">
+                <span>Lihat Video Lainnya</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </div>

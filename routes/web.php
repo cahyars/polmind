@@ -29,6 +29,8 @@ Route::get('/pmb', [PageController::class, 'pmb'])->name('pmb');
 Route::get('/dokumentasi', [PageController::class, 'dokumentasi'])->name('dokumentasi');
 Route::get('/daftar_dosen', [PageController::class, 'daftarDosen'])->name('daftar_dosen');
 Route::get('/daftar_tendik', [PageController::class, 'daftarTendik'])->name('daftar_tendik');
+Route::get('/video-ai', [PageController::class, 'videoAi'])->name('video.ai');
+Route::get('/galeri-video', fn() => redirect()->route('video.ai'));
 
 // Berita routes
 Route::get('/beranda/berita', [BeritaController::class, 'index'])->name('berita.index');

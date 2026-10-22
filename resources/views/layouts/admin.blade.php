@@ -459,12 +459,14 @@
         </a>
       </li>
 
+      @if(Route::has('admin.dokumentasi.index'))
       <li class="menu-item {{ request()->routeIs('admin.dokumentasi.*') ? 'active' : '' }}">
         <a href="{{ route('admin.dokumentasi.index') }}">
           <i class="fas fa-camera-retro"></i>
           <span>Kelola Dokumentasi</span>
         </a>
       </li>
+      @endif
 
       @if(Auth::user()->isAdmin())
       <li class="menu-item {{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
