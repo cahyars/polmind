@@ -46,8 +46,98 @@
     </a>
 </div>
 
-<div class="textPmb">
-    <a href="{{ $settings['pmb_cta_link'] }}" data-translate="signup">{{ $settings['pmb_cta_text'] }}</a>
+@push('styles')
+<style>
+.video-section-pmb {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 45px 20px 50px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: center !important;
+}
+
+.video-section-pmb .video-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.video-section-pmb .video-title {
+  color: #102C53 !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px 0 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.2px;
+}
+
+.video-section-pmb .video-subtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 auto 22px auto;
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.video-section-pmb .video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  background: #000000;
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(16, 44, 83, 0.12);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.video-section-pmb .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .video-section-pmb {
+    padding: 30px 15px 35px !important;
+  }
+  .video-section-pmb .video-title {
+    font-size: 20px !important;
+    margin-bottom: 6px !important;
+  }
+  .video-section-pmb .video-subtitle {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .video-section-pmb .video-wrapper {
+    border-radius: 10px;
+  }
+}
+</style>
+@endpush
+
+<div class="textPmb video-section-pmb">
+    <div class="video-inner">
+        <h2 class="video-title">
+            Film Pendek Hasil Latihan AI Mahasiswa
+        </h2>
+        <p class="video-subtitle">
+            Karya Inovasi & Pelatihan Artificial Intelligence Mahasiswa Baru Politeknik Mitra Industri
+        </p>
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/3AdW-_NuwIU?autoplay=1&mute=1&loop=1&playlist=3AdW-_NuwIU&playsinline=1&rel=0&controls=1" 
+                title="Film Pendek Hasil Latihan AI Mahasiswa" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 </div>
 
 <div class="container baseColor">
