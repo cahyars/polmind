@@ -141,6 +141,20 @@ class PageController extends Controller
                 'date' => 'Oktober 2026',
                 'featured' => false,
             ],
+            [
+                'id' => 'McZWzdCBBj4',
+                'type' => 'shorts',
+                'title' => 'Video AI Ronda Malam',
+                'short_title' => 'Video AI Ronda Malam',
+                'description' => 'Karya eksplorasi animasi dan cerita visual AI bertema Ronda Malam yang dibuat oleh mahasiswa Politeknik Mitra Industri.',
+                'creator' => 'Mahasiswa Polmind',
+                'category' => 'YouTube Shorts AI',
+                'sponsor' => null,
+                'youtube_url' => 'https://youtube.com/shorts/McZWzdCBBj4',
+                'embed_url' => 'https://www.youtube.com/embed/McZWzdCBBj4',
+                'date' => 'Oktober 2026',
+                'featured' => false,
+            ],
         ];
 
         return view('pages.video_ai', compact('videos'));

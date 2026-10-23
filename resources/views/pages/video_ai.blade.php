@@ -135,24 +135,24 @@
     border: 0;
   }
 
-  /* Shorts / Portrait Section (Flexbox centered 2-col) */
+  /* Shorts / Portrait Section */
   .shorts-grid-wrap {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
-    max-width: 960px;
+    gap: 24px;
+    max-width: 1040px;
     margin: 0 auto 40px;
     box-sizing: border-box;
   }
 
   .shorts-card {
-    flex: 1 1 360px;
-    max-width: 465px;
+    flex: 1 1 290px;
+    max-width: 330px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 22px;
+    padding: 18px;
     box-shadow: 0 6px 20px rgba(16, 44, 83, 0.06);
     box-sizing: border-box;
     display: flex;
@@ -169,10 +169,10 @@
 
   .shorts-card .shorts-item-title {
     color: #102C53 !important;
-    font-size: 16.5px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
     line-height: 1.4 !important;
-    margin: 0 0 14px 0 !important;
+    margin: 0 0 12px 0 !important;
     text-align: left !important;
   }
 
@@ -250,7 +250,8 @@
 
     .shorts-card {
       flex: 1 1 100%;
-      max-width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
       padding: 14px;
       border-radius: 12px;
     }

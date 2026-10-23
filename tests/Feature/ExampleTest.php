@@ -27,6 +27,7 @@ class ExampleTest extends TestCase
             '/daftar_dosen',
             '/daftar_tendik',
             '/beranda/berita',
+            '/video-ai',
             '/admin/login',
             '/sitemap.xml',
         ];
@@ -35,6 +36,12 @@ class ExampleTest extends TestCase
             $response = $this->get($route);
             $response->assertStatus(200);
         }
+
+        // /galeri-video redirects to /video-ai
+        $this->get('/galeri-video')->assertRedirect('/video-ai');
+
+        // /video-ai displays the 3rd shorts video
+        $this->get('/video-ai')->assertSee('Video AI Ronda Malam');
     }
 
     public function test_beranda_displays_partner_slider(): void

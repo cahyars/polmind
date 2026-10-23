@@ -10,3 +10,7 @@ Kode Semat :
 2. Link : https://youtube.com/shorts/OO0y1nbDAoU?si=3JiWgqAaUfD354C8
 Kode Semat :
 <iframe width="315" height="560" src="https://www.youtube.com/embed/OO0y1nbDAoU" title="Video AI Mahasiswa Polmind - Shorts 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+3. Link : https://youtube.com/shorts/McZWzdCBBj4?si=Q8jZxzDbpR1xymcm
+Kode Semat:
+<iframe width="315" height="560" src="https://www.youtube.com/embed/McZWzdCBBj4" title="Video AI Ronda Malam - Shorts 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
