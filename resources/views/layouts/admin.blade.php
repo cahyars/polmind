@@ -405,7 +405,93 @@
     .badge-info { background: #e0e7ff; color: #3730a3; }
     .badge-secondary { background: #f1f5f9; color: #475569; }
 
+    /* Admin Pagination */
+    .admin-pagination-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      width: 100%;
+    }
+    .admin-pagination-info {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .admin-pagination-info strong {
+      color: #1e293b;
+      font-weight: 600;
+    }
+    .admin-pagination-list {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .admin-page-item {
+      display: inline-flex;
+    }
+    .admin-page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #334155;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    a.admin-page-link:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      color: var(--accent);
+    }
+    .admin-page-item.active .admin-page-link {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 2px 4px rgba(16, 44, 83, 0.2);
+    }
+    .admin-page-item.disabled .admin-page-link {
+      color: #94a3b8;
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+    }
+
+    /* Fallback / Guard: Prevent any unstyled SVGs in pagination from breaking layout */
+    nav[role="navigation"] svg {
+      width: 16px !important;
+      height: 16px !important;
+      max-width: 16px !important;
+      max-height: 16px !important;
+      display: inline-block !important;
+      vertical-align: middle !important;
+    }
+
     /* Responsive */
+    @media (max-width: 768px) {
+      .admin-pagination-nav {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .admin-pagination-list {
+        justify-content: center;
+      }
+    }
+
     @media (max-width: 992px) {
       .sidebar {
         transform: translateX(-100%);
