@@ -40,8 +40,8 @@ class ExampleTest extends TestCase
         // /galeri-video redirects to /video-ai
         $this->get('/galeri-video')->assertRedirect('/video-ai');
 
-        // /video-ai displays the 3rd shorts video
-        $this->get('/video-ai')->assertSee('Video AI Ronda Malam');
+        // /video-ai displays the 2nd landscape video
+        $this->get('/video-ai')->assertSee('Film Pendek AI Horror Komedi - Ronda Malam');
     }
 
     public function test_beranda_displays_partner_slider(): void

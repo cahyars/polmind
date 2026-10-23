@@ -147,12 +147,12 @@
   }
 
   .shorts-card {
-    flex: 1 1 290px;
-    max-width: 330px;
+    flex: 1 1 320px;
+    max-width: 450px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 18px;
+    padding: 20px;
     box-shadow: 0 6px 20px rgba(16, 44, 83, 0.06);
     box-sizing: border-box;
     display: flex;
