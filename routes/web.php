@@ -71,7 +71,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     // ========================================================
     Route::middleware('admin.only')->group(function () {
         // Slider Management
-        Route::resource('sliders', SliderController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('sliders', SliderController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
         Route::post('sliders/{slider}/toggle', [SliderController::class, 'toggle'])->name('sliders.toggle');
 
         // Logo Mitra Management

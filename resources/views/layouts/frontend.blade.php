@@ -140,7 +140,7 @@
       --white: #fff;
       --muted: #e9eef7;
       --text: #0f172a;
-      --topbar-h: 40px;
+      --topbar-h: 36px;
     }
     .topbar, .topbar * { box-sizing: border-box; }
     .topbar {
@@ -171,9 +171,9 @@
       display: inline-flex; align-items: center; gap: 6px; opacity: .95;
     }
     .topbar__sep { opacity: .5; }
-    .topbar__link { padding: 6px 8px; border-radius: 8px; opacity: .95; }
+    .topbar__link { padding: 4px 8px; border-radius: 8px; opacity: .95; }
     .topbar__cta {
-      padding: 6px 10px;
+      padding: 5px 10px;
       background: #3065AB;
       color: var(--blue);
       border-radius: 10px;
@@ -187,7 +187,7 @@
       color: var(--blue);
       border: 0;
       border-radius: 10px;
-      padding: 6px 30px 6px 10px;
+      padding: 5px 30px 5px 10px;
       font-weight: 600;
       cursor: pointer;
       background-image: url("data:image/svg+xml;utf8,<svg fill='%23102C53' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -195,6 +195,21 @@
       background-position: right 8px center;
       background-size: 16px;
     }
+
+    /* Penyesuaian tinggi navbar: tetap 100% gaya & desain awal, kurangi padding vertikal berlebih */
+    .header {
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+    }
+    .header-inner {
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+    }
+    .desktop-nav ul li a {
+      padding-top: 8px !important;
+      padding-bottom: 8px !important;
+    }
+
     @media (max-width: 768px) {
       .topbar__container { height: auto; padding: 6px 12px; }
       .topbar__left { display: none; }

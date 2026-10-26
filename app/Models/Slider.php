@@ -12,6 +12,7 @@ class Slider extends Model
 
     protected $fillable = [
         'title',
+        'caption',
         'image',
         'link',
         'order',
@@ -22,6 +23,27 @@ class Slider extends Model
         'is_active' => 'boolean',
         'order' => 'integer',
     ];
+
+    protected $appends = [
+        'image_url',
+        'formatted_caption',
+        'has_dynamic_caption',
+    ];
+
+    public function getHasDynamicCaptionAttribute(): bool
+    {
+        return !empty($this->caption) && trim($this->caption) !== '';
+    }
+
+    public function getFormattedCaptionAttribute(): ?string
+    {
+        if (!$this->has_dynamic_caption) {
+            return null;
+        }
+
+        $clean = strip_tags($this->caption, '<em><strong><b><i><br>');
+        return preg_replace('/\*([^*]+)\*/', '<em>$1</em>', $clean);
+    }
 
     public function getImageUrlAttribute(): string
     {

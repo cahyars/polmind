@@ -13,23 +13,57 @@
     <div class="slider">
         @forelse($sliders as $index => $slide)
             <div class="slide">
+                <!-- Layer 1: Ambient Blur Backdrop (Solusi Cerdas: Anti-Gepeng & Anti-Crop) -->
+                <div class="slide-ambient-blur" aria-hidden="true">
+                    <img src="{{ $slide->image_url }}" alt="" loading="lazy" decoding="async" />
+                    <div class="slide-ambient-overlay"></div>
+                </div>
+
+                <!-- Layer 2: Main Content & Image -->
                 @if($slide->link)
-                    <a href="{{ $slide->link }}">
-                        <img src="{{ $slide->image_url }}"
-                             alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
-                             @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
+                    <a href="{{ $slide->link }}" class="slide-content-link">
+                        <div class="slide-main-image-container">
+                            <img class="slide-main-img"
+                                 src="{{ $slide->image_url }}"
+                                 alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
+                                 @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
+                        </div>
+                        @if($slide->has_dynamic_caption)
+                            <div class="slide-caption-wrapper">
+                                <div class="slide-caption-title">{!! $slide->formatted_caption !!}</div>
+                            </div>
+                        @endif
                     </a>
                 @else
-                    <img src="{{ $slide->image_url }}"
-                         alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
-                         @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
+                    <div class="slide-content-wrapper">
+                        <div class="slide-main-image-container">
+                            <img class="slide-main-img"
+                                 src="{{ $slide->image_url }}"
+                                 alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
+                                 @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
+                        </div>
+                        @if($slide->has_dynamic_caption)
+                            <div class="slide-caption-wrapper">
+                                <div class="slide-caption-title">{!! $slide->formatted_caption !!}</div>
+                            </div>
+                        @endif
+                    </div>
                 @endif
             </div>
         @empty
             <div class="slide">
-                <img id="img-slider" src="{{ asset('assets/images/slider/polmind_vasanta.png') }}"
-                     alt="Kampus Polmind Vasanta Innopark Kawasan Industri MM2100"
-                     fetchpriority="high" />
+                <div class="slide-ambient-blur" aria-hidden="true">
+                    <img src="{{ asset('assets/images/slider/polmind_vasanta.png') }}" alt="" />
+                    <div class="slide-ambient-overlay"></div>
+                </div>
+                <div class="slide-content-wrapper">
+                    <div class="slide-main-image-container">
+                        <img id="img-slider" class="slide-main-img"
+                             src="{{ asset('assets/images/slider/polmind_vasanta.png') }}"
+                             alt="Kampus Polmind Vasanta Innopark Kawasan Industri MM2100"
+                             fetchpriority="high" />
+                    </div>
+                </div>
             </div>
         @endforelse
     </div>
@@ -48,6 +82,171 @@
 
 @push('styles')
 <style>
+/* ========================================================
+   SOLUSI 1: AMBIENT BLUR BACKDROP SLIDER
+   - Tinggi seragam & konsisten untuk semua slide (Anti-Jumping)
+   - Foto 100% UTUH tanpa terpotong (Anti-Cropping)
+   - Foto 100% proporsional alami (Anti-Gepeng)
+   ======================================================== */
+
+.slider-container {
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  background: #081426 !important;
+  padding-top: 0 !important;
+  margin-top: 94px !important;
+}
+
+@media (max-width: 991px) {
+  .slider-container {
+    margin-top: 84px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    margin-top: 70px !important;
+  }
+}
+
+.slider {
+  display: flex !important;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.slide {
+  position: relative !important;
+  width: 100vw !important;
+  flex-shrink: 0 !important;
+  aspect-ratio: 2 / 1 !important;
+  min-height: 230px !important;
+  max-height: 720px !important;
+  height: auto !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #081426 !important;
+}
+
+/* Layer 1: Ambient Blur Backdrop */
+.slide-ambient-blur {
+  position: absolute !important;
+  inset: -20px !important;
+  width: calc(100% + 40px) !important;
+  height: calc(100% + 40px) !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.slide-ambient-blur img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  filter: blur(35px) brightness(0.65) saturate(1.3) !important;
+  transform: scale(1.12) !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.slide-ambient-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(circle at center, rgba(8, 20, 38, 0.15) 0%, rgba(8, 20, 38, 0.65) 100%) !important;
+}
+
+/* Layer 2: Main Image (100% Contain, Anti-Gepeng, Anti-Crop) */
+.slide-content-link,
+.slide-content-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2 !important;
+  text-decoration: none !important;
+}
+
+.slide-main-image-container {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.slide-main-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 !important;
+  display: block !important;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5)) !important;
+  transition: transform 0.4s ease !important;
+}
+
+.slide-content-link:hover .slide-main-img {
+  transform: scale(1.012) !important;
+}
+
+/* Layer 3: Dynamic Caption Overlay */
+.slide-caption-wrapper {
+  position: absolute !important;
+  bottom: 8% !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 25%, rgba(0, 0, 0, 0.65) 75%, rgba(0, 0, 0, 0) 100%) !important;
+  padding: 16px 24px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+.slide-caption-title {
+  color: #ffffff !important;
+  font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif !important;
+  font-size: clamp(16px, 3.2vw, 36px) !important;
+  font-weight: 800 !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85) !important;
+  letter-spacing: -0.2px !important;
+  max-width: 1100px !important;
+}
+
+.slide-caption-title em,
+.slide-caption-title i {
+  font-style: italic !important;
+  font-weight: 800 !important;
+}
+
+.slider-buttons {
+  z-index: 10 !important;
+}
+
+@media (max-width: 768px) {
+  .slide-caption-wrapper {
+    bottom: 5% !important;
+    padding: 8px 14px !important;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 20%, rgba(0, 0, 0, 0.7) 80%, rgba(0, 0, 0, 0) 100%) !important;
+  }
+  .slide-caption-title {
+    font-size: clamp(13px, 4vw, 18px) !important;
+    line-height: 1.25 !important;
+  }
+}
+
 .video-section-pmb {
   width: 100% !important;
   margin: 0 !important;
