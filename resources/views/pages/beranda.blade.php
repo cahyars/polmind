@@ -12,18 +12,20 @@
 <div class="slider-container">
     <div class="slider">
         @forelse($sliders as $index => $slide)
-            <div class="slide">
-                <!-- Layer 1: Ambient Blur Backdrop (Solusi Cerdas: Anti-Gepeng & Anti-Crop) -->
-                <div class="slide-ambient-blur" aria-hidden="true">
-                    <img src="{{ $slide->image_url }}" alt="" loading="lazy" decoding="async" />
-                    <div class="slide-ambient-overlay"></div>
-                </div>
+            <div class="slide {{ $slide->is_standard_aspect_ratio ? 'slide-standard' : 'slide-non-standard' }}">
+                @if(!$slide->is_standard_aspect_ratio)
+                    <!-- Layer 1: Ambient Blur Backdrop HANYA untuk slide non-standar (Anti-Gepeng & Anti-Crop) -->
+                    <div class="slide-ambient-blur" aria-hidden="true">
+                        <img src="{{ $slide->image_url }}" alt="" loading="lazy" decoding="async" />
+                        <div class="slide-ambient-overlay"></div>
+                    </div>
+                @endif
 
                 <!-- Layer 2: Main Content & Image -->
                 @if($slide->link)
                     <a href="{{ $slide->link }}" class="slide-content-link">
                         <div class="slide-main-image-container">
-                            <img class="slide-main-img"
+                            <img class="{{ $slide->is_standard_aspect_ratio ? 'slide-standard-img' : 'slide-contain-img' }}"
                                  src="{{ $slide->image_url }}"
                                  alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
                                  @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
@@ -37,7 +39,7 @@
                 @else
                     <div class="slide-content-wrapper">
                         <div class="slide-main-image-container">
-                            <img class="slide-main-img"
+                            <img class="{{ $slide->is_standard_aspect_ratio ? 'slide-standard-img' : 'slide-contain-img' }}"
                                  src="{{ $slide->image_url }}"
                                  alt="{{ $slide->title ?? 'Politeknik Mitra Industri' }}"
                                  @if($loop->first) fetchpriority="high" @else fetchpriority="low" loading="lazy" decoding="async" @endif />
@@ -51,14 +53,10 @@
                 @endif
             </div>
         @empty
-            <div class="slide">
-                <div class="slide-ambient-blur" aria-hidden="true">
-                    <img src="{{ asset('assets/images/slider/polmind_vasanta.png') }}" alt="" />
-                    <div class="slide-ambient-overlay"></div>
-                </div>
+            <div class="slide slide-standard">
                 <div class="slide-content-wrapper">
                     <div class="slide-main-image-container">
-                        <img id="img-slider" class="slide-main-img"
+                        <img id="img-slider" class="slide-standard-img"
                              src="{{ asset('assets/images/slider/polmind_vasanta.png') }}"
                              alt="Kampus Polmind Vasanta Innopark Kawasan Industri MM2100"
                              fetchpriority="high" />
@@ -83,17 +81,16 @@
 @push('styles')
 <style>
 /* ========================================================
-   SOLUSI 1: AMBIENT BLUR BACKDROP SLIDER
-   - Tinggi seragam & konsisten untuk semua slide (Anti-Jumping)
-   - Foto 100% UTUH tanpa terpotong (Anti-Cropping)
-   - Foto 100% proporsional alami (Anti-Gepeng)
+   SLIDER RESPONSIVE & CERDAS POLMIND
+   - Standard slides (rasio ~2:1): Tampil 100% full frame edge-to-edge (0% dark bars, 0% crop, 0% gepeng)
+   - Non-standard slides: Menggunakan Ambient Blur Backdrop cerdas (anti-gepeng & anti-crop)
+   - Mobile: Rasio 2:1 terjaga sempurna tanpa min-height berlebih
    ======================================================== */
 
 .slider-container {
   position: relative !important;
   width: 100% !important;
   overflow: hidden !important;
-  background: #081426 !important;
   padding-top: 0 !important;
   margin-top: 94px !important;
 }
@@ -122,22 +119,39 @@
   width: 100vw !important;
   flex-shrink: 0 !important;
   aspect-ratio: 2 / 1 !important;
-  min-height: 230px !important;
   max-height: 720px !important;
   height: auto !important;
   overflow: hidden !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  background: transparent !important;
+}
+
+/* Slide Standar: Full-bleed Cover (Tepat 2:1, Bersih Tanpa Blok Gelap) */
+.slide.slide-standard {
+  background: transparent !important;
+}
+
+.slide-standard-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Slide Non-Standar: Ambient Blur Backdrop & Contain */
+.slide.slide-non-standard {
   background: #081426 !important;
 }
 
-/* Layer 1: Ambient Blur Backdrop */
 .slide-ambient-blur {
   position: absolute !important;
-  inset: -20px !important;
-  width: calc(100% + 40px) !important;
-  height: calc(100% + 40px) !important;
+  inset: -15px !important;
+  width: calc(100% + 30px) !important;
+  height: calc(100% + 30px) !important;
   overflow: hidden !important;
   pointer-events: none !important;
   z-index: 1 !important;
@@ -147,8 +161,8 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  filter: blur(35px) brightness(0.65) saturate(1.3) !important;
-  transform: scale(1.12) !important;
+  filter: blur(25px) brightness(0.9) saturate(1.2) !important;
+  transform: scale(1.15) !important;
   margin: 0 !important;
   display: block !important;
 }
@@ -156,10 +170,9 @@
 .slide-ambient-overlay {
   position: absolute !important;
   inset: 0 !important;
-  background: radial-gradient(circle at center, rgba(8, 20, 38, 0.15) 0%, rgba(8, 20, 38, 0.65) 100%) !important;
+  background: rgba(8, 20, 38, 0.25) !important;
 }
 
-/* Layer 2: Main Image (100% Contain, Anti-Gepeng, Anti-Crop) */
 .slide-content-link,
 .slide-content-wrapper {
   position: relative !important;
@@ -181,22 +194,23 @@
   justify-content: center !important;
 }
 
-.slide-main-img {
+.slide-contain-img {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   object-position: center !important;
   margin: 0 !important;
   display: block !important;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5)) !important;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45)) !important;
   transition: transform 0.4s ease !important;
 }
 
-.slide-content-link:hover .slide-main-img {
-  transform: scale(1.012) !important;
+.slide-content-link:hover .slide-contain-img,
+.slide-content-link:hover .slide-standard-img {
+  transform: scale(1.01) !important;
 }
 
-/* Layer 3: Dynamic Caption Overlay */
+/* Dynamic Caption Overlay */
 .slide-caption-wrapper {
   position: absolute !important;
   bottom: 8% !important;

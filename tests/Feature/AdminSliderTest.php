@@ -226,4 +226,24 @@ class AdminSliderTest extends TestCase
         $this->assertDatabaseMissing('sliders', ['id' => $slider->id]);
         Storage::disk('public')->assertMissing($storedPath);
     }
+
+    public function test_slider_aspect_ratio_rendering_distinction(): void
+    {
+        // Slide standar (1620x810 ~ 2:1)
+        $standardSlide = Slider::create([
+            'title' => 'Standard Slide Banner',
+            'caption' => null,
+            'image' => 'assets/images/slider6.jpg',
+            'link' => null,
+            'order' => 1,
+            'is_active' => true,
+        ]);
+
+        $this->assertTrue($standardSlide->is_standard_aspect_ratio);
+
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('slide-standard');
+        $response->assertSee('slide-standard-img');
+    }
 }
