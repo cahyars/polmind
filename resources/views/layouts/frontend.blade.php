@@ -198,16 +198,47 @@
 
     /* Penyesuaian tinggi navbar: tetap 100% gaya & desain awal, kurangi padding vertikal berlebih */
     .header {
-      padding-top: 4px !important;
-      padding-bottom: 4px !important;
+      padding-top: 6px !important;
+      padding-bottom: 6px !important;
     }
     .header-inner {
       padding-top: 4px !important;
       padding-bottom: 4px !important;
+      display: flex !important;
+      align-items: center !important;
+      position: relative !important;
     }
     .desktop-nav ul li a {
       padding-top: 8px !important;
       padding-bottom: 8px !important;
+    }
+
+    /* Burger Menu Mobile: Presisi di tengah vertikal navbar (Anti-Bablas Keluar) */
+    @media (max-width: 991px) {
+      .header-inner {
+        min-height: 40px !important;
+      }
+      .burger {
+        position: absolute !important;
+        right: 0 !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        padding: 6px 4px !important;
+        cursor: pointer !important;
+        z-index: 10 !important;
+      }
+      .burger span {
+        display: block !important;
+        height: 3px !important;
+        width: 25px !important;
+        background-color: #ffffff !important;
+        border-radius: 2px !important;
+      }
     }
 
     @media (max-width: 768px) {

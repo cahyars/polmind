@@ -97,13 +97,13 @@
 
 @media (max-width: 991px) {
   .slider-container {
-    margin-top: 84px !important;
+    margin-top: 86px !important;
   }
 }
 
 @media (max-width: 768px) {
   .slider-container {
-    margin-top: 70px !important;
+    margin-top: 86px !important;
   }
 }
 
